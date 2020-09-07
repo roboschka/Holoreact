@@ -335,28 +335,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 978253231}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 48dae29777b27064abbe24e7f7f3aabd, type: 3}
+  m_Script: {fileID: 11500000, guid: c88fb833a88c0024daf0223802c4846b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  myGradient:
-    blendMode: 0
-    randomizeColour: 0
-    keys:
-    - colour: {r: 0.74509805, g: 0.9137255, b: 0.9004065, a: 1}
-      time: 0
-    - colour: {r: 0.19241722, g: 0.8679245, b: 0.8679245, a: 1}
-      time: 0.14617941
-    - colour: {r: 0.30860624, g: 0.8962264, b: 0.50870526, a: 1}
-      time: 0.29235882
-    - colour: {r: 0.6690548, g: 0.9150943, b: 0.9150943, a: 1}
-      time: 0.47840533
-    - colour: {r: 0.47770557, g: 0.8962264, b: 0.5404837, a: 1}
-      time: 0.64451826
-    - colour: {r: 0.68811345, g: 0.93717384, b: 0.58660984, a: 1}
-      time: 0.82724255
-    - colour: {r: 0.70977104, g: 0.9622642, b: 0.21333215, a: 1}
-      time: 1
-  colors: []
+  targetColor: {r: 0.94509804, g: 0.07392674, b: 0.0039215684, a: 0}
+  duration: 5
 --- !u!65 &978253233
 BoxCollider:
   m_ObjectHideFlags: 0
