@@ -7,11 +7,12 @@ using UnityEngine;
 /// </summary>
 
 public class MainMenu : MonoBehaviour
-{   
+{
+    private int lvl;
     // Start is called before the first frame update
     void Start()
     {
-        
+        lvl = 1;
     }
 
     // Update is called once per frame
@@ -20,7 +21,7 @@ public class MainMenu : MonoBehaviour
         //keycode Return mean enter since keycode enter in unity refer to enter in the numpad
         if(Input.GetKeyDown(KeyCode.Return))
         {
-            SCENE_MANAGER.NextScene();
+            //SCENE_MANAGER.MoveToLevel(lvl);
         }
         else if(Input.GetKeyDown(KeyCode.Escape))
         {

@@ -5,28 +5,37 @@ using UnityEngine.SceneManagement;
 
 /// <summary>
 /// This script is used to manage scene.
-/// eg : nextscene() is used to move to next scene.
+/// functionList :
+/// BackToMenu() is used to back to first menu.
+/// MoveToLevel(lvl) is used to move level  with parameter the lvl index.
 /// </summary>
 
 public static class SCENE_MANAGER
 {
     private static int index = 0;
     
-    public static void NextScene()
-    {
-        index++;
-        MoveScene();
-    }
+    //commented because probrably not used.
+    //public static void NextScene()
+    //{
+    //    index++;
+    //    MoveScene();
+    //}
 
-    public static void PrevScene()
-    {
-        index--;
-        MoveScene();
-    }
+    //public static void PrevScene()
+    //{
+    //    index--;
+    //    MoveScene();
+    //}
 
     public static void BackToMenu()
     {
         index = 0;
+        MoveScene();
+    }
+
+    public static void MoveToLevel(int lvl)
+    {
+        index = lvl;
         MoveScene();
     }
 
