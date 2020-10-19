@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 /// <summary>
 /// this script is used to manage MainMenu scene
@@ -8,11 +9,18 @@ using UnityEngine;
 
 public class MainMenu : MonoBehaviour
 {
+    [SerializeField]
+    private Button btnMenu; 
+
     private int lvl;
+
+
     // Start is called before the first frame update
     void Start()
     {
         lvl = 1;
+        //Change latter
+        HighLight();
     }
 
     // Update is called once per frame
@@ -28,4 +36,10 @@ public class MainMenu : MonoBehaviour
             SCENE_MANAGER.Quit();
         }
     }
+
+    private void HighLight()
+    {
+        btnMenu.Select();
+    }
+
 }
