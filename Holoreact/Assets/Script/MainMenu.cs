@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Events;
+using UnityEngine.EventSystems;
+using UnityEngine.SceneManagement;
 
 /// <summary>
 /// this script is used to manage MainMenu scene
@@ -9,37 +12,74 @@ using UnityEngine.UI;
 
 public class MainMenu : MonoBehaviour
 {
+
     [SerializeField]
-    private Button btnMenu; 
+    private Button playButton, yesQuitButton;
+    [SerializeField]
+    private Canvas quitNotificationCanvas, mainMenuCanvas;
 
     private int lvl;
-
+    
+    GameObject highlightedButton, highlightedButton2;
 
     // Start is called before the first frame update
     void Start()
     {
-        lvl = 1;
-        //Change latter
-        HighLight();
+        toggleNotification(false, true, playButton);
     }
 
     // Update is called once per frame
     void Update()
     {
-        //keycode Return mean enter since keycode enter in unity refer to enter in the numpad
-        if(Input.GetKeyDown(KeyCode.Return))
+        highlightedButton = EventSystem.current.currentSelectedGameObject;
+
+        if (Input.GetKeyDown(KeyCode.Return))
         {
-            //SCENE_MANAGER.MoveToLevel(lvl);
+            //MainMenu Navigation
+            switch(highlightedButton.name)
+            {
+                case "Play":
+                    SceneManager.LoadScene("ChooseLevel");
+                    break;
+                case "Settings":
+                    break;
+                case "Credits":
+                    break;
+                case "Quit":
+                    //Open Notification Canvas
+                    toggleNotification(true, false, yesQuitButton);
+                    break;
+            }
         }
-        else if(Input.GetKeyDown(KeyCode.Escape))
+
+
+        if (quitNotificationCanvas.isActiveAndEnabled)
         {
-            SCENE_MANAGER.Quit();
+            if (Input.GetKeyDown(KeyCode.Return))
+            {
+                switch (highlightedButton.name)
+                {
+                    case "YesQuit":
+                        print("Game Quits");
+                        Application.Quit();
+                        break;
+                    case "NoQuit":
+                        toggleNotification(false, true, playButton);
+                        break;
+                }
+            }
+            
+            else if (Input.GetKeyDown(KeyCode.Escape))
+            {
+                toggleNotification(false, true, playButton);
+            }
         }
     }
 
-    private void HighLight()
+    private void toggleNotification(bool isNotifOn, bool isMainMenuOn, Button toHighlight)
     {
-        btnMenu.Select();
+        quitNotificationCanvas.gameObject.SetActive(isNotifOn);
+        mainMenuCanvas.gameObject.SetActive(isMainMenuOn);
+        toHighlight.Select();
     }
-
 }

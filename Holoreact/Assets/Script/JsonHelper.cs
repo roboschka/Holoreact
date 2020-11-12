@@ -30,4 +30,10 @@ public static class JsonHelper
     {
         public T[] Items;
     }
+
+    public static string FixJSon(string value)
+    {
+        value = "{\"Items\":" + value + "}";
+        return value;
+    }
 }
