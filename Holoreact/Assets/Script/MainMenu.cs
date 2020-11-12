@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Events;
 using UnityEngine.EventSystems;
+using UnityEngine.SceneManagement;
 
 /// <summary>
 /// this script is used to manage MainMenu scene
@@ -24,8 +25,7 @@ public class MainMenu : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        quitNotificationCanvas.gameObject.SetActive(false);
-        highlightButton(playButton);
+        toggleNotification(false, true, playButton);
     }
 
     // Update is called once per frame
@@ -39,6 +39,7 @@ public class MainMenu : MonoBehaviour
             switch(highlightedButton.name)
             {
                 case "Play":
+                    SceneManager.LoadScene("ChooseLevel");
                     break;
                 case "Settings":
                     break;
@@ -49,10 +50,6 @@ public class MainMenu : MonoBehaviour
                     toggleNotification(true, false, yesQuitButton);
                     break;
             }
-        }
-        else if(Input.GetKeyDown(KeyCode.Escape))
-        {
-            //SCENE_MANAGER.Quit();
         }
 
 
@@ -79,15 +76,10 @@ public class MainMenu : MonoBehaviour
         }
     }
 
-    private void highlightButton(Button toBeHighlighted)
-    {
-        toBeHighlighted.Select();
-    }
-
     private void toggleNotification(bool isNotifOn, bool isMainMenuOn, Button toHighlight)
     {
         quitNotificationCanvas.gameObject.SetActive(isNotifOn);
         mainMenuCanvas.gameObject.SetActive(isMainMenuOn);
-        highlightButton(toHighlight);
+        toHighlight.Select();
     }
 }
