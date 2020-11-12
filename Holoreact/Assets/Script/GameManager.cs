@@ -8,14 +8,10 @@ using System.Linq;
 
 public class GameManager : MonoBehaviour
 {
-    [SerializeField]
-    private List<GameObject> itemList;
 
+    private List<GameObject> itemList;
     [SerializeField]
     private Combination[] combinationList;
-
-    [SerializeField]
-    private HandBook[] handBookData;
 
     private int counter;
 
@@ -58,12 +54,6 @@ public class GameManager : MonoBehaviour
         {
             Select();
         }
-    }
-
-    private string FixJson(string value)
-    {
-        value = "{\"Items\":" + value + "}";
-        return value;
     }
 
     private void CalculateScore()
@@ -147,11 +137,11 @@ public class GameManager : MonoBehaviour
 
     private void GetItemList()
     {
-        HttpWebRequest request = (HttpWebRequest)WebRequest.Create(String.Format("https://api.backendless.com/09476775-387A-4C56-FFE4-B663DC24FC00/DED29ABA-8FAC-4985-86E0-FCCDA5A290B5/data/ItemList?where=LvlID%3D0"));
+        HttpWebRequest request = (HttpWebRequest)WebRequest.Create(String.Format("https://api.backendless.com/09476775-387A-4C56-FFE4-B663DC24FC00/DED29ABA-8FAC-4985-86E0-FCCDA5A290B5/data/ItemList?pageSize=50"));
         HttpWebResponse response = (HttpWebResponse)request.GetResponse();
         StreamReader reader = new StreamReader(response.GetResponseStream());
         string jsonResponse = reader.ReadToEnd();
-        jsonResponse = FixJson(jsonResponse);
+        jsonResponse = JsonHelper.FixJSon(jsonResponse);
 
         Item[] items; 
 
@@ -167,24 +157,13 @@ public class GameManager : MonoBehaviour
 
     private void GetCombinationDataFromAPI()
     {
-        HttpWebRequest request = (HttpWebRequest)WebRequest.Create(String.Format("https://api.backendless.com/09476775-387A-4C56-FFE4-B663DC24FC00/DED29ABA-8FAC-4985-86E0-FCCDA5A290B5/data/CombinationList?where=lvlID%3D1"));
+        HttpWebRequest request = (HttpWebRequest)WebRequest.Create(String.Format("https://api.backendless.com/09476775-387A-4C56-FFE4-B663DC24FC00/DED29ABA-8FAC-4985-86E0-FCCDA5A290B5/data/CombinationList?pageSize=50&offset=0&where=lvlid%3D1"));
         HttpWebResponse response = (HttpWebResponse)request.GetResponse();
         StreamReader reader = new StreamReader(response.GetResponseStream());
         string jsonResponse = reader.ReadToEnd();
-        jsonResponse = FixJson(jsonResponse);
+        jsonResponse = JsonHelper.FixJSon(jsonResponse);
 
         combinationList = JsonHelper.FromJson<Combination>(jsonResponse);
-    }
-
-    private void GetHandbookData()
-    {
-        HttpWebRequest request = (HttpWebRequest)WebRequest.Create(String.Format("https://api.backendless.com/09476775-387A-4C56-FFE4-B663DC24FC00/DED29ABA-8FAC-4985-86E0-FCCDA5A290B5/data/Handbook?where=lvlid%3D1"));
-        HttpWebResponse response = (HttpWebResponse)request.GetResponse();
-        StreamReader reader = new StreamReader(response.GetResponseStream());
-        string jsonResponse = reader.ReadToEnd();
-        jsonResponse = FixJson(jsonResponse);
-
-        handBookData = JsonHelper.FromJson<HandBook>(jsonResponse);
     }
 
     #endregion
@@ -276,45 +255,13 @@ public class GameManager : MonoBehaviour
         return false;
     }
 
-    private string FindHandBookContent(int page)
-    {
-        string handBookContent =
-            (
-                from content in handBookData
-                where content.Page == page
-                select content.Text
-                
-            ).ToList().FirstOrDefault();
-
-        if(String.IsNullOrEmpty(handBookContent))
-        {
-            Debug.Log("not found");
-            return "something goes wrong please contact the developer";
-        }
-
-        Debug.Log(handBookContent);
-        return handBookContent;
-    }
-
     #endregion
 
     #region Check Data by Debug.log
 
     /// <summary>
-    /// CheckHandBookData()
     /// CheckCombinationData()
     /// </summary>
-
-    private void CheckHandBookData()
-    {
-
-        foreach (HandBook data in handBookData)
-        {
-            Debug.Log(data.Page);
-            Debug.Log(data.Text);
-            //Debug.Log(data.LvlID);
-        }
-    }
 
     private void CheckCombinationData()
     {
