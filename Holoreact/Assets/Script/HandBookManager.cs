@@ -4,16 +4,25 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net;
+using TMPro;
 using UnityEngine;
 
 public class HandBookManager : MonoBehaviour
 {
     private HandBook[] handBookData;
 
+    //panelnya di buat menjadi child yang id assign disini parentnya
+    [SerializeField]
+    private GameObject panel;
+
+    [SerializeField]
+    private TextMeshProUGUI textToShow;
+
     private int index;
 
     void Start()
     {
+        panel.SetActive(true);
         GetHandbookData();
     }
 
@@ -58,7 +67,7 @@ public class HandBookManager : MonoBehaviour
         handBookData = JsonHelper.FromJson<HandBook>(jsonResponse);
     }
 
-    private string FindHandBookContent(int page)
+    private void FindHandBookContent(int page)
     {
         string handBookContent =
             (
@@ -70,11 +79,12 @@ public class HandBookManager : MonoBehaviour
 
         if (String.IsNullOrEmpty(handBookContent))
         {
-            return "something goes wrong please contact the developer";
+            textToShow.text = "something goes wrong please contact the developer";
         }
-
-        Debug.Log(handBookContent);
-        return handBookContent;
+        else
+        {
+            textToShow.text = handBookContent;
+        }
     }
 
 }
