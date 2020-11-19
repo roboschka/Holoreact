@@ -6,7 +6,7 @@ using UnityEngine;
 [Serializable]
 public class Level
 {
-    public int lvlID;
+    public int LvlID;
     public string Description;
-    public string lvlName;
+    public string LvlName;
 }

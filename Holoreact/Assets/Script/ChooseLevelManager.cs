@@ -61,14 +61,14 @@ public class ChooseLevelManager : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Return))
         {
-            Debug.Log("Get level " + levels[currentViewingLevel].lvlID);
+            Debug.Log("Get level " + levels[currentViewingLevel].LvlID);
         }
         
     }
 
     private void showLevelInfo(int index)
     {
-        levelName.text = levels[index].lvlName;
+        levelName.text = levels[index].LvlName;
         levelDescription.text = levels[index].Description;
         pagination.text = index + 1 + "/" + levels.Length;
     }
@@ -89,9 +89,9 @@ public class ChooseLevelManager : MonoBehaviour
     {
         foreach(Level data in levels)
         {
-            Debug.Log(data.lvlID);
+            Debug.Log(data.LvlID);
             Debug.Log(data.Description);
-            Debug.Log(data.lvlName);
+            Debug.Log(data.LvlName);
         }
     }
     #endregion
