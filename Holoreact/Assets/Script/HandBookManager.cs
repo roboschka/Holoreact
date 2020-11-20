@@ -11,31 +11,35 @@ public class HandBookManager : MonoBehaviour
 {
     private HandBook[] handBookData;
 
-    //panelnya di buat menjadi child yang id assign disini parentnya
-    [SerializeField]
-    private GameObject panel;
-
     [SerializeField]
     private TextMeshProUGUI textToShow;
 
+    [SerializeField]
+    private GameObject gameManager;
+
     private int index;
+
+    private bool paused;
 
     void Start()
     {
-        panel.SetActive(true);
         GetHandbookData();
+        paused = true;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.LeftArrow))
+        if (!paused)
         {
-            Move(-1);
-        }
-        else if(Input.GetKeyDown(KeyCode.RightArrow))
-        {
-            Move(1);
+            if (Input.GetKeyDown(KeyCode.LeftArrow))
+            {
+                Move(-1);
+            }
+            else if (Input.GetKeyDown(KeyCode.RightArrow))
+            {
+                Move(1);
+            }
         }
     }
 
@@ -73,7 +77,7 @@ public class HandBookManager : MonoBehaviour
             (
                 from content in handBookData
                 where content.Page == page
-                select content.Text
+                select content.Description
 
             ).ToList().FirstOrDefault();
 
@@ -85,6 +89,12 @@ public class HandBookManager : MonoBehaviour
         {
             textToShow.text = handBookContent;
         }
+    }
+
+    private void Exit()
+    {
+        paused = true;
+        gameManager.GetComponent<GameManager>().UnPause();
     }
 
 }

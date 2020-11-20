@@ -8,6 +8,6 @@ public class Combination
 {
     public string FirstItem;
     public string SecondItem;
-    public int LvlID;
+    public int LevelID;
     public string Result;
 }
