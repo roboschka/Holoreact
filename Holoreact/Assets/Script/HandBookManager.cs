@@ -4,29 +4,42 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net;
+using TMPro;
 using UnityEngine;
 
 public class HandBookManager : MonoBehaviour
 {
     private HandBook[] handBookData;
 
+    [SerializeField]
+    private TextMeshProUGUI textToShow;
+
+    [SerializeField]
+    private GameObject gameManager;
+
     private int index;
+
+    private bool paused;
 
     void Start()
     {
         GetHandbookData();
+        paused = true;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.LeftArrow))
+        if (!paused)
         {
-            Move(-1);
-        }
-        else if(Input.GetKeyDown(KeyCode.RightArrow))
-        {
-            Move(1);
+            if (Input.GetKeyDown(KeyCode.LeftArrow))
+            {
+                Move(-1);
+            }
+            else if (Input.GetKeyDown(KeyCode.RightArrow))
+            {
+                Move(1);
+            }
         }
     }
 
@@ -58,23 +71,30 @@ public class HandBookManager : MonoBehaviour
         handBookData = JsonHelper.FromJson<HandBook>(jsonResponse);
     }
 
-    private string FindHandBookContent(int page)
+    private void FindHandBookContent(int page)
     {
         string handBookContent =
             (
                 from content in handBookData
                 where content.Page == page
-                select content.Text
+                select content.Description
 
             ).ToList().FirstOrDefault();
 
         if (String.IsNullOrEmpty(handBookContent))
         {
-            return "something goes wrong please contact the developer";
+            textToShow.text = "something goes wrong please contact the developer";
         }
+        else
+        {
+            textToShow.text = handBookContent;
+        }
+    }
 
-        Debug.Log(handBookContent);
-        return handBookContent;
+    private void Exit()
+    {
+        paused = true;
+        gameManager.GetComponent<GameManager>().UnPause();
     }
 
 }

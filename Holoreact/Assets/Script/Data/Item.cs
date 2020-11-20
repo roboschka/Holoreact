@@ -6,6 +6,6 @@ using UnityEngine;
 [Serializable]
 public class Item
 {
-    public int LvlID;
+    public int LevelID;
     public string Name;
 }

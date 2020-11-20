@@ -4,9 +4,9 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [Serializable]
-public class HandBook
+public class Question
 {
-    public int LevelID;
-    public string Description;
-    public int Page;
+    public string question;
+    public string answer;
+    public int levelID;
 }

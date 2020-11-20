@@ -10,13 +10,23 @@ public class GameManager : MonoBehaviour
 {
 
     private List<GameObject> itemList;
-    [SerializeField]
     private Combination[] combinationList;
+    private Question[] questionList;
+
+    [SerializeField]
+    private GameObject cameraForGameplay;
+
+    [SerializeField]
+    private GameObject cameraForHandbook;
+
+    [SerializeField]
+    private GameObject panelForHandbook;
 
     private int counter;
 
-    bool selectedItem;
-    int selectedIndex;
+    private bool selectedItem;
+    private int selectedIndex;
+    private bool paused;
 
     // Start is called before the first frame update
     void Start()
@@ -26,39 +36,38 @@ public class GameManager : MonoBehaviour
         selectedItem = false;
         selectedIndex = -1;
 
-        //PostDataToAPI(1, "test", "test");
-
-        //GetHandbookData();
-        //FindHandBookContent(1);
-
         GetItemList();
 
         GetCombinationDataFromAPI();
 
         itemList[0].SetActive(true);
 
+        paused = false;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetKeyDown("left"))
+        if (!paused)
         {
-            Move(-1);
-        }
-        else if(Input.GetKeyDown("right"))
-        {
-            Move(1);
-        }
-        else if(Input.GetKeyDown("return"))
-        {
-            Select();
+            if (Input.GetKeyDown("left"))
+            {
+                Move(-1);
+            }
+            else if (Input.GetKeyDown("right"))
+            {
+                Move(1);
+            }
+            else if (Input.GetKeyDown("return"))
+            {
+                Select();
+            }
         }
     }
 
     private void CalculateScore()
     {
-        float result = counter / combinationList.Count();
+        float result = counter / combinationList.Count() * 100;
     }
 
     private void Move(int direction)
@@ -81,20 +90,41 @@ public class GameManager : MonoBehaviour
 
     private void Select()
     {
-        if (selectedItem)
+        if (String.Equals(itemList[counter].name.Replace("(Clone)", ""),"Handbook"))
         {
-            Combine();
+
         }
         else
         {
-            itemList[counter].transform.Translate(2, 0, 0);
-            selectedItem = true;
-            selectedIndex = counter;
+            if (selectedItem)
+            {
+                Combine();
+            }
+            else
+            {
+                itemList[counter].transform.Translate(2, 0, 0);
+                selectedItem = true;
+                selectedIndex = counter;
 
-            int temp = counter;
-            Move(1);
-            itemList[temp].SetActive(true);
+                int temp = counter;
+                Move(1);
+                itemList[temp].SetActive(true);
+            }
         }
+    }
+
+    private void ShowHandbook()
+    {
+        cameraForGameplay.SetActive(false);
+        cameraForHandbook.SetActive(true);
+
+        paused = true;
+        panelForHandbook.SetActive(true);
+    }
+
+    public void UnPause()
+    {
+        paused = false;
     }
 
     private void Combine()
@@ -157,7 +187,7 @@ public class GameManager : MonoBehaviour
 
     private void GetCombinationDataFromAPI()
     {
-        HttpWebRequest request = (HttpWebRequest)WebRequest.Create(String.Format("https://api.backendless.com/09476775-387A-4C56-FFE4-B663DC24FC00/DED29ABA-8FAC-4985-86E0-FCCDA5A290B5/data/CombinationList?pageSize=50&offset=0&where=lvlid%3D1"));
+        HttpWebRequest request = (HttpWebRequest)WebRequest.Create(String.Format("https://api.backendless.com/09476775-387A-4C56-FFE4-B663DC24FC00/DED29ABA-8FAC-4985-86E0-FCCDA5A290B5/data/CombinationList?pageSize=50&offset=0&where=levelid%3D1"));
         HttpWebResponse response = (HttpWebResponse)request.GetResponse();
         StreamReader reader = new StreamReader(response.GetResponseStream());
         string jsonResponse = reader.ReadToEnd();
@@ -166,28 +196,42 @@ public class GameManager : MonoBehaviour
         combinationList = JsonHelper.FromJson<Combination>(jsonResponse);
     }
 
+    private void GetQuestionDataFromAPI()
+    {
+        HttpWebRequest request = (HttpWebRequest)WebRequest.Create(String.Format("https://api.backendless.com/09476775-387A-4C56-FFE4-B663DC24FC00/DED29ABA-8FAC-4985-86E0-FCCDA5A290B5/data/Quiz?where=levelid%3D1"));
+        HttpWebResponse response = (HttpWebResponse)request.GetResponse();
+        StreamReader reader = new StreamReader(response.GetResponseStream());
+        string jsonResponse = reader.ReadToEnd();
+        jsonResponse = JsonHelper.FixJSon(jsonResponse);
+
+        questionList = JsonHelper.FromJson<Question>(jsonResponse);
+    }
+
     #endregion
 
     #region Post Data to API
     /// <summary>
     /// PostDataToAPI
+    /// Example : PostScoreToAPI(0, 100, "pre", 1);
     /// </summary>
-    /// <param name="lvlID"></param>
+    /// <param name="levelID"></param>
     /// <param name="name"></param>
     /// <param name="schoolName"></param>
+    /// <param name="TestType"></param>
 
-    private void PostDataToAPI(int lvlID, string name, string schoolName)
+    private void PostScoreToAPI(int levelID, int score, string quizType, int studentID)
     {
         #region Create Request
-        HttpWebRequest request = (HttpWebRequest)WebRequest.Create(String.Format("https://api.backendless.com/09476775-387A-4C56-FFE4-B663DC24FC00/DED29ABA-8FAC-4985-86E0-FCCDA5A290B5/data/StudentData"));
+        HttpWebRequest request = (HttpWebRequest)WebRequest.Create(String.Format("https://api.backendless.com/09476775-387A-4C56-FFE4-B663DC24FC00/DED29ABA-8FAC-4985-86E0-FCCDA5A290B5/data/Score"));
         request.ContentType = "application/json";
         request.Method = "POST";
 
         using (var streamWriter = new StreamWriter(request.GetRequestStream()))
         {
-            string json = "{\"LvlID\":\"" + lvlID + "\"," +
-                          "\"Name\":\"" + name + "\"," +
-                          "\"SchoolName\":\"" + schoolName + "\"}";
+            string json = "{\"LevelID\":\"" + levelID + "\"," +
+                          "\"QuizScore\":\"" + score + "\"," +
+                          "\"QuizType\":\"" + quizType + "\"," +
+                          "\"StudentID\":\"" + studentID + "\"}";
             streamWriter.Write(json);
         }
         #endregion 
@@ -198,6 +242,7 @@ public class GameManager : MonoBehaviour
         {
             var result = streamReader.ReadToEnd();
         }
+
         #endregion
 
     }
@@ -229,7 +274,7 @@ public class GameManager : MonoBehaviour
             select data.Result
            ).ToList();
 
-        if (resultName != null)
+        if (resultName != null && resultName.Count > 0)
         {
             bool exist = false;
             try
@@ -267,7 +312,7 @@ public class GameManager : MonoBehaviour
     {
         foreach(Combination data in combinationList)
         {
-            //Debug.Log(data.LvlID);
+            //Debug.Log(data.LevelID);
             Debug.Log(data.FirstItem);
             Debug.Log(data.SecondItem);
             Debug.Log(data.Result);
