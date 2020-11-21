@@ -12,9 +12,14 @@ using TMPro;
 public class ChooseLevelManager : MonoBehaviour
 {
     private Level[] levels;
+    private Score[] scores;
+    private string sorting = "&sortBy=created%20desc";
 
     [SerializeField]
     private int currentViewingLevel = 0;
+
+    [SerializeField]
+    private string tempStudentID = "0";
 
     [SerializeField]
     private TextMeshProUGUI levelName, levelDescription, pagination;
@@ -23,15 +28,34 @@ public class ChooseLevelManager : MonoBehaviour
     void Start()
     {
         GetLevelList();
+        GetStudentScore();
+       
         showLevelInfo(currentViewingLevel);
     }
 
     // Update is called once per frame
     void Update()
     {
+
+        navigation();
+
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            SceneManager.LoadScene("MainMenu");
+        }
+
+        if (Input.GetKeyDown(KeyCode.Return))
+        {
+            Debug.Log("Get level " + levels[currentViewingLevel].LvlID);
+        }
+        
+    }
+
+    private void navigation()
+    {
         if (Input.GetKeyDown(KeyCode.RightArrow))
         {
-            if (currentViewingLevel < levels.Length-1)
+            if (currentViewingLevel < levels.Length - 1)
             {
                 currentViewingLevel++;
             }
@@ -53,17 +77,6 @@ public class ChooseLevelManager : MonoBehaviour
             }
             showLevelInfo(currentViewingLevel);
         }
-
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            SceneManager.LoadScene("MainMenu");
-        }
-
-        if (Input.GetKeyDown(KeyCode.Return))
-        {
-            Debug.Log("Get level " + levels[currentViewingLevel].LvlID);
-        }
-        
     }
 
     private void showLevelInfo(int index)
@@ -72,6 +85,17 @@ public class ChooseLevelManager : MonoBehaviour
         levelDescription.text = levels[index].Description;
         pagination.text = index + 1 + "/" + levels.Length;
     }
+
+    #region Star System
+    private void calculateTotalScore(Score[] scoreData)
+    {
+        //get the last three
+        for (int i = 0; i < 3; i++)
+        {
+            Debug.Log("the last three: " + scoreData[i].QuizScore);
+        }
+    }
+    #endregion
 
     #region API Functionality
     private void GetLevelList()
@@ -85,14 +109,16 @@ public class ChooseLevelManager : MonoBehaviour
         levels = JsonHelper.FromJson<Level>(JSONResponse);
     }
 
-    private void CheckLevelList()
+    private void GetStudentScore()
     {
-        foreach(Level data in levels)
-        {
-            Debug.Log(data.LvlID);
-            Debug.Log(data.Description);
-            Debug.Log(data.LvlName);
-        }
+        HttpWebRequest request = (HttpWebRequest)WebRequest.Create(String.Format("https://api.backendless.com/09476775-387A-4C56-FFE4-B663DC24FC00/DED29ABA-8FAC-4985-86E0-FCCDA5A290B5/data/Score?where=studentID%3D" + tempStudentID + sorting));
+        HttpWebResponse response = (HttpWebResponse)request.GetResponse();
+        StreamReader reader = new StreamReader(response.GetResponseStream());
+        string JSONResponse = reader.ReadToEnd();
+        JSONResponse = JsonHelper.FixJSon(JSONResponse);
+
+        scores = JsonHelper.FromJson<Score>(JSONResponse);
+        calculateTotalScore(scores);
     }
     #endregion
 }
