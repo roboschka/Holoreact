@@ -699,6 +699,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de9d323e0608d1e43844696614443e0e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  stars:
+  - {fileID: 661376036}
+  - {fileID: 1362310569}
+  - {fileID: 856215776}
+  starFilled: {fileID: 21300000, guid: d48f152abac17954db8279bb4e75c15d, type: 3}
+  starEmpty: {fileID: 21300000, guid: 581a18fa4499984448e9f499f6baad7b, type: 3}
   currentViewingLevel: 0
   tempStudentID: 1
   levelName: {fileID: 1850860630}

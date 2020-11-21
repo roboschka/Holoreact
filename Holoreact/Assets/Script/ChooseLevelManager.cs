@@ -16,6 +16,11 @@ public class ChooseLevelManager : MonoBehaviour
     private string sorting = "&sortBy=created%20desc";
 
     [SerializeField]
+    private SpriteRenderer[] stars;
+    [SerializeField]
+    private Sprite starFilled, starEmpty;
+
+    [SerializeField]
     private int currentViewingLevel = 0;
 
     [SerializeField]
@@ -29,7 +34,7 @@ public class ChooseLevelManager : MonoBehaviour
     {
         GetLevelList();
         GetStudentScore();
-       
+
         showLevelInfo(currentViewingLevel);
     }
 
@@ -84,15 +89,53 @@ public class ChooseLevelManager : MonoBehaviour
         levelName.text = levels[index].LvlName;
         levelDescription.text = levels[index].Description;
         pagination.text = index + 1 + "/" + levels.Length;
+
+        determineStars(calculateTotalScore(scores, index));
+        
     }
 
+
     #region Star System
-    private void calculateTotalScore(Score[] scoreData)
+    private int calculateTotalScore(Score[] scoreData, int currentIndex)
     {
-        //get the last three
-        for (int i = 0; i < 3; i++)
+        var data =
+            from score in scoreData
+            where Int32.Parse(score.LevelID) == (currentIndex + 1)
+            select Int32.Parse(score.QuizScore);
+
+        List<int> dataList = data.ToList();
+        return dataList.Take(3).Sum(); ;
+    }
+
+    private void determineStars(int totalScore)
+    {
+        Debug.Log(totalScore);
+
+        changeStarSprite(3, starEmpty);
+
+        if (totalScore == 300)
         {
-            Debug.Log("the last three: " + scoreData[i].QuizScore);
+            changeStarSprite(3, starFilled);
+        }
+        else if (totalScore >= 200)
+        {
+            changeStarSprite(2, starFilled);
+        }
+        else if (totalScore >= 100)
+        {
+            changeStarSprite(1, starFilled);
+        }
+        else if (totalScore >= 0)
+        {
+            changeStarSprite(3, starEmpty);
+        }
+    }
+
+    private void changeStarSprite(int amountOfStars, Sprite starType)
+    {
+        for (int i = 0; i < amountOfStars; i++)
+        {
+            stars[0].sprite = starType;
         }
     }
     #endregion
@@ -118,7 +161,7 @@ public class ChooseLevelManager : MonoBehaviour
         JSONResponse = JsonHelper.FixJSon(JSONResponse);
 
         scores = JsonHelper.FromJson<Score>(JSONResponse);
-        calculateTotalScore(scores);
+        
     }
     #endregion
 }
