@@ -113,21 +113,20 @@ public class ChooseLevelManager : MonoBehaviour
 
         changeStarSprite(3, starEmpty);
 
-        if (totalScore == 300)
+        switch(totalScore/100)
         {
-            changeStarSprite(3, starFilled);
-        }
-        else if (totalScore >= 200)
-        {
-            changeStarSprite(2, starFilled);
-        }
-        else if (totalScore >= 100)
-        {
-            changeStarSprite(1, starFilled);
-        }
-        else if (totalScore >= 0)
-        {
-            changeStarSprite(3, starEmpty);
+            case 1:
+                changeStarSprite(1, starFilled);
+                break;
+            case 2:
+                changeStarSprite(2, starFilled);
+                break;
+            case 3:
+                changeStarSprite(3, starFilled);
+                break;
+            default:
+                changeStarSprite(3, starEmpty);
+                break;
         }
     }
 
