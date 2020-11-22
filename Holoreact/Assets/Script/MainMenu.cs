@@ -27,10 +27,21 @@ public class MainMenu : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        ToggleNotification(false, true, playButton);
+        //isFirstPlay active
+        if (isFirstPlay)
+        {
+            studentDataCanvas.gameObject.SetActive(true);
+            mainMenuCanvas.gameObject.SetActive(false);
+        }
+        else
+        {
+            studentDataCanvas.gameObject.SetActive(false);
+            mainMenuCanvas.gameObject.SetActive(true);
+            ToggleNotification(false, true, playButton);
+        }
     }
 
-    // Update is called once per frame
+    // Update is called once per frames
     void Update()
     {
         MainMenuNavigation();
@@ -84,10 +95,11 @@ public class MainMenu : MonoBehaviour
         }
     }
 
-    private void ToggleNotification(bool isNotifOn, bool isMainMenuOn, Button toHighlight)
+    public void ToggleNotification(bool isNotifOn, bool isMainMenuOn, Button toHighlight)
     {
         quitNotificationCanvas.gameObject.SetActive(isNotifOn);
         mainMenuCanvas.gameObject.SetActive(isMainMenuOn);
         toHighlight.Select();
+        Debug.Log("toggle");
     }
 }
