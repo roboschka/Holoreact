@@ -14,29 +14,37 @@ public class MainMenu : MonoBehaviour
 {
 
     [SerializeField]
-    private Button playButton, yesQuitButton;
+    public Button playButton, yesQuitButton;
     [SerializeField]
-    private Canvas quitNotificationCanvas, mainMenuCanvas;
+    public Canvas quitNotificationCanvas, mainMenuCanvas, studentDataCanvas;
 
     private int lvl;
+    
+    public bool isFirstPlay = true;
     
     GameObject highlightedButton, highlightedButton2;
 
     // Start is called before the first frame update
     void Start()
     {
-        toggleNotification(false, true, playButton);
+        ToggleNotification(false, true, playButton);
     }
 
     // Update is called once per frame
     void Update()
     {
+        MainMenuNavigation();
+    }
+
+    private void MainMenuNavigation()
+    {
         highlightedButton = EventSystem.current.currentSelectedGameObject;
+        Debug.Log("highlighted button " + highlightedButton.name);
 
         if (Input.GetKeyDown(KeyCode.Return))
         {
             //MainMenu Navigation
-            switch(highlightedButton.name)
+            switch (highlightedButton.name)
             {
                 case "Play":
                     SceneManager.LoadScene("ChooseLevel");
@@ -47,7 +55,7 @@ public class MainMenu : MonoBehaviour
                     break;
                 case "Quit":
                     //Open Notification Canvas
-                    toggleNotification(true, false, yesQuitButton);
+                    ToggleNotification(true, false, yesQuitButton);
                     break;
             }
         }
@@ -64,19 +72,19 @@ public class MainMenu : MonoBehaviour
                         Application.Quit();
                         break;
                     case "NoQuit":
-                        toggleNotification(false, true, playButton);
+                        ToggleNotification(false, true, playButton);
                         break;
                 }
             }
-            
+
             else if (Input.GetKeyDown(KeyCode.Escape))
             {
-                toggleNotification(false, true, playButton);
+                ToggleNotification(false, true, playButton);
             }
         }
     }
 
-    private void toggleNotification(bool isNotifOn, bool isMainMenuOn, Button toHighlight)
+    private void ToggleNotification(bool isNotifOn, bool isMainMenuOn, Button toHighlight)
     {
         quitNotificationCanvas.gameObject.SetActive(isNotifOn);
         mainMenuCanvas.gameObject.SetActive(isMainMenuOn);
