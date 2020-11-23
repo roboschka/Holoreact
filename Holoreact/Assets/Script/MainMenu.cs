@@ -27,7 +27,9 @@ public class MainMenu : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        //isFirstPlay active
+        //isFirstPlay = PlayerPrefs.GetInt("isFirstPlay") == 1 ? true : false;
+        Debug.Log("isFirstPlay = " + isFirstPlay);
+
         if (isFirstPlay)
         {
             studentDataCanvas.gameObject.SetActive(true);
@@ -50,7 +52,6 @@ public class MainMenu : MonoBehaviour
     private void MainMenuNavigation()
     {
         highlightedButton = EventSystem.current.currentSelectedGameObject;
-        Debug.Log("highlighted button " + highlightedButton.name);
 
         if (Input.GetKeyDown(KeyCode.Return))
         {
@@ -100,6 +101,5 @@ public class MainMenu : MonoBehaviour
         quitNotificationCanvas.gameObject.SetActive(isNotifOn);
         mainMenuCanvas.gameObject.SetActive(isMainMenuOn);
         toHighlight.Select();
-        Debug.Log("toggle");
     }
 }

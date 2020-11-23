@@ -4151,7 +4151,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1899690324
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4168,7 +4168,7 @@ MonoBehaviour:
   yesQuitButton: {fileID: 736907947}
   quitNotificationCanvas: {fileID: 1992212241}
   mainMenuCanvas: {fileID: 1899690327}
-  studentDataCanvas: {fileID: 0}
+  studentDataCanvas: {fileID: 1527978348}
   isFirstPlay: 1
 --- !u!114 &1899690325
 MonoBehaviour:
@@ -4290,7 +4290,7 @@ MonoBehaviour:
   yesQuitButton: {fileID: 736907947}
   quitNotificationCanvas: {fileID: 1992212241}
   mainMenuCanvas: {fileID: 1899690327}
-  studentDataCanvas: {fileID: 0}
+  studentDataCanvas: {fileID: 1527978348}
   isFirstPlay: 1
 --- !u!114 &1992212239
 MonoBehaviour:

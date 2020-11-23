@@ -6,6 +6,7 @@ using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using TMPro;
 using System;
+using System.Linq;
 using System.IO;
 
 public class StudentDataManager : MonoBehaviour
@@ -16,9 +17,11 @@ public class StudentDataManager : MonoBehaviour
     [SerializeField]
     private Canvas self;
 
-    private string studentName, studentSchool;
+    private string studentName, studentSchool, studentID;
 
     public MainMenu mainMenu;
+    StudentData student;
+    
 
     GameObject highlightedButton;
 
@@ -53,8 +56,9 @@ public class StudentDataManager : MonoBehaviour
                 PostStudentData(studentName, studentSchool);
 
                 mainMenu.isFirstPlay = false;
-                self.gameObject.SetActive(false);
+                PlayerPrefs.SetInt("isFirstPlay", mainMenu.isFirstPlay ? 1 : 0);
 
+                self.gameObject.SetActive(false);
                 mainMenu.ToggleNotification(false, true, mainMenu.playButton);
             }
         }
@@ -75,11 +79,35 @@ public class StudentDataManager : MonoBehaviour
         }
 
         var httpResponse = (HttpWebResponse)request.GetResponse();
+        var result = "";
+
         using (var streamReader = new StreamReader(httpResponse.GetResponseStream()))
         {
-            var result = streamReader.ReadToEnd();
+            result = streamReader.ReadToEnd();
+            result = FixSingularJSonResponse(result);
             Debug.Log(result);
+            student = JsonHelper.FromJson<StudentData>(result).FirstOrDefault();
+            SaveStudentData(student);
+        }
+    }
+
+    private void SaveStudentData(StudentData student)
+    {
+        if (student == null)
+        {
+            Debug.Log("Retry to get data");
+        } 
+        else
+        {
+            Debug.Log("currentID=" + student.Id);
+            PlayerPrefs.SetInt("studentID", student.Id);
         }
     }
     #endregion
+
+    private string FixSingularJSonResponse(string value)
+    {
+        value = "{\"Items\":[" + value + "]}";
+        return value;
+    }
 }

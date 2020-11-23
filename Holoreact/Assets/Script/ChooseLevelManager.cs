@@ -20,11 +20,8 @@ public class ChooseLevelManager : MonoBehaviour
     [SerializeField]
     private Sprite starFilled, starEmpty;
 
-    [SerializeField]
     private int currentViewingLevel = 0;
-
-    [SerializeField]
-    private string tempStudentID = "0";
+    private string studentID;
 
     [SerializeField]
     private TextMeshProUGUI levelName, levelDescription, pagination;
@@ -32,9 +29,11 @@ public class ChooseLevelManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        studentID = PlayerPrefs.GetInt("studentID").ToString();
+
         GetLevelList();
         GetStudentScore();
-
+        
         showLevelInfo(currentViewingLevel);
     }
 
@@ -90,13 +89,13 @@ public class ChooseLevelManager : MonoBehaviour
         levelDescription.text = levels[index].Description;
         pagination.text = index + 1 + "/" + levels.Length;
 
-        determineStars(calculateTotalScore(scores, index));
+        DetermineStars(CalculateTotalScore(scores, index));
         
     }
 
 
     #region Star System
-    private int calculateTotalScore(Score[] scoreData, int currentIndex)
+    private int CalculateTotalScore(Score[] scoreData, int currentIndex)
     {
         var data =
             from score in scoreData
@@ -107,34 +106,34 @@ public class ChooseLevelManager : MonoBehaviour
         return dataList.Take(3).Sum(); ;
     }
 
-    private void determineStars(int totalScore)
+    private void DetermineStars(int totalScore)
     {
-        Debug.Log(totalScore);
+        Debug.Log(totalScore/100);
 
-        changeStarSprite(3, starEmpty);
+        ChangeStarSprite(3, starEmpty);
 
         switch(totalScore/100)
         {
             case 1:
-                changeStarSprite(1, starFilled);
+                ChangeStarSprite(1, starFilled);
                 break;
             case 2:
-                changeStarSprite(2, starFilled);
+                ChangeStarSprite(2, starFilled);
                 break;
             case 3:
-                changeStarSprite(3, starFilled);
+                ChangeStarSprite(3, starFilled);
                 break;
             default:
-                changeStarSprite(3, starEmpty);
+                ChangeStarSprite(3, starEmpty);
                 break;
         }
     }
 
-    private void changeStarSprite(int amountOfStars, Sprite starType)
+    private void ChangeStarSprite(int amountOfStars, Sprite starType)
     {
         for (int i = 0; i < amountOfStars; i++)
         {
-            stars[0].sprite = starType;
+            stars[i].sprite = starType;
         }
     }
     #endregion
@@ -153,7 +152,7 @@ public class ChooseLevelManager : MonoBehaviour
 
     private void GetStudentScore()
     {
-        HttpWebRequest request = (HttpWebRequest)WebRequest.Create(String.Format("https://api.backendless.com/09476775-387A-4C56-FFE4-B663DC24FC00/DED29ABA-8FAC-4985-86E0-FCCDA5A290B5/data/Score?where=studentID%3D" + tempStudentID + sorting));
+        HttpWebRequest request = (HttpWebRequest)WebRequest.Create(String.Format("https://api.backendless.com/09476775-387A-4C56-FFE4-B663DC24FC00/DED29ABA-8FAC-4985-86E0-FCCDA5A290B5/data/Score?where=studentID%3D" + studentID + sorting));
         HttpWebResponse response = (HttpWebResponse)request.GetResponse();
         StreamReader reader = new StreamReader(response.GetResponseStream());
         string JSONResponse = reader.ReadToEnd();
