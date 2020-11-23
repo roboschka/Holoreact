@@ -15,6 +15,9 @@ public class HandBookManager : MonoBehaviour
     private TextMeshProUGUI textToShow;
 
     [SerializeField]
+    private GameObject panelForHandbook;
+
+    [SerializeField]
     private GameObject gameManager;
 
     private int index;
@@ -91,9 +94,16 @@ public class HandBookManager : MonoBehaviour
         }
     }
 
+    public void UnPause()
+    {
+        paused = false;
+        panelForHandbook.SetActive(true);
+    }
+
     private void Exit()
     {
         paused = true;
+        panelForHandbook.SetActive(false);
         gameManager.GetComponent<GameManager>().UnPause();
     }
 
