@@ -27,7 +27,7 @@ public class MainMenu : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        //isFirstPlay = PlayerPrefs.GetInt("isFirstPlay") == 1 ? true : false;
+        isFirstPlay = PlayerPrefs.GetInt("isFirstPlay") == 1 ? true : false;
         Debug.Log("isFirstPlay = " + isFirstPlay);
 
         if (isFirstPlay)
