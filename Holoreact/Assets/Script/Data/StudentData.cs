@@ -4,9 +4,9 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [Serializable]
-public class Level
+public class StudentData
 {
-    public int LvlID;
-    public string Description;
-    public string LvlName;
+    public int Id;
+    public string Name;
+    public string schoolName;
 }

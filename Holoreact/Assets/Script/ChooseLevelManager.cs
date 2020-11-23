@@ -12,9 +12,16 @@ using TMPro;
 public class ChooseLevelManager : MonoBehaviour
 {
     private Level[] levels;
+    private Score[] scores;
+    private string sorting = "&sortBy=created%20desc";
 
     [SerializeField]
+    private SpriteRenderer[] stars;
+    [SerializeField]
+    private Sprite starFilled, starEmpty;
+
     private int currentViewingLevel = 0;
+    private string studentID;
 
     [SerializeField]
     private TextMeshProUGUI levelName, levelDescription, pagination;
@@ -22,16 +29,37 @@ public class ChooseLevelManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        studentID = PlayerPrefs.GetInt("studentID").ToString();
+
         GetLevelList();
+        GetStudentScore();
+        
         showLevelInfo(currentViewingLevel);
     }
 
     // Update is called once per frame
     void Update()
     {
+
+        navigation();
+
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            SceneManager.LoadScene("MainMenu");
+        }
+
+        if (Input.GetKeyDown(KeyCode.Return))
+        {
+            Debug.Log("Get level " + levels[currentViewingLevel].LvlID);
+        }
+        
+    }
+
+    private void navigation()
+    {
         if (Input.GetKeyDown(KeyCode.RightArrow))
         {
-            if (currentViewingLevel < levels.Length-1)
+            if (currentViewingLevel < levels.Length - 1)
             {
                 currentViewingLevel++;
             }
@@ -53,25 +81,62 @@ public class ChooseLevelManager : MonoBehaviour
             }
             showLevelInfo(currentViewingLevel);
         }
-
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            SceneManager.LoadScene("MainMenu");
-        }
-
-        if (Input.GetKeyDown(KeyCode.Return))
-        {
-            Debug.Log("Get level " + levels[currentViewingLevel].lvlID);
-        }
-        
     }
 
     private void showLevelInfo(int index)
     {
-        levelName.text = levels[index].lvlName;
+        levelName.text = levels[index].LvlName;
         levelDescription.text = levels[index].Description;
         pagination.text = index + 1 + "/" + levels.Length;
+
+        DetermineStars(CalculateTotalScore(scores, index));
+        
     }
+
+
+    #region Star System
+    private int CalculateTotalScore(Score[] scoreData, int currentIndex)
+    {
+        var data =
+            from score in scoreData
+            where Int32.Parse(score.LevelID) == (currentIndex + 1)
+            select Int32.Parse(score.QuizScore);
+
+        List<int> dataList = data.ToList();
+        return dataList.Take(3).Sum(); ;
+    }
+
+    private void DetermineStars(int totalScore)
+    {
+        Debug.Log(totalScore/100);
+
+        ChangeStarSprite(3, starEmpty);
+
+        switch(totalScore/100)
+        {
+            case 1:
+                ChangeStarSprite(1, starFilled);
+                break;
+            case 2:
+                ChangeStarSprite(2, starFilled);
+                break;
+            case 3:
+                ChangeStarSprite(3, starFilled);
+                break;
+            default:
+                ChangeStarSprite(3, starEmpty);
+                break;
+        }
+    }
+
+    private void ChangeStarSprite(int amountOfStars, Sprite starType)
+    {
+        for (int i = 0; i < amountOfStars; i++)
+        {
+            stars[i].sprite = starType;
+        }
+    }
+    #endregion
 
     #region API Functionality
     private void GetLevelList()
@@ -85,14 +150,16 @@ public class ChooseLevelManager : MonoBehaviour
         levels = JsonHelper.FromJson<Level>(JSONResponse);
     }
 
-    private void CheckLevelList()
+    private void GetStudentScore()
     {
-        foreach(Level data in levels)
-        {
-            Debug.Log(data.lvlID);
-            Debug.Log(data.Description);
-            Debug.Log(data.lvlName);
-        }
+        HttpWebRequest request = (HttpWebRequest)WebRequest.Create(String.Format("https://api.backendless.com/09476775-387A-4C56-FFE4-B663DC24FC00/DED29ABA-8FAC-4985-86E0-FCCDA5A290B5/data/Score?where=studentID%3D" + studentID + sorting));
+        HttpWebResponse response = (HttpWebResponse)request.GetResponse();
+        StreamReader reader = new StreamReader(response.GetResponseStream());
+        string JSONResponse = reader.ReadToEnd();
+        JSONResponse = JsonHelper.FixJSon(JSONResponse);
+
+        scores = JsonHelper.FromJson<Score>(JSONResponse);
+        
     }
     #endregion
 }
