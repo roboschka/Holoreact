@@ -13,7 +13,6 @@ public class ChooseLevelManager : MonoBehaviour
 {
     private Level[] levels;
     private Score[] scores;
-    private string sorting = "&sortBy=created%20desc";
 
     [SerializeField]
     private SpriteRenderer[] stars;
@@ -152,14 +151,13 @@ public class ChooseLevelManager : MonoBehaviour
 
     private void GetStudentScore()
     {
-        HttpWebRequest request = (HttpWebRequest)WebRequest.Create(String.Format("https://api.backendless.com/09476775-387A-4C56-FFE4-B663DC24FC00/DED29ABA-8FAC-4985-86E0-FCCDA5A290B5/data/Score?where=studentID%3D" + studentID + sorting));
+        HttpWebRequest request = (HttpWebRequest)WebRequest.Create(String.Format("https://api.backendless.com/09476775-387A-4C56-FFE4-B663DC24FC00/DED29ABA-8FAC-4985-86E0-FCCDA5A290B5/data/Score?where=studentID%3D" + studentID + "&sortBy=created%20desc"));
         HttpWebResponse response = (HttpWebResponse)request.GetResponse();
         StreamReader reader = new StreamReader(response.GetResponseStream());
         string JSONResponse = reader.ReadToEnd();
         JSONResponse = JsonHelper.FixJSon(JSONResponse);
 
         scores = JsonHelper.FromJson<Score>(JSONResponse);
-        
     }
     #endregion
 }
