@@ -16,9 +16,6 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private GameObject cameraForGameplay;
 
-    [SerializeField]
-    private GameObject cameraForHandbook;
-
     private int counter;
 
     private bool selectedItem;
@@ -113,13 +110,13 @@ public class GameManager : MonoBehaviour
     private void ShowHandbook()
     {
         cameraForGameplay.SetActive(false);
-        cameraForHandbook.SetActive(true);
         paused = true;
     }
 
     public void UnPause()
     {
         paused = false;
+        cameraForGameplay.SetActive(true);
     }
 
     private void Combine()
