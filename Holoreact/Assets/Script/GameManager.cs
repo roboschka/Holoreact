@@ -226,7 +226,7 @@ public class GameManager : MonoBehaviour
                           "\"StudentID\":\"" + studentID + "\"}";
             streamWriter.Write(json);
         }
-        #endregion 
+        #endregion
 
         #region Get Response
         var httpResponse = (HttpWebResponse)request.GetResponse();
