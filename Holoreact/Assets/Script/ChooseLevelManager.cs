@@ -50,8 +50,8 @@ public class ChooseLevelManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Return))
         {
             Debug.Log("Get level " + levels[currentViewingLevel].LvlID);
+            PlayerPrefs.SetInt("currentLevel", levels[currentViewingLevel].LvlID);
         }
-        
     }
 
     private void navigation()
