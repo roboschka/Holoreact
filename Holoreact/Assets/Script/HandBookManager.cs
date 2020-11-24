@@ -20,6 +20,9 @@ public class HandBookManager : MonoBehaviour
     [SerializeField]
     private GameObject gameManager;
 
+    [SerializeField]
+    private GameObject cameraForHandbook;
+
     private int index;
 
     private bool paused;
@@ -98,12 +101,14 @@ public class HandBookManager : MonoBehaviour
     {
         paused = false;
         panelForHandbook.SetActive(true);
+        cameraForHandbook.SetActive(true);
     }
 
     private void Exit()
     {
         paused = true;
         panelForHandbook.SetActive(false);
+        cameraForHandbook.SetActive(false);
         gameManager.GetComponent<GameManager>().UnPause();
     }
 
