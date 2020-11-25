@@ -11,16 +11,23 @@ public class GameManager : MonoBehaviour
 
     private List<GameObject> itemList;
     private Combination[] combinationList;
-    private Question[] questionList;
 
     [SerializeField]
     private GameObject cameraForGameplay;
+
+    [SerializeField]
+    private GameObject handBookManager;
+
+    [SerializeField]
+    private GameObject quizManager;
 
     private int counter;
 
     private bool selectedItem;
     private int selectedIndex;
     private bool paused;
+
+    private int currentLvl;
 
     // Start is called before the first frame update
     void Start()
@@ -30,13 +37,15 @@ public class GameManager : MonoBehaviour
         selectedItem = false;
         selectedIndex = -1;
 
+        currentLvl = PlayerPrefs.GetInt("currentLevel");
+
         GetItemList();
 
         GetCombinationDataFromAPI();
 
         itemList[0].SetActive(true);
 
-        paused = false;
+        paused = true;
     }
 
     // Update is called once per frame
@@ -59,9 +68,10 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    private void CalculateScore()
+    private int CalculateExperimentScore()
     {
-        float result = counter / combinationList.Count() * 100;
+        int result;
+        return  result = counter / combinationList.Count() * 100;
     }
 
     private void Move(int direction)
@@ -86,7 +96,12 @@ public class GameManager : MonoBehaviour
     {
         if (String.Equals(itemList[counter].name.Replace("(Clone)", ""),"Handbook"))
         {
-
+            ShowHandbook();
+        }
+        else if (String.Equals(itemList[counter].name.Replace("(Clone)", ""), "ButtonSubmit"))
+        {
+            quizManager.GetComponent<QuizManager>().SetExperimentScore(CalculateExperimentScore());
+            quizManager.GetComponent<QuizManager>().PostTest();
         }
         else
         {
@@ -111,6 +126,7 @@ public class GameManager : MonoBehaviour
     {
         cameraForGameplay.SetActive(false);
         paused = true;
+        handBookManager.GetComponent<HandBookManager>().UnPause();
     }
 
     public void UnPause()
@@ -159,7 +175,7 @@ public class GameManager : MonoBehaviour
 
     private void GetItemList()
     {
-        HttpWebRequest request = (HttpWebRequest)WebRequest.Create(String.Format("https://api.backendless.com/09476775-387A-4C56-FFE4-B663DC24FC00/DED29ABA-8FAC-4985-86E0-FCCDA5A290B5/data/ItemList?pageSize=50"));
+        HttpWebRequest request = (HttpWebRequest)WebRequest.Create(String.Format("https://api.backendless.com/09476775-387A-4C56-FFE4-B663DC24FC00/DED29ABA-8FAC-4985-86E0-FCCDA5A290B5/data/ItemList?pageSize=50&where=levelid%3D"+currentLvl));
         HttpWebResponse response = (HttpWebResponse)request.GetResponse();
         StreamReader reader = new StreamReader(response.GetResponseStream());
         string jsonResponse = reader.ReadToEnd();
@@ -171,7 +187,7 @@ public class GameManager : MonoBehaviour
 
         foreach(Item item in items)
         {
-            GameObject instance = Instantiate(Resources.Load("Prefab/Test/" + item.Name) as GameObject);
+            GameObject instance = Instantiate(Resources.Load("Prefab/" + item.Name) as GameObject);
             itemList.Add(instance);
             instance.SetActive(false);
         }
@@ -179,64 +195,13 @@ public class GameManager : MonoBehaviour
 
     private void GetCombinationDataFromAPI()
     {
-        HttpWebRequest request = (HttpWebRequest)WebRequest.Create(String.Format("https://api.backendless.com/09476775-387A-4C56-FFE4-B663DC24FC00/DED29ABA-8FAC-4985-86E0-FCCDA5A290B5/data/CombinationList?pageSize=50&offset=0&where=levelid%3D1"));
+        HttpWebRequest request = (HttpWebRequest)WebRequest.Create(String.Format("https://api.backendless.com/09476775-387A-4C56-FFE4-B663DC24FC00/DED29ABA-8FAC-4985-86E0-FCCDA5A290B5/data/CombinationList?pageSize=50&offset=0&where=levelid%3D"+currentLvl));
         HttpWebResponse response = (HttpWebResponse)request.GetResponse();
         StreamReader reader = new StreamReader(response.GetResponseStream());
         string jsonResponse = reader.ReadToEnd();
         jsonResponse = JsonHelper.FixJSon(jsonResponse);
 
         combinationList = JsonHelper.FromJson<Combination>(jsonResponse);
-    }
-
-    private void GetQuestionDataFromAPI()
-    {
-        HttpWebRequest request = (HttpWebRequest)WebRequest.Create(String.Format("https://api.backendless.com/09476775-387A-4C56-FFE4-B663DC24FC00/DED29ABA-8FAC-4985-86E0-FCCDA5A290B5/data/Quiz?where=levelid%3D1"));
-        HttpWebResponse response = (HttpWebResponse)request.GetResponse();
-        StreamReader reader = new StreamReader(response.GetResponseStream());
-        string jsonResponse = reader.ReadToEnd();
-        jsonResponse = JsonHelper.FixJSon(jsonResponse);
-
-        questionList = JsonHelper.FromJson<Question>(jsonResponse);
-    }
-
-    #endregion
-
-    #region Post Data to API
-    /// <summary>
-    /// PostDataToAPI
-    /// Example : PostScoreToAPI(0, 100, "pre", 1);
-    /// </summary>
-    /// <param name="levelID"></param>
-    /// <param name="name"></param>
-    /// <param name="schoolName"></param>
-    /// <param name="TestType"></param>
-
-    private void PostScoreToAPI(int levelID, int score, string quizType, int studentID)
-    {
-        #region Create Request
-        HttpWebRequest request = (HttpWebRequest)WebRequest.Create(String.Format("https://api.backendless.com/09476775-387A-4C56-FFE4-B663DC24FC00/DED29ABA-8FAC-4985-86E0-FCCDA5A290B5/data/Score"));
-        request.ContentType = "application/json";
-        request.Method = "POST";
-
-        using (var streamWriter = new StreamWriter(request.GetRequestStream()))
-        {
-            string json = "{\"LevelID\":\"" + levelID + "\"," +
-                          "\"QuizScore\":\"" + score + "\"," +
-                          "\"QuizType\":\"" + quizType + "\"," +
-                          "\"StudentID\":\"" + studentID + "\"}";
-            streamWriter.Write(json);
-        }
-        #endregion
-
-        #region Get Response
-        var httpResponse = (HttpWebResponse)request.GetResponse();
-        using (var streamReader = new StreamReader(httpResponse.GetResponseStream()))
-        {
-            var result = streamReader.ReadToEnd();
-        }
-
-        #endregion
-
     }
 
     #endregion
