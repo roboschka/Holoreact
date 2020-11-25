@@ -51,7 +51,7 @@ public class ChooseLevelManager : MonoBehaviour
         {
             Debug.Log("Get level " + levels[currentViewingLevel].LevelID);
             PlayerPrefs.SetInt("currentLevel", levels[currentViewingLevel].LevelID);
-            //SceneManager.LoadScene("Gameplay");
+            SceneManager.LoadScene("Gameplay");
         }
     }
 
