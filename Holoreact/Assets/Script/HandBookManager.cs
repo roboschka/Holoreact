@@ -24,11 +24,13 @@ public class HandBookManager : MonoBehaviour
     private GameObject cameraForHandbook;
 
     private int index;
+    private int currentLvl;
 
     private bool paused;
 
     void Start()
     {
+        currentLvl = PlayerPrefs.GetInt("currentLevel");
         GetHandbookData();
         paused = true;
     }
@@ -68,7 +70,7 @@ public class HandBookManager : MonoBehaviour
 
     private void GetHandbookData()
     {
-        HttpWebRequest request = (HttpWebRequest)WebRequest.Create(String.Format("https://api.backendless.com/09476775-387A-4C56-FFE4-B663DC24FC00/DED29ABA-8FAC-4985-86E0-FCCDA5A290B5/data/Handbook?where=lvlid%3D1"));
+        HttpWebRequest request = (HttpWebRequest)WebRequest.Create(String.Format("https://api.backendless.com/09476775-387A-4C56-FFE4-B663DC24FC00/DED29ABA-8FAC-4985-86E0-FCCDA5A290B5/data/Handbook?where=levelid%3D"+currentLvl));
         HttpWebResponse response = (HttpWebResponse)request.GetResponse();
         StreamReader reader = new StreamReader(response.GetResponseStream());
         string jsonResponse = reader.ReadToEnd();
