@@ -1,22 +1,26 @@
 fileFormatVersion: 2
-guid: 93477f3008941ae4098e06cdd2d5481d
+guid: 882d3f3fab58ae447aaf90a4377167cd
 ModelImporter:
   serializedVersion: 23
   fileIDToRecycleName:
     100000: //RootNode
-    100002: Circle
-    100004: Cube
+    100002: lamp glass
+    100004: lamp handle
+    100006: socket
     400000: //RootNode
-    400002: Circle
-    400004: Cube
+    400002: lamp glass
+    400004: lamp handle
+    400006: socket
     2100000: No Name
-    2100002: Material.001
-    2300000: Circle
-    2300002: Cube
-    3300000: Circle
-    3300002: Cube
-    4300000: Circle
-    4300002: Cube
+    2300000: lamp glass
+    2300002: lamp handle
+    2300004: socket
+    3300000: lamp glass
+    3300002: lamp handle
+    3300004: socket
+    4300000: socket
+    4300002: lamp handle
+    4300004: lamp glass
   externalObjects: {}
   materials:
     importMaterials: 1
