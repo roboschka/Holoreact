@@ -292,9 +292,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f3e020e11705345429dbc06619dec7e6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemList: []
-  combinationList: []
-  handBookData: []
+  cameraForGameplay: {fileID: 0}
+  handBookManager: {fileID: 0}
+  quizManager: {fileID: 0}
 --- !u!4 &2014534730
 Transform:
   m_ObjectHideFlags: 0
