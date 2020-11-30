@@ -10,13 +10,16 @@ public class QuizManager : MonoBehaviour
 {
     private int currentLvl;
 
-    private Question[] questionList;
+    private Questions[] questionList;
 
     [SerializeField]
     private TMP_InputField answerField;
 
     [SerializeField]
     private GameObject panelForQuiz;
+
+    [SerializeField]
+    private TextMeshProUGUI questionLabel;
 
     [SerializeField]
     private GameObject cameraForQuiz;
@@ -41,6 +44,9 @@ public class QuizManager : MonoBehaviour
         index = 0;
         paused = false;
         isPostTest = false;
+        GetQuestionDataFromAPI();
+        questionLabel.text = questionList[0].Question;
+        answerField.ActivateInputField();
     }
 
     // Update is called once per frame
@@ -54,7 +60,7 @@ public class QuizManager : MonoBehaviour
     
     private void Submit()
     {
-        if(answerField.text.Equals(questionList[index].answer, StringComparison.InvariantCultureIgnoreCase))
+        if(answerField.text.Equals(questionList[index].Answer, StringComparison.InvariantCultureIgnoreCase))
         {
             correctAnswer += 1;
         }
@@ -97,13 +103,13 @@ public class QuizManager : MonoBehaviour
 
     private void GetQuestionDataFromAPI()
     {
-        HttpWebRequest request = (HttpWebRequest)WebRequest.Create(String.Format("https://api.backendless.com/09476775-387A-4C56-FFE4-B663DC24FC00/DED29ABA-8FAC-4985-86E0-FCCDA5A290B5/data/Quiz?where=levelid%3D" + currentLvl));
+        HttpWebRequest request = (HttpWebRequest)WebRequest.Create(String.Format("https://api.backendless.com/09476775-387A-4C56-FFE4-B663DC24FC00/DED29ABA-8FAC-4985-86E0-FCCDA5A290B5/data/Quiz?where=LevelID%3D" + currentLvl));
         HttpWebResponse response = (HttpWebResponse)request.GetResponse();
         StreamReader reader = new StreamReader(response.GetResponseStream());
         string jsonResponse = reader.ReadToEnd();
         jsonResponse = JsonHelper.FixJSon(jsonResponse);
 
-        questionList = JsonHelper.FromJson<Question>(jsonResponse);
+        questionList = JsonHelper.FromJson<Questions>(jsonResponse);
     }
 
     #endregion
