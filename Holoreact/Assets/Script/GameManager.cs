@@ -48,6 +48,7 @@ public class GameManager : MonoBehaviour
         paused = true;
 
         DeactiveAllItemAndResetPosition();
+        Debug.Log("start called");
     }
 
     // Update is called once per frame
@@ -126,7 +127,9 @@ public class GameManager : MonoBehaviour
 
     private void ShowHandbook()
     {
+        Debug.Log("selectedIndex at showHandbook: " + selectedIndex);
         cameraForGameplay.SetActive(false);
+        itemList[selectedIndex].SetActive(false);
         paused = true;
         handBookManager.GetComponent<HandBookManager>().UnPause();
     }
@@ -136,7 +139,7 @@ public class GameManager : MonoBehaviour
         paused = false;
         cameraForGameplay.SetActive(true);
         itemList[selectedIndex].SetActive(true);
-        
+        Debug.Log("selectedIndex at UnPause: " + selectedIndex);
     }
 
     private void Combine()

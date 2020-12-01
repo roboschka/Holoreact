@@ -48,6 +48,12 @@ public class HandBookManager : MonoBehaviour
             {
                 Move(1);
             }
+            else if (Input.GetKey(KeyCode.Escape))
+            {
+                panelForHandbook.SetActive(false);
+                cameraForHandbook.SetActive(false);
+                gameManager.GetComponent<GameManager>().UnPause();
+            }
         }
     }
 

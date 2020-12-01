@@ -57,6 +57,7 @@ public class QuizManager : MonoBehaviour
         finish = false;
         GetQuestionDataFromAPI();
         answerField.ActivateInputField();
+        LoadQuestion();
     }
 
     // Update is called once per frame
@@ -66,7 +67,10 @@ public class QuizManager : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.Return))
             {
+                answerField.Select();
+                answerField.text = "";
                 Submit();
+                answerField.ActivateInputField();
             }
         }
         else
@@ -85,7 +89,6 @@ public class QuizManager : MonoBehaviour
     
     private void Submit()
     {
-        Debug.Log(index);
         if(answerField.text.Equals(questionList[index].Answer, StringComparison.InvariantCultureIgnoreCase))
         {
             correctAnswer += 1;

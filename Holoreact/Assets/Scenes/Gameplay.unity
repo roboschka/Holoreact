@@ -1897,6 +1897,8 @@ MonoBehaviour:
   questionLabel: {fileID: 775572595}
   cameraForQuiz: {fileID: 1408761517}
   gameManager: {fileID: 1366044760}
+  panelForPostGame: {fileID: 0}
+  scoreText: {fileID: 0}
 --- !u!4 &1539800969
 Transform:
   m_ObjectHideFlags: 0
