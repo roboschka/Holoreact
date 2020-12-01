@@ -21,7 +21,8 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private GameObject quizManager;
 
-    private int counter;
+    private int currentIndex;
+    private int combinationPerformed;
 
     private bool selectedItem;
     private int selectedIndex;
@@ -32,10 +33,11 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        counter = 0;
+        currentIndex = 0;
         itemList = new List<GameObject>();
         selectedItem = false;
-        selectedIndex = 0;
+        selectedIndex = -1;
+        combinationPerformed = 0;
 
         currentLvl = PlayerPrefs.GetInt("currentLevel");
 
@@ -48,7 +50,6 @@ public class GameManager : MonoBehaviour
         paused = true;
 
         DeactiveAllItemAndResetPosition();
-        Debug.Log("start called");
     }
 
     // Update is called once per frame
@@ -74,34 +75,34 @@ public class GameManager : MonoBehaviour
     private int CalculateExperimentScore()
     {
         int result;
-        return  result = counter / combinationList.Count() * 100;
+        return  result = combinationPerformed / combinationList.Count() * 100;
     }
 
     private void Move(int direction)
     {
-        itemList[counter].SetActive(false);
-        if (counter + direction < 0)
+        itemList[currentIndex].SetActive(false);
+        if (currentIndex + direction < 0)
         {
-            counter = itemList.Count - 1;
+            currentIndex = itemList.Count - 1;
         }
-        else if( counter + direction > (itemList.Count - 1) )
+        else if( currentIndex + direction > (itemList.Count - 1) )
         {
-            counter = 0;
+            currentIndex = 0;
         }
         else
         {
-            counter += direction;
+            currentIndex += direction;
         }
-        itemList[counter].SetActive(true);
+        itemList[currentIndex].SetActive(true);
     }
 
     private void Select()
     {
-        if (String.Equals(itemList[counter].name.Replace("(Clone)", ""),"Handbook"))
+        if (String.Equals(itemList[currentIndex].name.Replace("(Clone)", ""),"Handbook"))
         {
             ShowHandbook();
         }
-        else if (String.Equals(itemList[counter].name.Replace("(Clone)", ""), "ButtonSubmit"))
+        else if (String.Equals(itemList[currentIndex].name.Replace("(Clone)", ""), "ButtonSubmit"))
         {
             quizManager.GetComponent<QuizManager>().SetExperimentScore(CalculateExperimentScore());
             quizManager.GetComponent<QuizManager>().PostTest();
@@ -114,11 +115,11 @@ public class GameManager : MonoBehaviour
             }
             else
             {
-                itemList[counter].transform.Translate(2, 0, 0);
+                itemList[currentIndex].transform.Translate(2, 0, 0);
                 selectedItem = true;
-                selectedIndex = counter;
+                selectedIndex = currentIndex;
 
-                int temp = counter;
+                int temp = currentIndex;
                 Move(1);
                 itemList[temp].SetActive(true);
             }
@@ -129,7 +130,7 @@ public class GameManager : MonoBehaviour
     {
         Debug.Log("selectedIndex at showHandbook: " + selectedIndex);
         cameraForGameplay.SetActive(false);
-        itemList[selectedIndex].SetActive(false);
+        itemList[currentIndex].SetActive(false);
         paused = true;
         handBookManager.GetComponent<HandBookManager>().UnPause();
     }
@@ -138,26 +139,31 @@ public class GameManager : MonoBehaviour
     {
         paused = false;
         cameraForGameplay.SetActive(true);
-        itemList[selectedIndex].SetActive(true);
-        Debug.Log("selectedIndex at UnPause: " + selectedIndex);
+        itemList[currentIndex].SetActive(true);
+
+        if(selectedIndex != -1)
+        {
+            itemList[selectedIndex].SetActive(true);
+        }
     }
 
     private void Combine()
     {
-        if(FindCombinationResult(itemList[selectedIndex],itemList[counter]))
+        if(FindCombinationResult(itemList[selectedIndex],itemList[currentIndex]))
         {
             //deactive to off all object and then active the combine result object
             DeactiveAllItemAndResetPosition();
 
-            counter = itemList.Count - 1;
-            itemList[counter].SetActive(true);
+            currentIndex = itemList.Count - 1;
+            itemList[currentIndex].SetActive(true);
+            combinationPerformed += 1;
         }
         else
         {
             //give marning and reduce score
             DeactiveAllItemAndResetPosition();
 
-            itemList[counter].SetActive(true);
+            itemList[currentIndex].SetActive(true);
         }
         selectedItem = false;
         selectedIndex = selectedIndex - 1;
