@@ -35,7 +35,7 @@ public class GameManager : MonoBehaviour
         counter = 0;
         itemList = new List<GameObject>();
         selectedItem = false;
-        selectedIndex = -1;
+        selectedIndex = 0;
 
         currentLvl = PlayerPrefs.GetInt("currentLevel");
 
@@ -46,6 +46,8 @@ public class GameManager : MonoBehaviour
         itemList[0].SetActive(true);
 
         paused = true;
+
+        DeactiveAllItemAndResetPosition();
     }
 
     // Update is called once per frame
@@ -133,6 +135,8 @@ public class GameManager : MonoBehaviour
     {
         paused = false;
         cameraForGameplay.SetActive(true);
+        itemList[selectedIndex].SetActive(true);
+        
     }
 
     private void Combine()
@@ -153,7 +157,7 @@ public class GameManager : MonoBehaviour
             itemList[counter].SetActive(true);
         }
         selectedItem = false;
-        selectedIndex = -1;
+        selectedIndex = selectedIndex - 1;
     }
 
     private void DeactiveAllItemAndResetPosition()

@@ -5,6 +5,7 @@ using System.IO;
 using System.Net;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class QuizManager : MonoBehaviour
 {
@@ -27,8 +28,15 @@ public class QuizManager : MonoBehaviour
     [SerializeField]
     private GameObject gameManager;
 
+    [SerializeField]
+    private GameObject panelForPostGame;
+
+    [SerializeField]
+    private TextMeshProUGUI scoreText;
+
     private int index;
     private  int correctAnswer;
+    private int studentId;
 
     private int preTestScore;
     private int experimentScore;
@@ -36,30 +44,48 @@ public class QuizManager : MonoBehaviour
 
     private bool paused;
     private bool isPostTest;
+    private bool finish;
 
     // Start is called before the first frame update
     void Start()
     {
         currentLvl = PlayerPrefs.GetInt("currentLevel");
+        studentId = PlayerPrefs.GetInt("studentID");
         index = 0;
         paused = false;
         isPostTest = false;
+        finish = false;
         GetQuestionDataFromAPI();
-        questionLabel.text = questionList[0].Question;
         answerField.ActivateInputField();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Return))
+        if (!finish)
         {
-            Submit();
+            if (Input.GetKeyDown(KeyCode.Return))
+            {
+                Submit();
+            }
         }
+        else
+        {
+            if (Input.GetKeyDown(KeyCode.Return))
+            {
+                SceneManager.LoadScene("ChooseLevel");
+            }
+        }
+    }
+
+    private void LoadQuestion()
+    {
+        questionLabel.text = questionList[index].Question;
     }
     
     private void Submit()
     {
+        Debug.Log(index);
         if(answerField.text.Equals(questionList[index].Answer, StringComparison.InvariantCultureIgnoreCase))
         {
             correctAnswer += 1;
@@ -67,11 +93,18 @@ public class QuizManager : MonoBehaviour
 
         index += 1;
         
-        if(index > questionList.Length)
+        if(index >= questionList.Length)
         {
             if (isPostTest)
             {
                 //do something
+                panelForPostGame.SetActive(true);
+                scoreText.text = "";
+
+                PostScoreToAPI(preTestScore,"Pre",studentId);
+                PostScoreToAPI(experimentScore,"Experiment",studentId);
+                PostScoreToAPI(postTestScore, "Post", studentId);
+                finish = true;
             }
             else
             {
@@ -83,6 +116,10 @@ public class QuizManager : MonoBehaviour
                 questionLabel.text = questionList[index].Question;
                 Debug.Log("else called");
             }
+        }
+        else
+        {
+            LoadQuestion();
         }
 
     }
@@ -99,6 +136,7 @@ public class QuizManager : MonoBehaviour
         panelForQuiz.SetActive(true);
         paused = false;
         index = 0;
+        LoadQuestion();
     }
 
     #region Get Data From API
