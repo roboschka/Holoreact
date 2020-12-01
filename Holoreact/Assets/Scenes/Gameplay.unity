@@ -1894,6 +1894,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   answerField: {fileID: 494415942}
   panelForQuiz: {fileID: 1061735688}
+  questionLabel: {fileID: 775572595}
   cameraForQuiz: {fileID: 1408761517}
   gameManager: {fileID: 1366044760}
 --- !u!4 &1539800969
@@ -2389,7 +2390,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1891226480
 MonoBehaviour:
   m_ObjectHideFlags: 0

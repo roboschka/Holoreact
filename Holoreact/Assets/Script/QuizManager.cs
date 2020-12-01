@@ -80,6 +80,8 @@ public class QuizManager : MonoBehaviour
                 cameraForQuiz.SetActive(false);
                 paused = true;
                 gameManager.GetComponent<GameManager>().UnPause();
+                questionLabel.text = questionList[index].Question;
+                Debug.Log("else called");
             }
         }
 
