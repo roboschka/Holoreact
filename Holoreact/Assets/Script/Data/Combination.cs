@@ -10,4 +10,5 @@ public class Combination
     public string SecondItem;
     public int LevelID;
     public string Result;
+    public string AnimationName;
 }
