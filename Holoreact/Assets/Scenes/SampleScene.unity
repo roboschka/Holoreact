@@ -271,7 +271,7 @@ Transform:
   m_LocalScale: {x: 18.961287, y: 1, z: 27.06782}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 10
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!54 &198505325
 Rigidbody:
@@ -354,7 +354,7 @@ PrefabInstance:
     - target: {fileID: 4014061489145052669, guid: 8c184651727a97f45a52e0d3e84f3581,
         type: 3}
       propertyPath: m_RootOrder
-      value: 5
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 4014061489145052669, guid: 8c184651727a97f45a52e0d3e84f3581,
         type: 3}
@@ -510,7 +510,7 @@ PrefabInstance:
     - target: {fileID: 762778003385768638, guid: c52536bec7272e941afba960438b002a,
         type: 3}
       propertyPath: m_RootOrder
-      value: 8
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 762778003385768638, guid: c52536bec7272e941afba960438b002a,
         type: 3}
@@ -765,7 +765,7 @@ PrefabInstance:
     - target: {fileID: 3459695986153888896, guid: a7d4690e96d4ba44cb66a22564cbd2cf,
         type: 3}
       propertyPath: m_RootOrder
-      value: 7
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 3459695986153888896, guid: a7d4690e96d4ba44cb66a22564cbd2cf,
         type: 3}
@@ -1066,7 +1066,7 @@ Transform:
   m_LocalScale: {x: 0.2, y: 0.2, z: 0.2}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1134089151
 MonoBehaviour:
@@ -1401,7 +1401,7 @@ PrefabInstance:
     - target: {fileID: 3131054429024352036, guid: 49a267383b133f94b8cb3da3f965a801,
         type: 3}
       propertyPath: m_RootOrder
-      value: 6
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 3131054429024352036, guid: 49a267383b133f94b8cb3da3f965a801,
         type: 3}
@@ -1530,7 +1530,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 11
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &2130429331
 PrefabInstance:
@@ -1577,7 +1577,7 @@ PrefabInstance:
     - target: {fileID: 3131054429024352036, guid: 49a267383b133f94b8cb3da3f965a801,
         type: 3}
       propertyPath: m_RootOrder
-      value: 12
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 3131054429024352036, guid: 49a267383b133f94b8cb3da3f965a801,
         type: 3}
