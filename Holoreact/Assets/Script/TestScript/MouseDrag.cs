@@ -7,10 +7,15 @@ public class MouseDrag : MonoBehaviour
 {
     [SerializeField]
     Vector3 originPosition;
+
+    GameObject rayCastManager;
+    public bool isWithinRange = false;
+
     private void Start()
     {
+        isWithinRange = false;
+        rayCastManager = GameObject.Find("RayCastManager");
         originPosition = this.gameObject.transform.position;
-        Debug.Log(originPosition);
     }
     private Vector3 mOffset;
     private float mZCoord;
@@ -30,11 +35,33 @@ public class MouseDrag : MonoBehaviour
 
     private void OnMouseDrag()
     {
+        isWithinRange = false;
         transform.position = GetMouseWorldPos() + mOffset;
+        //GameObject currentlyHitting = rayCastManager.GetComponent<ClickPositionManager>().getHittedObject();
+        //if (currentlyHitting.name == "Cube (1)")
+        //{
+        //    isWithinRange = true;
+        //}
+    }
+
+    private void OnCollisionStay(Collision collision)
+    {
+        Debug.Log(collision.gameObject.name);
+        if (collision.gameObject.name == "Plane")
+        {
+            isWithinRange = true;
+        }
     }
 
     private void OnMouseUp()
     {
-        transform.position = originPosition;
+        if (isWithinRange)
+        {
+            Debug.Log("SNAP!");
+        } else
+        {
+            transform.position = originPosition;
+        }
     }
+    
 }

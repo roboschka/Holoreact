@@ -4,12 +4,13 @@ using UnityEngine;
 
 public class ClickPositionManager : MonoBehaviour
 {
-    bool selected;
-    GameObject hittedObject;
+    GameObject hittedObject, currentlyClicked;
+    bool isSelected;
+
     private void Start()
     {
-        selected = false;
-    }    
+
+    }
     // Update is called once per frame
     void Update()
     {
@@ -23,29 +24,24 @@ public class ClickPositionManager : MonoBehaviour
 
         Vector3 worldPosition;
         
-
-
-
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit hitData;
         if (Physics.Raycast(ray, out hitData, 1000))
         {
             //raycast hit object
             worldPosition = hitData.point;
-            hittedObject = hitData.collider.gameObject; 
-            if (Input.GetMouseButtonDown(0))
-            {
-                Debug.Log(hittedObject.name);
-                selected = true;
-            }
-            
+            hittedObject = hitData.collider.gameObject;
         }
+    }
 
-        if (selected)
-        {
-            Debug.Log(Camera.main.ScreenToWorldPoint(Input.mousePosition));
-            hittedObject.transform.position = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        }
+    private void OnCollisionEnter(Collision collision)
+    {
+        Debug.Log(collision.gameObject.name);
+    }
+
+    public GameObject getHittedObject()
+    {
+        return hittedObject;
     }
     
 }
