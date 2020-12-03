@@ -263,6 +263,15 @@ public class GameManager : MonoBehaviour
                 string result = resultName.FirstOrDefault();
                 GameObject instance = Instantiate(Resources.Load("Prefab/Test/" + result) as GameObject);
 
+                string animationName =
+                    (
+                        from anim in combinationList
+                        where anim.Result == result
+                        select anim.AnimationName
+                    ).FirstOrDefault();
+
+                instance.GetComponent<Animator>().Play(animationName);
+
                 itemList.Add(instance);
 
                 return true;
