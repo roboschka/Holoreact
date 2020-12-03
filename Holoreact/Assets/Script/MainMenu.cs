@@ -68,7 +68,6 @@ public class MainMenu : MonoBehaviour
             }
         }
 
-
         if (quitNotificationCanvas.isActiveAndEnabled)
         {
             if (Input.GetKeyDown(KeyCode.Return))
@@ -97,6 +96,5 @@ public class MainMenu : MonoBehaviour
         quitNotificationCanvas.gameObject.SetActive(isNotifOn);
         mainMenuCanvas.gameObject.SetActive(isMainMenuOn);
         toHighlight.Select();
-        Debug.Log("notif On");
     }
 }
