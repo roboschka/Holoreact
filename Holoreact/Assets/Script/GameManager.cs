@@ -57,18 +57,32 @@ public class GameManager : MonoBehaviour
     {
         if (!paused)
         {
-            if (Input.GetKeyDown("left"))
-            {
-                Move(-1);
-            }
-            else if (Input.GetKeyDown("right"))
-            {
-                Move(1);
-            }
-            else if (Input.GetKeyDown("return"))
-            {
-                Select();
-            }
+            //if (Input.GetKeyDown("left"))
+            //{
+            //    Move(-1);
+            //}
+            //else if (Input.GetKeyDown("right"))
+            //{
+            //    Move(1);
+            //}
+            //else if (Input.GetKeyDown("return"))
+            //{
+            //    Select();
+            //}
+
+            Vector3 temp = Input.mousePosition;
+            temp.z = 10f; // Set this to be the distance you want the object to be placed in front of the camera.
+            this.transform.position = Camera.main.ScreenToWorldPoint(temp);
+
+            //Pseudo Code for note
+            //if(collide)
+            //take item
+            //if place second item try to combine
+            // if could combine
+            //else give feedback
+
+            
+
         }
     }
 
