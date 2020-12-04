@@ -52,7 +52,7 @@ public class HandBookManager : MonoBehaviour
             {
                 panelForHandbook.SetActive(false);
                 cameraForHandbook.SetActive(false);
-                gameManager.GetComponent<GameManager>().UnPause();
+                gameManager.GetComponent<GameManagerAlt>().UnPause();
             }
         }
     }
@@ -117,7 +117,7 @@ public class HandBookManager : MonoBehaviour
         paused = true;
         panelForHandbook.SetActive(false);
         cameraForHandbook.SetActive(false);
-        gameManager.GetComponent<GameManager>().UnPause();
+        gameManager.GetComponent<GameManagerAlt>().UnPause();
     }
 
 }

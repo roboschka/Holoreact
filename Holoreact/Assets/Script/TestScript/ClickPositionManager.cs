@@ -26,19 +26,16 @@ public class ClickPositionManager : MonoBehaviour
         
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit hitData;
-        if (Physics.Raycast(ray, out hitData, 1000))
+
+        if (Physics.Raycast(ray, out hitData, LayerMask.GetMask("ExperimentObject")))
         {
             //raycast hit object
             worldPosition = hitData.point;
             hittedObject = hitData.collider.gameObject;
+            Debug.Log(hitData.collider.name);
         }
     }
-
-    private void OnCollisionEnter(Collision collision)
-    {
-        Debug.Log(collision.gameObject.name);
-    }
-
+    
     public GameObject getHittedObject()
     {
         return hittedObject;

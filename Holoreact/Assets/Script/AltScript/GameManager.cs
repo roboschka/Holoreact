@@ -2,15 +2,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Net;
 using UnityEngine;
+using System.Linq;
 
-public class GameManager : MonoBehaviour
+public class GameManagerAlt : MonoBehaviour
 {
+
     private List<GameObject> itemList;
     private Combination[] combinationList;
-    private Collider[] collidedColliders;
 
     [SerializeField]
     private GameObject cameraForGameplay;
@@ -18,13 +18,17 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private GameObject handBookManager;
 
-    private int combinationPerformed;
-    private int selectedIndex;
-    private int currentIndex;
-    private int currentLvl;
+    [SerializeField]
+    private GameObject quizManager;
 
-    private bool paused;
+    private int currentIndex;
+    private int combinationPerformed;
+
     private bool selectedItem;
+    private int selectedIndex;
+    private bool paused;
+
+    private int currentLvl;
 
     // Start is called before the first frame update
     void Start()
@@ -51,31 +55,85 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (!paused)
+        {
+            //if (Input.GetKeyDown("left"))
+            //{
+            //    Move(-1);
+            //}
+            //else if (Input.GetKeyDown("right"))
+            //{
+            //    Move(1);
+            //}
+            //else if (Input.GetKeyDown("return"))
+            //{
+            //    Select();
+            //}
+
+            Vector3 temp = Input.mousePosition;
+            temp.z = 10f; // Set this to be the distance you want the object to be placed in front of the camera.
+            this.transform.position = Camera.main.ScreenToWorldPoint(temp);
+
+            //Pseudo Code for note
+            //if(collide)
+            //take item
+            //if place second item try to combine
+            // if could combine
+            //else give feedback
+
+            
+
+        }
     }
 
-    private void OnCollisionEnter(Collision collision)
+    private void Move(int direction)
     {
-        CheckCollidedObject();
+        itemList[currentIndex].SetActive(false);
+        if (currentIndex + direction < 0)
+        {
+            currentIndex = itemList.Count - 1;
+        }
+        else if( currentIndex + direction > (itemList.Count - 1) )
+        {
+            currentIndex = 0;
+        }
+        else
+        {
+            currentIndex += direction;
+        }
+        itemList[currentIndex].SetActive(true);
     }
 
-    private void CheckCollidedObject()
+    private void Select()
     {
-        Collider planeCollider = gameObject.GetComponent<Collider>();
-        collidedColliders = Physics.OverlapBox(gameObject.transform.position, transform.localScale*10, Quaternion.identity, LayerMask.GetMask("ExperimentObject"));
-        //Collider[] collidedColliders = Physics.OverlapBox(gameObject.transform.TransformPoint(planeCollider.bounds.center), gameObject.transform.TransformVector(planeCollider.bounds.size), gameObject.transform.rotation);
-        int i = 0;
-        while (i < collidedColliders.Length)
+        if (String.Equals(itemList[currentIndex].name.Replace("(Clone)", ""),"Handbook"))
         {
-            Debug.Log("Collided with : " + collidedColliders[i].name);
-            i++;
+            ShowHandbook();
         }
-        
-        if (i == 2)
+        else if (String.Equals(itemList[currentIndex].name.Replace("(Clone)", ""), "ButtonSubmit"))
         {
-            FindCombinationResult(collidedColliders[0].gameObject, collidedColliders[1].gameObject);
+            quizManager.GetComponent<QuizManager>().SetExperimentScore(CalculateExperimentScore());
+            quizManager.GetComponent<QuizManager>().PostTest();
+        }
+        else
+        {
+            if (selectedItem)
+            {
+                Combine();
+            }
+            else
+            {
+                itemList[currentIndex].transform.Translate(2, 0, 0);
+                selectedItem = true;
+                selectedIndex = currentIndex;
+
+                int temp = currentIndex;
+                Move(1);
+                itemList[temp].SetActive(true);
+            }
         }
     }
+
 
     private int CalculateExperimentScore()
     {
@@ -98,7 +156,7 @@ public class GameManager : MonoBehaviour
         cameraForGameplay.SetActive(true);
         itemList[currentIndex].SetActive(true);
 
-        if (selectedIndex != -1)
+        if(selectedIndex != -1)
         {
             itemList[selectedIndex].SetActive(true);
         }
@@ -106,7 +164,7 @@ public class GameManager : MonoBehaviour
 
     private void Combine()
     {
-        if (FindCombinationResult(itemList[selectedIndex], itemList[currentIndex]))
+        if(FindCombinationResult(itemList[selectedIndex],itemList[currentIndex]))
         {
             //deactive to off all object and then active the combine result object
             DeactiveAllItemAndResetPosition();
@@ -128,9 +186,9 @@ public class GameManager : MonoBehaviour
 
     private void DeactiveAllItemAndResetPosition()
     {
-        foreach (GameObject data in itemList)
+        foreach(GameObject data in itemList)
         {
-            data.transform.position = new Vector3(0, 0, 0);
+            data.transform.position = new Vector3(0,0,0);
 
             data.SetActive(false);
         }
@@ -145,18 +203,19 @@ public class GameManager : MonoBehaviour
 
     private void GetItemList()
     {
-        HttpWebRequest request = (HttpWebRequest)WebRequest.Create(String.Format("https://api.backendless.com/09476775-387A-4C56-FFE4-B663DC24FC00/DED29ABA-8FAC-4985-86E0-FCCDA5A290B5/data/ItemList?pageSize=50&where=levelid%3D" + currentLvl));
+        HttpWebRequest request = (HttpWebRequest)WebRequest.Create(String.Format("https://api.backendless.com/09476775-387A-4C56-FFE4-B663DC24FC00/DED29ABA-8FAC-4985-86E0-FCCDA5A290B5/data/ItemList?pageSize=50&where=levelid%3D"+currentLvl));
         HttpWebResponse response = (HttpWebResponse)request.GetResponse();
         StreamReader reader = new StreamReader(response.GetResponseStream());
         string jsonResponse = reader.ReadToEnd();
         jsonResponse = JsonHelper.FixJSon(jsonResponse);
 
-        Item[] items;
+        Item[] items; 
 
         items = JsonHelper.FromJson<Item>(jsonResponse);
 
-        foreach (Item item in items)
+        foreach(Item item in items)
         {
+            Debug.Log(item.Name);
             GameObject instance = Instantiate(Resources.Load("Prefab/" + item.Name) as GameObject);
             itemList.Add(instance);
             instance.SetActive(false);
@@ -165,7 +224,7 @@ public class GameManager : MonoBehaviour
 
     private void GetCombinationDataFromAPI()
     {
-        HttpWebRequest request = (HttpWebRequest)WebRequest.Create(String.Format("https://api.backendless.com/09476775-387A-4C56-FFE4-B663DC24FC00/DED29ABA-8FAC-4985-86E0-FCCDA5A290B5/data/CombinationList?pageSize=50&offset=0&where=levelid%3D" + currentLvl));
+        HttpWebRequest request = (HttpWebRequest)WebRequest.Create(String.Format("https://api.backendless.com/09476775-387A-4C56-FFE4-B663DC24FC00/DED29ABA-8FAC-4985-86E0-FCCDA5A290B5/data/CombinationList?pageSize=50&offset=0&where=levelid%3D"+currentLvl));
         HttpWebResponse response = (HttpWebResponse)request.GetResponse();
         StreamReader reader = new StreamReader(response.GetResponseStream());
         string jsonResponse = reader.ReadToEnd();
@@ -197,7 +256,7 @@ public class GameManager : MonoBehaviour
         List<string> resultName =
            (
             from data in combinationList
-            where (data.FirstItem == a.name.Replace("(Clone)", "") && data.SecondItem == b.name.Replace("(Clone)", "") || (data.FirstItem == b.name.Replace("(Clone)", "") && data.SecondItem == a.name.Replace("(Clone)", "")))
+            where ( data.FirstItem == a.name.Replace("(Clone)","") && data.SecondItem == b.name.Replace("(Clone)", "") || (data.FirstItem == b.name.Replace("(Clone)", "") && data.SecondItem == a.name.Replace("(Clone)", "")) )
             select data.Result
            ).ToList();
 
@@ -206,7 +265,7 @@ public class GameManager : MonoBehaviour
             bool exist = false;
             try
             {
-                String.IsNullOrEmpty(itemList.Where(x => x.name.Replace("(Clone)", "") == resultName.FirstOrDefault()).FirstOrDefault().name);
+                String.IsNullOrEmpty(itemList.Where(x => x.name.Replace("(Clone)", "") == resultName.FirstOrDefault() ).FirstOrDefault().name);
                 exist = true;
             }
             catch (Exception)
@@ -217,7 +276,7 @@ public class GameManager : MonoBehaviour
             if (!exist)
             {
                 string result = resultName.FirstOrDefault();
-                GameObject instance = Instantiate(Resources.Load("Prefab/" + result) as GameObject);
+                GameObject instance = Instantiate(Resources.Load("Prefab/Test/" + result) as GameObject);
 
                 string animationName =
                     (
@@ -246,7 +305,7 @@ public class GameManager : MonoBehaviour
 
     private void CheckCombinationData()
     {
-        foreach (Combination data in combinationList)
+        foreach(Combination data in combinationList)
         {
             //Debug.Log(data.LevelID);
             Debug.Log(data.FirstItem);
@@ -256,4 +315,5 @@ public class GameManager : MonoBehaviour
     }
 
     #endregion
+
 }
