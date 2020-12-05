@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 8873806551568150742}
   - component: {fileID: 2240139184644644605}
   - component: {fileID: 8611163084185073493}
-  m_Layer: 5
+  m_Layer: 9
   m_Name: Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -111,7 +111,7 @@ GameObject:
   - component: {fileID: 4014061489146346975}
   - component: {fileID: 4014061489147477791}
   - component: {fileID: 4014061488463285797}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -200,7 +200,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4014061489145052669}
-  m_Layer: 0
+  - component: {fileID: 6501653728707488975}
+  - component: {fileID: 3533202650973537248}
+  - component: {fileID: 9190044249528156127}
+  m_Layer: 9
   m_Name: Aquades
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -224,6 +227,50 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &6501653728707488975
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4014061489145471453}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2.377166, y: 3.0011165, z: 2.2355497}
+  m_Center: {x: -0.13450027, y: 1.0005583, z: 0.08565354}
+--- !u!54 &3533202650973537248
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4014061489145471453}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 126
+  m_CollisionDetection: 0
+--- !u!114 &9190044249528156127
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4014061489145471453}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b3e19551d5e26e4ab6bbe12fe4a645e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  originPosition: {x: 0, y: 0, z: 0}
+  snapPosition: {x: 0, y: 0, z: 0}
+  isWithinRange: 0
 --- !u!1 &4014061489145471455
 GameObject:
   m_ObjectHideFlags: 0
@@ -235,7 +282,7 @@ GameObject:
   - component: {fileID: 4014061489145052671}
   - component: {fileID: 4014061489146346973}
   - component: {fileID: 4014061489147477789}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Circle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -312,7 +359,7 @@ GameObject:
   - component: {fileID: 8242521391771903182}
   - component: {fileID: 2258219667985304702}
   - component: {fileID: 2816837761803174461}
-  m_Layer: 5
+  m_Layer: 9
   m_Name: Text (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}

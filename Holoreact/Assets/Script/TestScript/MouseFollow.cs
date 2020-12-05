@@ -2,18 +2,42 @@
 
 public class MouseFollow : MonoBehaviour
 {
-    bool selected;
-    GameObject hittedObject;
-    private void Start()
-    {
-        selected = false;
-    }
+    [SerializeField]
+    GameManager gameManager;
+    
     void Update()
     {
-        Vector3 temp = Input.mousePosition;
-        temp.z = 10f; // Set this to be the distance you want the object to be placed in front of the camera.
-        this.transform.position = Camera.main.ScreenToWorldPoint(temp);
+        Debug.Log(gameManager.getPause());
+        if (!gameManager.getPause())
+        {
+            Vector3 temp = Input.mousePosition;
+            temp.z = 10f; // Set this to be the distance you want the object to be placed in front of the camera.
+            this.transform.position = Camera.main.ScreenToWorldPoint(temp);
+
+            if (Input.GetMouseButtonDown(0))
+            {
+                Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+                RaycastHit hitData;
+
+                if (Physics.Raycast(ray, out hitData))
+                {
+                    Debug.Log(hitData.collider.gameObject.name + " is clicked");
+                    if (hitData.collider.gameObject.name == "Next")
+                    {
+                        gameManager.Move(2);
+                    }
+                    else if (hitData.collider.gameObject.name == "Prev")
+                    {
+                        gameManager.Move(-2);
+                    }
+                    else if (hitData.collider.gameObject.name == "Handbook(Clone)")
+                    {
+                        gameManager.ShowHandbook();
+                    }
+                }
+            }
+        }
+        
     }
-
-
+    
 }

@@ -17,19 +17,15 @@ public class MouseDrag : MonoBehaviour
     //Samuel 4 des 2020 - For testting
     private LayerMask experimentObjectLayer;
 
-
+    GameManager gameManager;
     private void Start()
     {
         isWithinRange = false;
         originPosition = this.gameObject.transform.position;
-
+        gameManager = FindObjectOfType<GameManager>() as GameManager;
         experimentObjectLayer = LayerMask.GetMask("ExperimentObject");
     }
-
-    private void Update()
-    {
-        
-    }
+    
     private void OnMouseDown()
     {
         //Vector3 worldPosition;
@@ -86,32 +82,45 @@ public class MouseDrag : MonoBehaviour
 
         if (hittedObject.layer == 9)
         {
-            isWithinRange = false;
+            //isWithinRange = false;
             transform.position = GetMouseWorldPos() + mOffset;
         }
 
     }
 
-    private void OnCollisionStay(Collision collision)
+    private void OnCollisionEnter(Collision collision)
     {
+        Debug.Log("Mouse drag enter");
         if (collision.gameObject.name == "Plane")
         {
+            Debug.Log("collide with plane");
             isWithinRange = true;
+            Debug.Log(isWithinRange);
             snapPosition = collision.gameObject.transform.position;
             //Debug.Log("dragged object is on collision with plane");
         }
     }
 
+    private void OnCollisionExit(Collision collision)
+    {
+        if (collision.gameObject.name == "Plane")
+        {
+            isWithinRange = false;
+        }
+    }
     private void OnMouseUp()
     {
+        Debug.Log(isWithinRange);
         if (isWithinRange)
         {
+            Debug.Log("snap to plane");
             transform.position = snapPosition;
            // Debug.Log("snapped within range");
+
         } else
         {
+            Debug.Log("snap to origin");
             transform.position = originPosition;
-           // Debug.Log("snapped now within range");
         }
     }
     

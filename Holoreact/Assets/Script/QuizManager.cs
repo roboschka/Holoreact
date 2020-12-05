@@ -115,7 +115,7 @@ public class QuizManager : MonoBehaviour
                 index = 0;
                 cameraForQuiz.SetActive(false);
                 paused = true;
-                gameManager.GetComponent<GameManagerAlt>().UnPause();
+                gameManager.GetComponent<GameManager>().UnPause();
                 questionLabel.text = questionList[index].Question;
                 Debug.Log("else called");
             }

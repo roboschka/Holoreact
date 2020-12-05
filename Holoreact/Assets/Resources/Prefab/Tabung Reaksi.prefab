@@ -11,7 +11,10 @@ GameObject:
   - component: {fileID: 773668688862706240}
   - component: {fileID: 773668688866097760}
   - component: {fileID: 773668688865130656}
-  m_Layer: 0
+  - component: {fileID: 4536001118321162144}
+  - component: {fileID: 1714896941266783819}
+  - component: {fileID: 2522436102094810602}
+  m_Layer: 9
   m_Name: Tabung Reaksi
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -78,6 +81,50 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!114 &4536001118321162144
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 773668688863127136}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b3e19551d5e26e4ab6bbe12fe4a645e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  originPosition: {x: 0, y: 0, z: 0}
+  snapPosition: {x: 0, y: 0, z: 0}
+  isWithinRange: 0
+--- !u!65 &1714896941266783819
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 773668688863127136}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.023566175, y: 0.026342457, z: 0.11659956}
+  m_Center: {x: -0.0008357763, y: 0.00021315219, z: 0.04072134}
+--- !u!54 &2522436102094810602
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 773668688863127136}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 126
+  m_CollisionDetection: 0
 --- !u!1 &1383466493524675843
 GameObject:
   m_ObjectHideFlags: 0
@@ -90,7 +137,7 @@ GameObject:
   - component: {fileID: 5710681137374605122}
   - component: {fileID: 5533565768517231050}
   - component: {fileID: 6478050707444320778}
-  m_Layer: 5
+  m_Layer: 9
   m_Name: Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -188,7 +235,7 @@ GameObject:
   - component: {fileID: 7143051763706682959}
   - component: {fileID: 3265545270823967174}
   - component: {fileID: 2566246667508811045}
-  m_Layer: 5
+  m_Layer: 9
   m_Name: Text (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2020931814418616844}
   - component: {fileID: 2165584134232537160}
   - component: {fileID: 2177856527536556096}
-  m_Layer: 5
+  m_Layer: 9
   m_Name: Text (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -168,7 +168,7 @@ GameObject:
   - component: {fileID: 7190044585971397312}
   - component: {fileID: 8686794179179244505}
   - component: {fileID: 2655421715273992210}
-  m_Layer: 5
+  m_Layer: 9
   m_Name: Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -266,7 +266,10 @@ GameObject:
   - component: {fileID: 7718225705412928275}
   - component: {fileID: 7718225705411633971}
   - component: {fileID: 7718225705410503155}
-  m_Layer: 0
+  - component: {fileID: 1816683368339723399}
+  - component: {fileID: 3637242859126330651}
+  - component: {fileID: 6085283201181694714}
+  m_Layer: 9
   m_Name: spatula
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -333,3 +336,47 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!65 &1816683368339723399
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7718225705412771635}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.044723213, y: 0.036215097, z: 0.10665517}
+  m_Center: {x: 0.0019352579, y: -0.00002078102, z: -0.0023978518}
+--- !u!54 &3637242859126330651
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7718225705412771635}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 126
+  m_CollisionDetection: 0
+--- !u!114 &6085283201181694714
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7718225705412771635}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b3e19551d5e26e4ab6bbe12fe4a645e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  originPosition: {x: 0, y: 0, z: 0}
+  snapPosition: {x: 0, y: 0, z: 0}
+  isWithinRange: 0

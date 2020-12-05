@@ -17,6 +17,7 @@ public class GameManager : MonoBehaviour
 
     [SerializeField]
     private GameObject handBookManager;
+    private List<GameObject> objectsOnPlane;
 
     private int combinationPerformed;
     private int selectedIndex;
@@ -29,8 +30,9 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        currentIndex = 0;
+        currentIndex = 1;
         itemList = new List<GameObject>();
+        objectsOnPlane = new List<GameObject>();
         selectedItem = false;
         selectedIndex = -1;
         combinationPerformed = 0;
@@ -45,7 +47,12 @@ public class GameManager : MonoBehaviour
 
         paused = true;
 
-        DeactiveAllItemAndResetPosition();
+        itemList[currentIndex - 1].SetActive(true);
+        itemList[currentIndex].SetActive(true);
+
+        SetFirstItemPosition(itemList[currentIndex - 1]);
+        SetSecondItemPosition(itemList[currentIndex]);
+
     }
 
     // Update is called once per frame
@@ -59,15 +66,140 @@ public class GameManager : MonoBehaviour
         CheckCollidedObject();
     }
 
+    private void OnCollisionExit(Collision collision)
+    {
+        for (int i = 0; i < objectsOnPlane.Count; i++)
+        {
+            if (collision.gameObject == objectsOnPlane[i])
+            {
+                objectsOnPlane.Clear();
+            }
+        }
+    }
+
+    public void Move(int direction)
+    {
+        Debug.Log(currentIndex);
+
+        //2 Objek pada 2 index sebelumnya dimatikan kecuali yang ada di plane
+        if (objectsOnPlane != null)
+        {
+            if (objectsOnPlane.Count > 0)
+            {
+                //supaya di list dia gak keliatan/terduplikasi.
+                Debug.Log("masuk if");
+                Debug.Log(objectsOnPlane.Count);
+                if (itemList[currentIndex - 1] != objectsOnPlane[0])
+                {
+                    itemList[currentIndex - 1].SetActive(false);
+
+                }
+                if (itemList[currentIndex] != objectsOnPlane[0])
+                {
+                    itemList[currentIndex].SetActive(false);
+                }
+            }
+            else
+            {
+                itemList[currentIndex - 1].SetActive(false);
+                itemList[currentIndex].SetActive(false);
+            }
+        }
+        else
+        {
+            itemList[currentIndex - 1].SetActive(false);
+            itemList[currentIndex].SetActive(false);
+        }
+
+        //ambil 2 objek selanjutnya
+        currentIndex += direction;
+
+        if (currentIndex < 0)
+        {
+            currentIndex = itemList.Count + currentIndex;
+        }
+        else if (currentIndex > itemList.Count)
+        {
+            currentIndex = 1;
+        }
+
+
+        //taruh 2 objek selanjutnya di placeholder list objek
+        if (objectsOnPlane.Count != 0)
+        {
+            if (itemList[currentIndex - 1] != objectsOnPlane[0])
+            {
+                SetFirstItemPosition(itemList[currentIndex - 1]);
+            }
+            if (itemList[currentIndex] != objectsOnPlane[0])
+            {
+                SetSecondItemPosition(itemList[currentIndex]);
+            }
+        }
+        else
+        {
+            SetFirstItemPosition(itemList[currentIndex - 1]);
+            SetSecondItemPosition(itemList[currentIndex]);
+        }
+        
+
+        //aktivasikan 2 objek selanjutnya jika bukan objek di plane.
+        if (objectsOnPlane != null)
+        {
+            if (objectsOnPlane.Count > 0)
+            {
+                //supaya di list dia gak keliatan/terduplikasi.
+                Debug.Log("masuk if");
+                Debug.Log(objectsOnPlane.Count);
+                if (itemList[currentIndex - 1] != objectsOnPlane[0])
+                {
+                    itemList[currentIndex - 1].SetActive(true);
+
+                }
+                if (itemList[currentIndex] != objectsOnPlane[0])
+                {
+                    itemList[currentIndex].SetActive(true);
+                }
+            }
+            else
+            {
+                
+                itemList[currentIndex - 1].SetActive(true);
+                itemList[currentIndex].SetActive(true);
+            }
+        }
+        else
+        {
+            itemList[currentIndex - 1].SetActive(true);
+            itemList[currentIndex].SetActive(true);
+        }
+       
+
+    }
+
+    private void SetFirstItemPosition(GameObject item)
+    {
+        //Change to the postion of first item latter
+        item.transform.position = new Vector3(15, -2.5f, 4);
+    }
+
+    private void SetSecondItemPosition(GameObject item)
+    {
+        //Change to the postion of second item latter
+        item.transform.position = new Vector3(15, -2.5f, -4);
+    }
+
     private void CheckCollidedObject()
     {
         Collider planeCollider = gameObject.GetComponent<Collider>();
         collidedColliders = Physics.OverlapBox(gameObject.transform.position, transform.localScale*10, Quaternion.identity, LayerMask.GetMask("ExperimentObject"));
         //Collider[] collidedColliders = Physics.OverlapBox(gameObject.transform.TransformPoint(planeCollider.bounds.center), gameObject.transform.TransformVector(planeCollider.bounds.size), gameObject.transform.rotation);
         int i = 0;
+        objectsOnPlane.Clear();
         while (i < collidedColliders.Length)
         {
-            Debug.Log("Collided with : " + collidedColliders[i].name);
+            
+            objectsOnPlane.Add(collidedColliders[i].gameObject);
             i++;
         }
         
@@ -77,13 +209,14 @@ public class GameManager : MonoBehaviour
         }
     }
 
+
     private int CalculateExperimentScore()
     {
         int result;
         return result = combinationPerformed / combinationList.Count() * 100;
     }
 
-    private void ShowHandbook()
+    public void ShowHandbook()
     {
         Debug.Log("selectedIndex at showHandbook: " + selectedIndex);
         cameraForGameplay.SetActive(false);
@@ -94,6 +227,7 @@ public class GameManager : MonoBehaviour
 
     public void UnPause()
     {
+        Debug.Log("show gameplay camera");
         paused = false;
         cameraForGameplay.SetActive(true);
         itemList[currentIndex].SetActive(true);
@@ -256,4 +390,14 @@ public class GameManager : MonoBehaviour
     }
 
     #endregion
+
+    public bool getPause()
+    {
+        return paused;
+    }
+
+    public void setPause (bool pauseValue)
+    {
+        paused = pauseValue;
+    }
 }

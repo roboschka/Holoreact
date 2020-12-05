@@ -9,7 +9,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3459695986153888896}
-  m_Layer: 0
+  - component: {fileID: 54177692288738858}
+  - component: {fileID: 65627947949524914}
+  m_Layer: 9
   m_Name: Handbook
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -33,6 +35,35 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 61.5, y: -90, z: 0}
+--- !u!54 &54177692288738858
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3459695986153848992}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 126
+  m_CollisionDetection: 0
+--- !u!65 &65627947949524914
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3459695986153848992}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1.8795884}
+  m_Center: {x: -6.559023e-16, y: 0.0000000018086506, z: 0.04114713}
 --- !u!1 &3459695986153848996
 GameObject:
   m_ObjectHideFlags: 0
@@ -44,7 +75,7 @@ GameObject:
   - component: {fileID: 3459695986153888900}
   - component: {fileID: 3459695986156788900}
   - component: {fileID: 3459695986155789924}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: BezierCircle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -121,7 +152,7 @@ GameObject:
   - component: {fileID: 3459695986153888902}
   - component: {fileID: 3459695986156788902}
   - component: {fileID: 3459695986155789926}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -198,7 +229,7 @@ GameObject:
   - component: {fileID: 7599272370373232977}
   - component: {fileID: 3980168721283271976}
   - component: {fileID: 7193746392682171408}
-  m_Layer: 5
+  m_Layer: 9
   m_Name: Text (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -355,7 +386,7 @@ GameObject:
   - component: {fileID: 5895096229798144179}
   - component: {fileID: 4633068790696168356}
   - component: {fileID: 878334555908178138}
-  m_Layer: 5
+  m_Layer: 9
   m_Name: Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
