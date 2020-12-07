@@ -7,8 +7,8 @@ public class MouseFollow : MonoBehaviour
     
     void Update()
     {
-        Debug.Log(gameManager.getPause());
-        if (!gameManager.getPause())
+        //Debug.Log(gameManager.getPause());
+        if (!gameManager.GetPause())
         {
             Vector3 temp = Input.mousePosition;
             temp.z = 10f; // Set this to be the distance you want the object to be placed in front of the camera.

@@ -20,7 +20,7 @@ public class GameManager : MonoBehaviour
     private List<GameObject> objectsOnPlane;
 
     private int combinationPerformed;
-    private int selectedIndex;
+    //private int selectedIndex;
     private int currentIndex;
     private int currentLvl;
 
@@ -34,7 +34,7 @@ public class GameManager : MonoBehaviour
         itemList = new List<GameObject>();
         objectsOnPlane = new List<GameObject>();
         selectedItem = false;
-        selectedIndex = -1;
+        //selectedIndex = -1;
         combinationPerformed = 0;
 
         currentLvl = PlayerPrefs.GetInt("currentLevel");
@@ -79,31 +79,25 @@ public class GameManager : MonoBehaviour
 
     public void Move(int direction)
     {
-        Debug.Log(currentIndex);
+        Debug.Log("current index :" + currentIndex);
 
         //2 Objek pada 2 index sebelumnya dimatikan kecuali yang ada di plane
-        if (objectsOnPlane != null)
+        if (objectsOnPlane != null && objectsOnPlane.Count > 0)
         {
-            if (objectsOnPlane.Count > 0)
-            {
-                //supaya di list dia gak keliatan/terduplikasi.
-                Debug.Log("masuk if");
-                Debug.Log(objectsOnPlane.Count);
-                if (itemList[currentIndex - 1] != objectsOnPlane[0])
-                {
-                    itemList[currentIndex - 1].SetActive(false);
 
-                }
-                if (itemList[currentIndex] != objectsOnPlane[0])
-                {
-                    itemList[currentIndex].SetActive(false);
-                }
-            }
-            else
+            //supaya di list dia gak keliatan/terduplikasi.
+            Debug.Log("masuk if");
+            Debug.Log(objectsOnPlane.Count);
+            if (itemList[currentIndex - 1] != objectsOnPlane[0])
             {
                 itemList[currentIndex - 1].SetActive(false);
+
+            }
+            if (itemList[currentIndex] != objectsOnPlane[0])
+            {
                 itemList[currentIndex].SetActive(false);
             }
+
         }
         else
         {
@@ -114,11 +108,11 @@ public class GameManager : MonoBehaviour
         //ambil 2 objek selanjutnya
         currentIndex += direction;
 
-        if (currentIndex < 0)
+        if (currentIndex <= 0)
         {
-            currentIndex = itemList.Count + currentIndex;
+            currentIndex = itemList.Count - 1;
         }
-        else if (currentIndex > itemList.Count)
+        else if (currentIndex > itemList.Count - 1)
         {
             currentIndex = 1;
         }
@@ -141,39 +135,32 @@ public class GameManager : MonoBehaviour
             SetFirstItemPosition(itemList[currentIndex - 1]);
             SetSecondItemPosition(itemList[currentIndex]);
         }
-        
+
 
         //aktivasikan 2 objek selanjutnya jika bukan objek di plane.
-        if (objectsOnPlane != null)
+        if (objectsOnPlane != null && objectsOnPlane.Count > 0)
         {
-            if (objectsOnPlane.Count > 0)
-            {
-                //supaya di list dia gak keliatan/terduplikasi.
-                Debug.Log("masuk if");
-                Debug.Log(objectsOnPlane.Count);
-                if (itemList[currentIndex - 1] != objectsOnPlane[0])
-                {
-                    itemList[currentIndex - 1].SetActive(true);
 
-                }
-                if (itemList[currentIndex] != objectsOnPlane[0])
-                {
-                    itemList[currentIndex].SetActive(true);
-                }
-            }
-            else
+            //supaya di list dia gak keliatan/terduplikasi.
+            Debug.Log("masuk if");
+            Debug.Log(objectsOnPlane.Count);
+            if (itemList[currentIndex - 1] != objectsOnPlane[0])
             {
-                
                 itemList[currentIndex - 1].SetActive(true);
+
+            }
+            if (itemList[currentIndex] != objectsOnPlane[0])
+            {
                 itemList[currentIndex].SetActive(true);
             }
+
         }
         else
         {
             itemList[currentIndex - 1].SetActive(true);
             itemList[currentIndex].SetActive(true);
         }
-       
+
 
     }
 
@@ -205,7 +192,8 @@ public class GameManager : MonoBehaviour
         
         if (i == 2)
         {
-            FindCombinationResult(collidedColliders[0].gameObject, collidedColliders[1].gameObject);
+            //FindCombinationResult(collidedColliders[0].gameObject, collidedColliders[1].gameObject);\
+            Combine();
         }
     }
 
@@ -218,7 +206,7 @@ public class GameManager : MonoBehaviour
 
     public void ShowHandbook()
     {
-        Debug.Log("selectedIndex at showHandbook: " + selectedIndex);
+        //Debug.Log("selectedIndex at showHandbook: " + selectedIndex);
         cameraForGameplay.SetActive(false);
         itemList[currentIndex].SetActive(false);
         paused = true;
@@ -232,43 +220,97 @@ public class GameManager : MonoBehaviour
         cameraForGameplay.SetActive(true);
         itemList[currentIndex].SetActive(true);
 
-        if (selectedIndex != -1)
-        {
-            itemList[selectedIndex].SetActive(true);
-        }
+        //if (selectedIndex != -1)
+        //{
+        //    itemList[selectedIndex].SetActive(true);
+        //}
+
     }
 
     private void Combine()
     {
-        if (FindCombinationResult(itemList[selectedIndex], itemList[currentIndex]))
+        Debug.Log("combine terpanggil");
+        if( FindCombinationResult(objectsOnPlane[0], objectsOnPlane[1]) )
         {
+            #region commneted
             //deactive to off all object and then active the combine result object
-            DeactiveAllItemAndResetPosition();
+            //DeactiveAllItemAndResetPosition();
 
-            currentIndex = itemList.Count - 1;
-            itemList[currentIndex].SetActive(true);
+            //currentIndex = itemList.Count - 1;
+            //itemList[currentIndex].SetActive(true);
+            #endregion
+
+            Debug.Log("kombinasi berhasil");
+
+            //Reset all coliiding object with the plane
+
+            foreach (GameObject objectOnPlane in objectsOnPlane)
+            {
+                objectOnPlane.SetActive(false);
+            }
+
+            objectsOnPlane.Clear();
+
+            //Set combination result object to the plane
+            objectsOnPlane.Add(itemList[(itemList.Count - 1)]);
+
+            string animationName =
+            (
+                from anim in combinationList
+                where anim.Result == itemList[itemList.Count - 1].name
+                select anim.AnimationName
+            ).FirstOrDefault();
+
+            if (!String.IsNullOrEmpty(animationName))
+            {
+                itemList[(itemList.Count - 1)].GetComponent<Animator>().Play(animationName);
+            }
+
+            //set combination result to plane postion
+            itemList[itemList.Count - 1].transform.position = gameObject.transform.position;
+
             combinationPerformed += 1;
         }
         else
         {
-            //give marning and reduce score
-            DeactiveAllItemAndResetPosition();
+            Debug.Log("clean all object omn plane only");
+            foreach (GameObject objectOnPlane in objectsOnPlane)
+            {
+                Debug.Log("deactive" + objectOnPlane.name);
+                objectOnPlane.SetActive(false);
+            }
 
+            objectsOnPlane.Clear();
+
+            //show the current object
+            itemList[currentIndex - 1].SetActive(true);
             itemList[currentIndex].SetActive(true);
+
+            SetFirstItemPosition(itemList[currentIndex - 1]);
+            SetSecondItemPosition(itemList[currentIndex]);
         }
-        selectedItem = false;
-        selectedIndex = selectedIndex - 1;
+        #region commented
+        //else
+        //{
+        //    DeactiveAllItemAndResetPosition();
+
+        //    itemList[currentIndex].SetActive(true);
+
+        //}
+        //selectedItem = false;
+        //selectedIndex = selectedIndex - 1;
+        #endregion
     }
 
-    private void DeactiveAllItemAndResetPosition()
-    {
-        foreach (GameObject data in itemList)
-        {
-            data.transform.position = new Vector3(0, 0, 0);
+    //private void DeactiveAllItemAndResetPosition()
+    //{
+    //    foreach (GameObject data in itemList)
+    //    {
+    //        data.transform.position = new Vector3(0, 0, 0);
 
-            data.SetActive(false);
-        }
-    }
+    //        data.SetActive(false);
+    //    }
+    //}
 
     #region Get Data from API
     /// <summary>
@@ -353,15 +395,18 @@ public class GameManager : MonoBehaviour
                 string result = resultName.FirstOrDefault();
                 GameObject instance = Instantiate(Resources.Load("Prefab/" + result) as GameObject);
 
-                string animationName =
-                    (
-                        from anim in combinationList
-                        where anim.Result == result
-                        select anim.AnimationName
-                    ).FirstOrDefault();
+                //string animationName =
+                //    (
+                //        from anim in combinationList
+                //        where anim.Result == result
+                //        select anim.AnimationName
+                //    ).FirstOrDefault();
 
-                instance.GetComponent<Animator>().Play(animationName);
-
+                //if (!String.IsNullOrEmpty(animationName))
+                //{
+                //    instance.GetComponent<Animator>().Play(animationName);
+                //}
+                Debug.Log("combination sucess");
                 itemList.Add(instance);
 
                 return true;
@@ -391,12 +436,12 @@ public class GameManager : MonoBehaviour
 
     #endregion
 
-    public bool getPause()
+    public bool GetPause()
     {
         return paused;
     }
 
-    public void setPause (bool pauseValue)
+    public void SetPause (bool pauseValue)
     {
         paused = pauseValue;
     }
