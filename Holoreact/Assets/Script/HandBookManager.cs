@@ -28,7 +28,7 @@ public class HandBookManager : MonoBehaviour
 
     private bool paused;
 
-    void Start()
+    void Awake()
     {
         currentLvl = PlayerPrefs.GetInt("currentLevel");
         GetHandbookData();

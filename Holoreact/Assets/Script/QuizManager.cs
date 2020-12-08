@@ -47,7 +47,7 @@ public class QuizManager : MonoBehaviour
     private bool finish;
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         currentLvl = PlayerPrefs.GetInt("currentLevel");
         studentId = PlayerPrefs.GetInt("studentID");

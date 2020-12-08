@@ -5,8 +5,8 @@ using UnityEngine;
 
 public class MouseDrag : MonoBehaviour
 {
-    [SerializeField]
-    Vector3 originPosition, snapPosition;
+    public Vector3 originPosition;
+    private Vector3 snapPosition;
 
     GameObject hittedObject;
     public bool isWithinRange = false;
@@ -18,7 +18,7 @@ public class MouseDrag : MonoBehaviour
     private LayerMask experimentObjectLayer;
 
     GameManager gameManager;
-    private void Start()
+    private void Awake()
     {
         isWithinRange = false;
         originPosition = this.gameObject.transform.position;
@@ -36,7 +36,6 @@ public class MouseDrag : MonoBehaviour
     
         if (Physics.Raycast(ray, out hitData))
         {
-
             Debug.Log("OriginPosition: " + originPosition + " of " + hitData.collider.gameObject.name);
             //hitData layer = "ExperimentObject"
             hittedObject = hitData.collider.gameObject;
@@ -117,7 +116,17 @@ public class MouseDrag : MonoBehaviour
         } else
         {
             transform.position = originPosition;
+            
+            //buat testing navigation
+            if (gameObject.name != "Plane")
+            {
+                //disable self
+                gameObject.SetActive(false);
+            }
+
+            //Show current index
+            gameManager.ShowCurrentIndexObject();
         }
     }
-    
+
 }

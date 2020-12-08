@@ -28,7 +28,7 @@ public class GameManager : MonoBehaviour
     private bool selectedItem;
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         currentIndex = 1;
         itemList = new List<GameObject>();
@@ -79,8 +79,6 @@ public class GameManager : MonoBehaviour
 
     public void Move(int direction)
     {
-        Debug.Log("current index :" + currentIndex);
-
         //2 Objek pada 2 index sebelumnya dimatikan kecuali yang ada di plane
         if (objectsOnPlane != null && objectsOnPlane.Count > 0)
         {
@@ -101,24 +99,69 @@ public class GameManager : MonoBehaviour
         }
         else
         {
-            itemList[currentIndex - 1].SetActive(false);
-            itemList[currentIndex].SetActive(false);
+            #region commented
+            //itemList[currentIndex - 1].SetActive(false);
+            //itemList[currentIndex].SetActive(false);
+            #endregion
+
+            if (itemList.Count % 2 != 0)
+            {
+                //kalau index terakhir maka hanya munculkan 1 item
+                if (currentIndex == itemList.Count)
+                {
+                    itemList[currentIndex - 1].SetActive(false);
+                }
+                else
+                {
+                    //kalau bukan last index seperti normal
+                    itemList[currentIndex - 1].SetActive(false);
+                    itemList[currentIndex].SetActive(false);
+                }
+
+            }
+            else
+            {
+                //kalau genap seperti normal
+                itemList[currentIndex - 1].SetActive(false);
+                itemList[currentIndex].SetActive(false);
+            }
+
         }
 
         //ambil 2 objek selanjutnya
         currentIndex += direction;
+        //Debug.Log("current index :" + currentIndex);
+        //Debug.Log("itemlist count :" + itemList.Count);
 
         if (currentIndex <= 0)
         {
-            currentIndex = itemList.Count - 1;
+            //check apakah genap
+            if (itemList.Count % 2 == 0)
+            {
+                currentIndex = itemList.Count - 1;
+            }
+            else
+            {
+                currentIndex = itemList.Count;
+            }
         }
-        else if (currentIndex > itemList.Count - 1)
+        //Check apakah jumlah item genap
+        else if (currentIndex > itemList.Count - 1 && itemList.Count % 2 == 0)
         {
             currentIndex = 1;
         }
+        //jika ganjil
+        else
+        {
+            if(currentIndex > itemList.Count)
+            {
+                Debug.Log("reset index");
+                currentIndex = 1;
+            }
+        }
 
 
-        //taruh 2 objek selanjutnya di placeholder list objek
+        //check apakah next object yang akan ditampilkan berada di plane
         if (objectsOnPlane.Count != 0)
         {
             if (itemList[currentIndex - 1] != objectsOnPlane[0])
@@ -132,8 +175,38 @@ public class GameManager : MonoBehaviour
         }
         else
         {
-            SetFirstItemPosition(itemList[currentIndex - 1]);
-            SetSecondItemPosition(itemList[currentIndex]);
+            #region commneted
+            //SetFirstItemPosition(itemList[currentIndex - 1]);
+            //SetSecondItemPosition(itemList[currentIndex]);
+            #endregion
+
+            if (itemList.Count % 2 != 0)
+            {
+                Debug.Log("ganjil");
+                Debug.Log("current index :" + currentIndex);
+                Debug.Log("itemlist count :" + itemList.Count);
+
+                //kalau index terakhir maka hanya munculkan 1 item
+                if (currentIndex == itemList.Count)
+                {
+                    Debug.Log("Show one item only");
+                    SetFirstItemPosition(itemList[currentIndex - 1]);
+                }
+                else
+                {
+                    //kalau bukan last index seperti normal
+                    SetFirstItemPosition(itemList[currentIndex - 1]);
+                    SetSecondItemPosition(itemList[currentIndex]);
+                }
+
+            }
+            else
+            {
+                //kalau genap seperti normal
+                SetFirstItemPosition(itemList[currentIndex - 1]);
+                SetSecondItemPosition(itemList[currentIndex]);
+            }
+
         }
 
 
@@ -157,8 +230,33 @@ public class GameManager : MonoBehaviour
         }
         else
         {
-            itemList[currentIndex - 1].SetActive(true);
-            itemList[currentIndex].SetActive(true);
+            #region commented
+            //itemList[currentIndex - 1].SetActive(true);
+            //itemList[currentIndex].SetActive(true);
+            #endregion
+            
+            if(itemList.Count % 2 != 0)
+            {
+                //kalau index terakhir maka hanya munculkan 1 item
+                if (currentIndex == itemList.Count)
+                {
+                    itemList[currentIndex - 1].SetActive(true);
+                }
+                else
+                {
+                    //kalau bukan last index seperti normal
+                    itemList[currentIndex - 1].SetActive(true);
+                    itemList[currentIndex].SetActive(true);
+                }
+
+            }
+            else
+            {
+                //kalau genap seperti normal
+                itemList[currentIndex - 1].SetActive(true);
+                itemList[currentIndex].SetActive(true);
+            }
+
         }
 
 
@@ -168,12 +266,16 @@ public class GameManager : MonoBehaviour
     {
         //Change to the postion of first item latter
         item.transform.position = new Vector3(15, -2.5f, 4);
+        MouseDrag mouseDrag = item.GetComponent<MouseDrag>();
+        mouseDrag.originPosition = new Vector3(15, -2.5f, 4);
     }
 
     private void SetSecondItemPosition(GameObject item)
     {
         //Change to the postion of second item latter
         item.transform.position = new Vector3(15, -2.5f, -4);
+        MouseDrag mouseDrag = item.GetComponent<MouseDrag>();
+        mouseDrag.originPosition = new Vector3(15, -2.5f, -4);
     }
 
     private void CheckCollidedObject()
@@ -269,6 +371,15 @@ public class GameManager : MonoBehaviour
             //set combination result to plane postion
             itemList[itemList.Count - 1].transform.position = gameObject.transform.position;
 
+            if( (itemList.Count - 1) % 2 == 0)
+            {
+                itemList[itemList.Count - 1].GetComponent<MouseDrag>().originPosition = new Vector3(15, -2.5f, 4);
+            }
+            else
+            {
+                itemList[itemList.Count - 1].GetComponent<MouseDrag>().originPosition = new Vector3(15, -2.5f, -4);
+            }
+
             combinationPerformed += 1;
         }
         else
@@ -282,12 +393,14 @@ public class GameManager : MonoBehaviour
 
             objectsOnPlane.Clear();
 
-            //show the current object
-            itemList[currentIndex - 1].SetActive(true);
-            itemList[currentIndex].SetActive(true);
+            //itemList[currentIndex - 1].SetActive(true);
+            //itemList[currentIndex].SetActive(true);
 
-            SetFirstItemPosition(itemList[currentIndex - 1]);
-            SetSecondItemPosition(itemList[currentIndex]);
+            //SetFirstItemPosition(itemList[currentIndex - 1]);
+            //SetSecondItemPosition(itemList[currentIndex]);
+
+            //show the current object
+            ShowCurrentIndexObject();
         }
         #region commented
         //else
@@ -300,6 +413,37 @@ public class GameManager : MonoBehaviour
         //selectedItem = false;
         //selectedIndex = selectedIndex - 1;
         #endregion
+    }
+
+    public void ShowCurrentIndexObject()
+    {
+        //genap
+        if (itemList.Count % 2 == 0)
+        {
+            itemList[currentIndex - 1].SetActive(true);
+            itemList[currentIndex].SetActive(true);
+
+            SetFirstItemPosition(itemList[currentIndex - 1]);
+            SetSecondItemPosition(itemList[currentIndex]);
+        }
+        else
+        {
+            if (currentIndex == itemList.Count)
+            {
+                itemList[currentIndex - 1].SetActive(true);
+                SetFirstItemPosition(itemList[currentIndex - 1]);
+            }
+            else
+            {
+                //Sama seperti genap
+                itemList[currentIndex - 1].SetActive(true);
+                itemList[currentIndex].SetActive(true);
+
+                SetFirstItemPosition(itemList[currentIndex - 1]);
+                SetSecondItemPosition(itemList[currentIndex]);
+            }
+        }
+
     }
 
     //private void DeactiveAllItemAndResetPosition()

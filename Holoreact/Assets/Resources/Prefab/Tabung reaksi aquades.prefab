@@ -636,7 +636,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   originPosition: {x: 0, y: 0, z: 0}
-  snapPosition: {x: 0, y: 0, z: 0}
   isWithinRange: 0
 --- !u!65 &65727766369726024
 BoxCollider:
@@ -649,8 +648,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 4.829881, y: 5.688612, z: 5.686182}
-  m_Center: {x: 0.2569756, y: 2.3715134, z: -0.6239283}
+  m_Size: {x: 4.829881, y: 5.0280333, z: 4.372911}
+  m_Center: {x: 0.2569756, y: 2.0412083, z: 0.03270793}
 --- !u!54 &6586018550836368596
 Rigidbody:
   m_ObjectHideFlags: 0

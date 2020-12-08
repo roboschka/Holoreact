@@ -9,8 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3459695986153888896}
-  - component: {fileID: 54177692288738858}
-  - component: {fileID: 65627947949524914}
+  - component: {fileID: 114023020721045194}
   m_Layer: 9
   m_Name: Handbook
   m_TagString: Untagged
@@ -35,35 +34,20 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 61.5, y: -90, z: 0}
---- !u!54 &54177692288738858
-Rigidbody:
+--- !u!114 &114023020721045194
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3459695986153848992}
-  serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_UseGravity: 0
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 126
-  m_CollisionDetection: 0
---- !u!65 &65627947949524914
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3459695986153848992}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1.8795884}
-  m_Center: {x: -6.559023e-16, y: 0.0000000018086506, z: 0.04114713}
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b3e19551d5e26e4ab6bbe12fe4a645e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  originPosition: {x: 0, y: 0, z: 0}
+  isWithinRange: 0
 --- !u!1 &3459695986153848996
 GameObject:
   m_ObjectHideFlags: 0

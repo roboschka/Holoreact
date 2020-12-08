@@ -17,9 +17,10 @@ public class MouseFollow : MonoBehaviour
             if (Input.GetMouseButtonDown(0))
             {
                 Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-                RaycastHit hitData;
-
-                if (Physics.Raycast(ray, out hitData))
+                
+                //out disini digunakan untuk menandakan bahwa akan ada value yang ditaruh ke parameter
+                //The out keyword here is used to tells the compiler that the method will return a value in that parameter
+                if (Physics.Raycast(ray, out RaycastHit hitData))
                 {
                     Debug.Log(hitData.collider.gameObject.name + " is clicked");
                     if (hitData.collider.gameObject.name == "Next")
