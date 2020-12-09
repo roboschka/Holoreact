@@ -4,9 +4,9 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [Serializable]
-public class Question
+public class Questions
 {
-    public string question;
-    public string answer;
-    public int levelID;
+    public string Question;
+    public string Answer;
+    public int LevelID;
 }

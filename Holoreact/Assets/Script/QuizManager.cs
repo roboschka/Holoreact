@@ -5,12 +5,13 @@ using System.IO;
 using System.Net;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class QuizManager : MonoBehaviour
 {
     private int currentLvl;
 
-    private Question[] questionList;
+    private Questions[] questionList;
 
     [SerializeField]
     private TMP_InputField answerField;
@@ -19,13 +20,23 @@ public class QuizManager : MonoBehaviour
     private GameObject panelForQuiz;
 
     [SerializeField]
+    private TextMeshProUGUI questionLabel;
+
+    [SerializeField]
     private GameObject cameraForQuiz;
 
     [SerializeField]
     private GameObject gameManager;
 
+    [SerializeField]
+    private GameObject panelForPostGame;
+
+    [SerializeField]
+    private TextMeshProUGUI scoreText;
+
     private int index;
     private  int correctAnswer;
+    private int studentId;
 
     private int preTestScore;
     private int experimentScore;
@@ -33,39 +44,70 @@ public class QuizManager : MonoBehaviour
 
     private bool paused;
     private bool isPostTest;
+    private bool finish;
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         currentLvl = PlayerPrefs.GetInt("currentLevel");
+        studentId = PlayerPrefs.GetInt("studentID");
         index = 0;
         paused = false;
         isPostTest = false;
+        finish = false;
+        GetQuestionDataFromAPI();
+        answerField.ActivateInputField();
+        LoadQuestion();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Return))
+        if (!finish)
         {
-            Submit();
+            if (Input.GetKeyDown(KeyCode.Return))
+            {
+                answerField.Select();
+                answerField.text = "";
+                Submit();
+                answerField.ActivateInputField();
+            }
         }
+        else
+        {
+            if (Input.GetKeyDown(KeyCode.Return))
+            {
+                SceneManager.LoadScene("ChooseLevel");
+            }
+        }
+    }
+
+    private void LoadQuestion()
+    {
+        questionLabel.text = questionList[index].Question;
     }
     
     private void Submit()
     {
-        if(answerField.text.Equals(questionList[index].answer, StringComparison.InvariantCultureIgnoreCase))
+        if(answerField.text.Equals(questionList[index].Answer, StringComparison.InvariantCultureIgnoreCase))
         {
             correctAnswer += 1;
         }
 
         index += 1;
         
-        if(index > questionList.Length)
+        if(index >= questionList.Length)
         {
             if (isPostTest)
             {
                 //do something
+                panelForPostGame.SetActive(true);
+                scoreText.text = "";
+
+                PostScoreToAPI(preTestScore,"Pre",studentId);
+                PostScoreToAPI(experimentScore,"Experiment",studentId);
+                PostScoreToAPI(postTestScore, "Post", studentId);
+                finish = true;
             }
             else
             {
@@ -74,7 +116,13 @@ public class QuizManager : MonoBehaviour
                 cameraForQuiz.SetActive(false);
                 paused = true;
                 gameManager.GetComponent<GameManager>().UnPause();
+                questionLabel.text = questionList[index].Question;
+                Debug.Log("else called");
             }
+        }
+        else
+        {
+            LoadQuestion();
         }
 
     }
@@ -91,19 +139,20 @@ public class QuizManager : MonoBehaviour
         panelForQuiz.SetActive(true);
         paused = false;
         index = 0;
+        LoadQuestion();
     }
 
     #region Get Data From API
 
     private void GetQuestionDataFromAPI()
     {
-        HttpWebRequest request = (HttpWebRequest)WebRequest.Create(String.Format("https://api.backendless.com/09476775-387A-4C56-FFE4-B663DC24FC00/DED29ABA-8FAC-4985-86E0-FCCDA5A290B5/data/Quiz?where=levelid%3D" + currentLvl));
+        HttpWebRequest request = (HttpWebRequest)WebRequest.Create(String.Format("https://api.backendless.com/09476775-387A-4C56-FFE4-B663DC24FC00/DED29ABA-8FAC-4985-86E0-FCCDA5A290B5/data/Quiz?where=LevelID%3D" + currentLvl));
         HttpWebResponse response = (HttpWebResponse)request.GetResponse();
         StreamReader reader = new StreamReader(response.GetResponseStream());
         string jsonResponse = reader.ReadToEnd();
         jsonResponse = JsonHelper.FixJSon(jsonResponse);
 
-        questionList = JsonHelper.FromJson<Question>(jsonResponse);
+        questionList = JsonHelper.FromJson<Questions>(jsonResponse);
     }
 
     #endregion
