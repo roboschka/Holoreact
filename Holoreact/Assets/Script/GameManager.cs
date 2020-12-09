@@ -16,7 +16,7 @@ public class GameManager : MonoBehaviour
     private GameObject cameraForGameplay;
 
     [SerializeField]
-    private GameObject handBookManager;
+    private GameObject handBookManager, submitManager;
     private List<GameObject> objectsOnPlane;
 
     [SerializeField]
@@ -454,11 +454,13 @@ public class GameManager : MonoBehaviour
 
     public void Submit()
     {
-        paused = true;
+        cameraForGameplay.SetActive(false);
         panelConfirmation.SetActive(true);
+        paused = true;
+        submitManager.GetComponent<SubmitManager>().UnPause();
     }
 
-    private void FinishExperiment()
+    public void FinishExperiment()
     {
         quizManager.GetComponent<QuizManager>().SetExperimentScore(CalculateExperimentScore());
         quizManager.GetComponent<QuizManager>().PostTest();

@@ -35,6 +35,9 @@ public class MouseFollow : MonoBehaviour
                     {
                         gameManager.ShowHandbook();
                     }
+                    else if (hitData.collider.gameObject.name == "SubmitButton(Clone)") {
+                        gameManager.Submit();
+                    }
                 }
             }
         }

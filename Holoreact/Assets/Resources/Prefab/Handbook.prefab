@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3459695986153888896}
   - component: {fileID: 114023020721045194}
+  - component: {fileID: 65314005832930598}
   m_Layer: 9
   m_Name: Handbook
   m_TagString: Untagged
@@ -48,6 +49,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   originPosition: {x: 0, y: 0, z: 0}
   isWithinRange: 0
+--- !u!65 &65314005832930598
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3459695986153848992}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1.9454881}
+  m_Center: {x: -1.6187178e-16, y: 5.875455e-10, z: 0.010504817}
 --- !u!1 &3459695986153848996
 GameObject:
   m_ObjectHideFlags: 0
