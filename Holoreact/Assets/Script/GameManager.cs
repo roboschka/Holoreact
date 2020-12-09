@@ -19,6 +19,12 @@ public class GameManager : MonoBehaviour
     private GameObject handBookManager;
     private List<GameObject> objectsOnPlane;
 
+    [SerializeField]
+    private GameObject quizManager;
+
+    [SerializeField]
+    private GameObject panelConfirmation;
+
     private int combinationPerformed;
     //private int selectedIndex;
     private int currentIndex;
@@ -444,6 +450,18 @@ public class GameManager : MonoBehaviour
             }
         }
 
+    }
+
+    public void Submit()
+    {
+        paused = true;
+        panelConfirmation.SetActive(true);
+    }
+
+    private void FinishExperiment()
+    {
+        quizManager.GetComponent<QuizManager>().SetExperimentScore(CalculateExperimentScore());
+        quizManager.GetComponent<QuizManager>().PostTest();
     }
 
     //private void DeactiveAllItemAndResetPosition()
