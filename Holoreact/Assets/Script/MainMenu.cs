@@ -46,16 +46,11 @@ public class MainMenu : MonoBehaviour
     // Update is called once per frames
     void Update()
     {
-        MainMenuNavigation();
-    }
-
-    private void MainMenuNavigation()
-    {
         highlightedButton = EventSystem.current.currentSelectedGameObject;
 
         if (Input.GetKeyDown(KeyCode.Return))
         {
-            //MainMenu Navigation
+            Debug.Log(highlightedButton.name);
             switch (highlightedButton.name)
             {
                 case "Play":
@@ -67,11 +62,11 @@ public class MainMenu : MonoBehaviour
                     break;
                 case "Quit":
                     //Open Notification Canvas
+                    Debug.Log("Open Quit");
                     ToggleNotification(true, false, yesQuitButton);
                     break;
             }
         }
-
 
         if (quitNotificationCanvas.isActiveAndEnabled)
         {
