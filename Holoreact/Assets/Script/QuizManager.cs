@@ -18,7 +18,7 @@ public class QuizManager : MonoBehaviour
     
 
     [SerializeField]
-    private TextMeshProUGUI questionLabel, scoreText;
+    private TextMeshProUGUI questionLabel, preScoreText, expScoreText, postScoreText;
 
     [SerializeField]
     private GameObject cameraForQuiz, gameManager, panelForPostGame, panelForQuiz, warningLabel;
@@ -62,7 +62,6 @@ public class QuizManager : MonoBehaviour
                 answerField.Select();
                 if (answerField.text.Trim().Length == 0)
                 {
-                    Debug.Log("Don't submit");
                     answerField.ActivateInputField();
                     warningLabel.SetActive(true);
                 }
@@ -103,11 +102,15 @@ public class QuizManager : MonoBehaviour
             if (isPostTest)
             {
                 //do something
+                panelForQuiz.SetActive(false);
                 panelForPostGame.SetActive(true);
-                scoreText.text = "";
 
-                PostScoreToAPI(preTestScore,"Pre",studentId);
-                PostScoreToAPI(experimentScore,"Experiment",studentId);
+                preScoreText.text = preTestScore.ToString();
+                expScoreText.text = experimentScore.ToString();
+                postScoreText.text = postTestScore.ToString();
+
+                PostScoreToAPI(preTestScore,"Pre", studentId);
+                PostScoreToAPI(experimentScore,"Experiment", studentId);
                 PostScoreToAPI(postTestScore, "Post", studentId);
                 finish = true;
             }

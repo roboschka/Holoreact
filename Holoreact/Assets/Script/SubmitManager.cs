@@ -31,11 +31,9 @@ public class SubmitManager : MonoBehaviour
                 switch (highlightedButton.name)
                 {
                     case "Yes":
-                        Debug.Log("YesSubmit chosen");
                         gameManager.GetComponent<GameManager>().FinishExperiment();
                         break;
                     case "No":
-                        Debug.Log("NoSubmit chosen");
                         cameraForSubmitNotif.SetActive(false);
                         gameManager.GetComponent<GameManager>().UnPause();
                         break;
