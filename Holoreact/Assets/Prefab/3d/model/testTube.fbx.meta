@@ -1,14 +1,21 @@
 fileFormatVersion: 2
-guid: 042719a6fb46e374b946ee558e079d04
+guid: 4acb167d9c533d94988d5660c73c6ad9
 ModelImporter:
   serializedVersion: 23
   fileIDToRecycleName:
-    100000: //RootNode
-    400000: //RootNode
+    100000: substance
+    100002: //RootNode
+    100004: tube
+    400000: substance
+    400002: //RootNode
+    400004: tube
     2100000: No Name
-    2300000: //RootNode
-    3300000: //RootNode
-    4300000: Cylinder
+    2300000: substance
+    2300002: tube
+    3300000: substance
+    3300002: tube
+    4300000: substance
+    4300002: tube
   externalObjects: {}
   materials:
     importMaterials: 1
