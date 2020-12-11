@@ -21,8 +21,8 @@ public class MainMenu : MonoBehaviour
     private int lvl;
     
     public bool isFirstPlay = true;
-    
-    GameObject highlightedButton, highlightedButton2;
+
+    GameObject highlightedButton;
 
     // Start is called before the first frame update
     void Start()

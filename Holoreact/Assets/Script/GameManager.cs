@@ -16,8 +16,14 @@ public class GameManager : MonoBehaviour
     private GameObject cameraForGameplay;
 
     [SerializeField]
-    private GameObject handBookManager;
+    private GameObject handBookManager, submitManager;
     private List<GameObject> objectsOnPlane;
+
+    [SerializeField]
+    private GameObject quizManager;
+
+    [SerializeField]
+    private GameObject panelConfirmation;
 
     private int combinationPerformed;
     //private int selectedIndex;
@@ -83,17 +89,44 @@ public class GameManager : MonoBehaviour
         if (objectsOnPlane != null && objectsOnPlane.Count > 0)
         {
 
-            //supaya di list dia gak keliatan/terduplikasi.
-            Debug.Log("masuk if");
-            Debug.Log(objectsOnPlane.Count);
-            if (itemList[currentIndex - 1] != objectsOnPlane[0])
+            //supaya di list dia gak keliatan/terduplikasi
+            if (itemList.Count % 2 != 0)
             {
-                itemList[currentIndex - 1].SetActive(false);
+                //kalau index terakhir maka hanya munculkan 1 item
+                if (currentIndex == itemList.Count)
+                {
+                    if (itemList[currentIndex - 1] != objectsOnPlane[0])
+                    {
+                        itemList[currentIndex - 1].SetActive(false);
+                    }
+                }
+                else
+                {
+                    //kalau bukan last index seperti normal
+                    if (itemList[currentIndex - 1] != objectsOnPlane[0])
+                    {
+                        itemList[currentIndex - 1].SetActive(false);
+
+                    }
+                    if (itemList[currentIndex] != objectsOnPlane[0])
+                    {
+                        itemList[currentIndex].SetActive(false);
+                    }
+                }
 
             }
-            if (itemList[currentIndex] != objectsOnPlane[0])
+            else
             {
-                itemList[currentIndex].SetActive(false);
+                //kalau genap seperti normal
+                if (itemList[currentIndex - 1] != objectsOnPlane[0])
+                {
+                    itemList[currentIndex - 1].SetActive(false);
+
+                }
+                if (itemList[currentIndex] != objectsOnPlane[0])
+                {
+                    itemList[currentIndex].SetActive(false);
+                }
             }
 
         }
@@ -155,7 +188,6 @@ public class GameManager : MonoBehaviour
         {
             if(currentIndex > itemList.Count)
             {
-                Debug.Log("reset index");
                 currentIndex = 1;
             }
         }
@@ -164,14 +196,45 @@ public class GameManager : MonoBehaviour
         //check apakah next object yang akan ditampilkan berada di plane
         if (objectsOnPlane.Count != 0)
         {
-            if (itemList[currentIndex - 1] != objectsOnPlane[0])
+
+
+            if (itemList.Count % 2 != 0)
             {
-                SetFirstItemPosition(itemList[currentIndex - 1]);
+                //kalau index terakhir maka hanya munculkan 1 item
+                if (currentIndex == itemList.Count)
+                {
+                    if (itemList[currentIndex - 1] != objectsOnPlane[0])
+                    {
+                        SetFirstItemPosition(itemList[currentIndex - 1]);
+                    }
+                }
+                else
+                {
+                    //kalau bukan last index seperti normal
+                    if (itemList[currentIndex - 1] != objectsOnPlane[0])
+                    {
+                        SetFirstItemPosition(itemList[currentIndex - 1]);
+                    }
+                    if (itemList[currentIndex] != objectsOnPlane[0])
+                    {
+                        SetSecondItemPosition(itemList[currentIndex]);
+                    }
+                }
+
             }
-            if (itemList[currentIndex] != objectsOnPlane[0])
+            else
             {
-                SetSecondItemPosition(itemList[currentIndex]);
+                //kalau genap seperti normal
+                if (itemList[currentIndex - 1] != objectsOnPlane[0])
+                {
+                    SetFirstItemPosition(itemList[currentIndex - 1]);
+                }
+                if (itemList[currentIndex] != objectsOnPlane[0])
+                {
+                    SetSecondItemPosition(itemList[currentIndex]);
+                }
             }
+
         }
         else
         {
@@ -182,14 +245,10 @@ public class GameManager : MonoBehaviour
 
             if (itemList.Count % 2 != 0)
             {
-                Debug.Log("ganjil");
-                Debug.Log("current index :" + currentIndex);
-                Debug.Log("itemlist count :" + itemList.Count);
 
                 //kalau index terakhir maka hanya munculkan 1 item
                 if (currentIndex == itemList.Count)
                 {
-                    Debug.Log("Show one item only");
                     SetFirstItemPosition(itemList[currentIndex - 1]);
                 }
                 else
@@ -215,16 +274,44 @@ public class GameManager : MonoBehaviour
         {
 
             //supaya di list dia gak keliatan/terduplikasi.
-            Debug.Log("masuk if");
             Debug.Log(objectsOnPlane.Count);
-            if (itemList[currentIndex - 1] != objectsOnPlane[0])
+
+            if (itemList.Count % 2 != 0)
             {
-                itemList[currentIndex - 1].SetActive(true);
+                //kalau index terakhir maka hanya munculkan 1 item
+                if (currentIndex == itemList.Count)
+                {
+                    if (itemList[currentIndex - 1] != objectsOnPlane[0])
+                    {
+                        itemList[currentIndex - 1].SetActive(true);
+                    }
+                }
+                else
+                {
+                    //kalau bukan last index seperti normal
+                    if (itemList[currentIndex - 1] != objectsOnPlane[0])
+                    {
+                        itemList[currentIndex - 1].SetActive(true);
+                    }
+                    if (itemList[currentIndex] != objectsOnPlane[0])
+                    {
+                        itemList[currentIndex].SetActive(true);
+                    }
+                }
 
             }
-            if (itemList[currentIndex] != objectsOnPlane[0])
+            else
             {
-                itemList[currentIndex].SetActive(true);
+                //kalau genap seperti normal
+                if (itemList[currentIndex - 1] != objectsOnPlane[0])
+                {
+                    itemList[currentIndex - 1].SetActive(true);
+
+                }
+                if (itemList[currentIndex] != objectsOnPlane[0])
+                {
+                    itemList[currentIndex].SetActive(true);
+                }
             }
 
         }
@@ -287,11 +374,10 @@ public class GameManager : MonoBehaviour
         objectsOnPlane.Clear();
         while (i < collidedColliders.Length)
         {
-            
             objectsOnPlane.Add(collidedColliders[i].gameObject);
+            Debug.Log("List: " + objectsOnPlane[i].gameObject.name);
             i++;
         }
-        
         if (i == 2)
         {
             //FindCombinationResult(collidedColliders[0].gameObject, collidedColliders[1].gameObject);\
@@ -317,7 +403,6 @@ public class GameManager : MonoBehaviour
 
     public void UnPause()
     {
-        Debug.Log("show gameplay camera");
         paused = false;
         cameraForGameplay.SetActive(true);
         itemList[currentIndex].SetActive(true);
@@ -331,7 +416,6 @@ public class GameManager : MonoBehaviour
 
     private void Combine()
     {
-        Debug.Log("combine terpanggil");
         if( FindCombinationResult(objectsOnPlane[0], objectsOnPlane[1]) )
         {
             #region commneted
@@ -342,10 +426,7 @@ public class GameManager : MonoBehaviour
             //itemList[currentIndex].SetActive(true);
             #endregion
 
-            Debug.Log("kombinasi berhasil");
-
             //Reset all coliiding object with the plane
-
             foreach (GameObject objectOnPlane in objectsOnPlane)
             {
                 objectOnPlane.SetActive(false);
@@ -384,10 +465,8 @@ public class GameManager : MonoBehaviour
         }
         else
         {
-            Debug.Log("clean all object omn plane only");
             foreach (GameObject objectOnPlane in objectsOnPlane)
             {
-                Debug.Log("deactive" + objectOnPlane.name);
                 objectOnPlane.SetActive(false);
             }
 
@@ -444,6 +523,20 @@ public class GameManager : MonoBehaviour
             }
         }
 
+    }
+
+    public void Submit()
+    {
+        cameraForGameplay.SetActive(false);
+        panelConfirmation.SetActive(true);
+        paused = true;
+        submitManager.GetComponent<SubmitManager>().UnPause();
+    }
+
+    public void FinishExperiment()
+    {
+        quizManager.GetComponent<QuizManager>().SetExperimentScore(CalculateExperimentScore());
+        quizManager.GetComponent<QuizManager>().PostTest();
     }
 
     //private void DeactiveAllItemAndResetPosition()

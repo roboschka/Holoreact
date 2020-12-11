@@ -36,7 +36,6 @@ public class MouseDrag : MonoBehaviour
     
         if (Physics.Raycast(ray, out hitData))
         {
-            Debug.Log("OriginPosition: " + originPosition + " of " + hitData.collider.gameObject.name);
             //hitData layer = "ExperimentObject"
             hittedObject = hitData.collider.gameObject;
             if (hitData.transform.gameObject.layer == 9)
@@ -95,7 +94,6 @@ public class MouseDrag : MonoBehaviour
         {
             isWithinRange = true;
             snapPosition = collision.gameObject.transform.position;
-            //Debug.Log("dragged object is on collision with plane");
         }
     }
 
@@ -111,12 +109,12 @@ public class MouseDrag : MonoBehaviour
         if (isWithinRange)
         {
             transform.position = snapPosition;
-           // Debug.Log("snapped within range");
+            Debug.Log("snapped within range " + snapPosition);
 
         } else
         {
             transform.position = originPosition;
-            
+            Debug.Log("masuk else");
             //buat testing navigation
             if (gameObject.name != "Plane")
             {
