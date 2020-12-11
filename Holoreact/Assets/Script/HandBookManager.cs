@@ -15,16 +15,9 @@ public class HandBookManager : MonoBehaviour
     private TextMeshProUGUI textToShow;
 
     [SerializeField]
-    private GameObject panelForHandbook;
+    private GameObject panelForHandbook, gameManager, cameraForHandbook;
 
-    [SerializeField]
-    private GameObject gameManager;
-
-    [SerializeField]
-    private GameObject cameraForHandbook;
-
-    private int index;
-    private int currentLvl;
+    private int index, currentLvl;
 
     private bool paused;
 

@@ -8,30 +8,18 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    private List<GameObject> itemList;
+    private List<GameObject> itemList, objectsOnPlane;
     private Combination[] combinationList;
     private Collider[] collidedColliders;
-
+    
     [SerializeField]
-    private GameObject cameraForGameplay;
-
-    [SerializeField]
-    private GameObject handBookManager, submitManager;
-    private List<GameObject> objectsOnPlane;
-
-    [SerializeField]
-    private GameObject quizManager;
-
-    [SerializeField]
-    private GameObject panelConfirmation;
-
-    private int combinationPerformed;
+    private GameObject cameraForGameplay, handBookManager, submitManager, quizManager, panelConfirmation;
+    
+    
     //private int selectedIndex;
-    private int currentIndex;
-    private int currentLvl;
+    private int currentIndex, currentLvl, combinationPerformed;
 
-    private bool paused;
-    private bool selectedItem;
+    private bool paused, selectedItem;
 
     // Start is called before the first frame update
     void Awake()
