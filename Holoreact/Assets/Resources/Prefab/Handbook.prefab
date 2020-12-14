@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3459695986153888896}
   - component: {fileID: 65314005832930598}
   - component: {fileID: 1727060181891476709}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: Handbook
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -73,7 +73,7 @@ GameObject:
   - component: {fileID: 3459695986153888900}
   - component: {fileID: 3459695986156788900}
   - component: {fileID: 3459695986155789924}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: BezierCircle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -150,7 +150,7 @@ GameObject:
   - component: {fileID: 3459695986153888902}
   - component: {fileID: 3459695986156788902}
   - component: {fileID: 3459695986155789926}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -227,7 +227,7 @@ GameObject:
   - component: {fileID: 7599272370373232977}
   - component: {fileID: 3980168721283271976}
   - component: {fileID: 7193746392682171408}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: Text (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -384,7 +384,7 @@ GameObject:
   - component: {fileID: 5895096229798144179}
   - component: {fileID: 4633068790696168356}
   - component: {fileID: 878334555908178138}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
