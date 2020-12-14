@@ -9,33 +9,20 @@ using UnityEngine.SceneManagement;
 
 public class QuizManager : MonoBehaviour
 {
-    private int currentLvl;
-
     private Questions[] questionList;
 
     [SerializeField]
     private TMP_InputField answerField;
     
-
     [SerializeField]
     private TextMeshProUGUI questionLabel, preScoreText, expScoreText, postScoreText;
 
     [SerializeField]
     private GameObject cameraForQuiz, gameManager, panelForPostGame, panelForQuiz, warningLabel;
     
-   
+    private int currentLvl, index, correctAnswer, studentId, preTestScore, experimentScore, postTestScore;
 
-    private int index;
-    private  int correctAnswer;
-    private int studentId;
-
-    private int preTestScore;
-    private int experimentScore;
-    private int postTestScore;
-
-    private bool paused;
-    private bool isPostTest;
-    private bool finish;
+    private bool paused, isPostTest, finish;
 
     // Start is called before the first frame update
     void Awake()

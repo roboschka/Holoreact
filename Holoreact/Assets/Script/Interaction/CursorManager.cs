@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class MouseFollow : MonoBehaviour
+public class CursorManager : MonoBehaviour
 {
     [SerializeField]
     GameManager gameManager;

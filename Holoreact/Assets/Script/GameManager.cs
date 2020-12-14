@@ -8,30 +8,18 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    private List<GameObject> itemList;
+    private List<GameObject> itemList, objectsOnPlane;
     private Combination[] combinationList;
     private Collider[] collidedColliders;
-
+    
     [SerializeField]
-    private GameObject cameraForGameplay;
-
-    [SerializeField]
-    private GameObject handBookManager, submitManager;
-    private List<GameObject> objectsOnPlane;
-
-    [SerializeField]
-    private GameObject quizManager;
-
-    [SerializeField]
-    private GameObject panelConfirmation;
-
-    private int combinationPerformed;
+    private GameObject cameraForGameplay, handBookManager, submitManager, quizManager, panelConfirmation;
+    
+    
     //private int selectedIndex;
-    private int currentIndex;
-    private int currentLvl;
+    private int currentIndex, currentLvl, combinationPerformed;
 
-    private bool paused;
-    private bool selectedItem;
+    private bool paused, selectedItem;
 
     // Start is called before the first frame update
     void Awake()
@@ -353,7 +341,7 @@ public class GameManager : MonoBehaviour
     {
         //Change to the postion of first item latter
         item.transform.position = new Vector3(15, -2.5f, 4);
-        MouseDrag mouseDrag = item.GetComponent<MouseDrag>();
+        MouseBehaviour mouseDrag = item.GetComponent<MouseBehaviour>();
         mouseDrag.originPosition = new Vector3(15, -2.5f, 4);
     }
 
@@ -361,7 +349,7 @@ public class GameManager : MonoBehaviour
     {
         //Change to the postion of second item latter
         item.transform.position = new Vector3(15, -2.5f, -4);
-        MouseDrag mouseDrag = item.GetComponent<MouseDrag>();
+        MouseBehaviour mouseDrag = item.GetComponent<MouseBehaviour>();
         mouseDrag.originPosition = new Vector3(15, -2.5f, -4);
     }
 
@@ -454,11 +442,11 @@ public class GameManager : MonoBehaviour
 
             if( (itemList.Count - 1) % 2 == 0)
             {
-                itemList[itemList.Count - 1].GetComponent<MouseDrag>().originPosition = new Vector3(15, -2.5f, 4);
+                itemList[itemList.Count - 1].GetComponent<MouseBehaviour>().originPosition = new Vector3(15, -2.5f, 4);
             }
             else
             {
-                itemList[itemList.Count - 1].GetComponent<MouseDrag>().originPosition = new Vector3(15, -2.5f, -4);
+                itemList[itemList.Count - 1].GetComponent<MouseBehaviour>().originPosition = new Vector3(15, -2.5f, -4);
             }
 
             combinationPerformed += 1;
