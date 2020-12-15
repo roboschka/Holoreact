@@ -21,7 +21,7 @@ public class HandBookManager : MonoBehaviour
 
     private bool paused;
 
-    void Awake()
+    private void Awake()
     {
         currentLvl = PlayerPrefs.GetInt("currentLevel");
         GetHandbookData();
@@ -29,7 +29,7 @@ public class HandBookManager : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    private void Update()
     {
         if (!paused)
         {

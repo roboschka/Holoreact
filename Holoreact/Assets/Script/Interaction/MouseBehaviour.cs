@@ -52,10 +52,8 @@ public class MouseBehaviour : MonoBehaviour
         //Vector3 worldPosition;
 
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        RaycastHit hitData;
-        
-    
-        if (Physics.Raycast(ray, out hitData))
+
+        if (Physics.Raycast(ray, out RaycastHit hitData))
         {
             //hitData layer = "ExperimentObject"
             hittedObject = hitData.collider.gameObject;
@@ -63,7 +61,7 @@ public class MouseBehaviour : MonoBehaviour
             {
                 mZCoord = Camera.main.WorldToScreenPoint(gameObject.transform.position).z;
                 mOffset = gameObject.transform.position - GetMouseWorldPos();
-               // Debug.Log("9");
+                // Debug.Log("9");
             }
             else if (hitData.transform.gameObject.layer == 10)
             {
