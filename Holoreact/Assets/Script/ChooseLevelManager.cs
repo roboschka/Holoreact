@@ -26,7 +26,7 @@ public class ChooseLevelManager : MonoBehaviour
     private TextMeshProUGUI levelName, levelDescription, pagination;
    
     // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
         studentID = PlayerPrefs.GetInt("studentID").ToString();
 
@@ -37,7 +37,7 @@ public class ChooseLevelManager : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    private void Update()
     {
 
         Navigation();

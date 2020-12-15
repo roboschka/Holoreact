@@ -15,13 +15,13 @@ public class SubmitManager : MonoBehaviour
     private bool paused;
     private GameObject highlightedButton;
 
-    void Awake()
+    private void Awake()
     {
         paused = true;
     }
 
     // Update is called once per frame
-    void Update()
+    private void Update()
     {
         highlightedButton = EventSystem.current.currentSelectedGameObject;
         if (!paused)

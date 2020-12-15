@@ -15,7 +15,7 @@ public class GraduallyChangeColor : MonoBehaviour
     private bool allowChange;
 
     // Start is called before the first frame update
-    void Awake()
+    private void Awake()
     {
         try
         {
@@ -24,10 +24,10 @@ public class GraduallyChangeColor : MonoBehaviour
             allowChange = true;
             StartChangeColor();
         }
-        catch (System.Exception Ex)
+        catch (System.Exception ex)
         {
             Debug.Log("There's no Renderer in the object please place renderer in the object!!!");
-            throw;
+            Debug.Log(ex.Message);
         }
     }
 

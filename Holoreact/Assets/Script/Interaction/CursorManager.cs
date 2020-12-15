@@ -5,7 +5,7 @@ public class CursorManager : MonoBehaviour
     [SerializeField]
     GameManager gameManager;
     
-    void Update()
+    private void Update()
     {
         //Debug.Log(gameManager.getPause());
         if (!gameManager.GetPause())
