@@ -99,8 +99,8 @@ public class StudentDataManager : MonoBehaviour
         } 
         else
         {
-            Debug.Log("currentID=" + student.Id);
-            PlayerPrefs.SetInt("studentID", student.Id);
+            Debug.Log("currentID=" + student.ID);
+            PlayerPrefs.SetInt("studentID", student.ID);
         }
     }
     #endregion
