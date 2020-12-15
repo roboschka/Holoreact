@@ -8,13 +8,16 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/Test UI.unity
     guid: e4907b843a5f151489203c745d5b1a54
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/MainMenu.unity
     guid: 778dd571d26663a4c8a186a89b2d080e
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/ChooseLevel.unity
     guid: 0b5632feaa31d8c4fb2a412f69f618ec
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Gameplay_Alt.unity
     guid: ea6964fb4a5c75a4f82f4a30345e30ee
+  - enabled: 1
+    path: Assets/Scenes/IndoorTesting.unity
+    guid: 31a70759485dad34ba946bc71932bc0f
   m_configObjects: {}
