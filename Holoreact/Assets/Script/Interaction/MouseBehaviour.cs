@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MouseDrag : MonoBehaviour
+public class MouseBehaviour : MonoBehaviour
 {
     public Vector3 originPosition;
     private Vector3 snapPosition;
@@ -18,14 +18,35 @@ public class MouseDrag : MonoBehaviour
     private LayerMask experimentObjectLayer;
 
     GameManager gameManager;
+    DescriptionManager descriptionManager;
     private void Awake()
     {
+        descriptionManager = FindObjectOfType<DescriptionManager>() as DescriptionManager;
         isWithinRange = false;
         originPosition = this.gameObject.transform.position;
         gameManager = FindObjectOfType<GameManager>() as GameManager;
         experimentObjectLayer = LayerMask.GetMask("ExperimentObject");
     }
-    
+
+    private Vector3 GetMouseWorldPos()
+    {
+        Vector3 mousePoint = Input.mousePosition;
+        mousePoint.z = mZCoord;
+        return Camera.main.ScreenToWorldPoint(mousePoint);
+    }
+
+    private void OnMouseOver()
+    {
+        Debug.Log(descriptionManager);
+        descriptionManager.ShowDescription(gameObject);
+    }
+
+    private void OnMouseExit()
+    {
+        descriptionManager.HideDescription(gameObject);
+    }
+
+    #region MouseDrag Handling
     private void OnMouseDown()
     {
         //Vector3 worldPosition;
@@ -36,7 +57,6 @@ public class MouseDrag : MonoBehaviour
     
         if (Physics.Raycast(ray, out hitData))
         {
-            Debug.Log("OriginPosition: " + originPosition + " of " + hitData.collider.gameObject.name);
             //hitData layer = "ExperimentObject"
             hittedObject = hitData.collider.gameObject;
             if (hitData.transform.gameObject.layer == 9)
@@ -53,14 +73,7 @@ public class MouseDrag : MonoBehaviour
             }
         }
     }
-
-    private Vector3 GetMouseWorldPos()
-    {
-        Vector3 mousePoint = Input.mousePosition;
-        mousePoint.z = mZCoord;
-        return Camera.main.ScreenToWorldPoint(mousePoint);
-    }
-
+    
     private void OnMouseDrag()
     {
         #region Commented
@@ -89,34 +102,17 @@ public class MouseDrag : MonoBehaviour
 
     }
 
-    private void OnCollisionEnter(Collision collision)
-    {
-        if (collision.gameObject.name == "Plane")
-        {
-            isWithinRange = true;
-            snapPosition = collision.gameObject.transform.position;
-            //Debug.Log("dragged object is on collision with plane");
-        }
-    }
-
-    private void OnCollisionExit(Collision collision)
-    {
-        if (collision.gameObject.name == "Plane")
-        {
-            isWithinRange = false;
-        }
-    }
     private void OnMouseUp()
     {
         if (isWithinRange)
         {
             transform.position = snapPosition;
-           // Debug.Log("snapped within range");
+            Debug.Log("snapped within range " + snapPosition);
 
         } else
         {
             transform.position = originPosition;
-            
+            Debug.Log("masuk else");
             //buat testing navigation
             if (gameObject.name != "Plane")
             {
@@ -129,4 +125,24 @@ public class MouseDrag : MonoBehaviour
         }
     }
 
+    #endregion
+
+    #region Collision Handling
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.name == "Plane")
+        {
+            isWithinRange = true;
+            snapPosition = collision.gameObject.transform.position;
+        }
+    }
+
+    private void OnCollisionExit(Collision collision)
+    {
+        if (collision.gameObject.name == "Plane")
+        {
+            isWithinRange = false;
+        }
+    }
+    #endregion
 }

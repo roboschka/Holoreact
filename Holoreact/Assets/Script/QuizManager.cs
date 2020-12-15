@@ -9,42 +9,20 @@ using UnityEngine.SceneManagement;
 
 public class QuizManager : MonoBehaviour
 {
-    private int currentLvl;
-
     private Questions[] questionList;
 
     [SerializeField]
     private TMP_InputField answerField;
+    
+    [SerializeField]
+    private TextMeshProUGUI questionLabel, preScoreText, expScoreText, postScoreText;
 
     [SerializeField]
-    private GameObject panelForQuiz;
+    private GameObject cameraForQuiz, gameManager, panelForPostGame, panelForQuiz, warningLabel;
+    
+    private int currentLvl, index, correctAnswer, studentId, preTestScore, experimentScore, postTestScore;
 
-    [SerializeField]
-    private TextMeshProUGUI questionLabel;
-
-    [SerializeField]
-    private GameObject cameraForQuiz;
-
-    [SerializeField]
-    private GameObject gameManager;
-
-    [SerializeField]
-    private GameObject panelForPostGame;
-
-    [SerializeField]
-    private TextMeshProUGUI scoreText;
-
-    private int index;
-    private  int correctAnswer;
-    private int studentId;
-
-    private int preTestScore;
-    private int experimentScore;
-    private int postTestScore;
-
-    private bool paused;
-    private bool isPostTest;
-    private bool finish;
+    private bool paused, isPostTest, finish;
 
     // Start is called before the first frame update
     void Awake()
@@ -55,6 +33,7 @@ public class QuizManager : MonoBehaviour
         paused = false;
         isPostTest = false;
         finish = false;
+        warningLabel.SetActive(false);
         GetQuestionDataFromAPI();
         answerField.ActivateInputField();
         LoadQuestion();
@@ -68,9 +47,18 @@ public class QuizManager : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.Return))
             {
                 answerField.Select();
-                answerField.text = "";
-                Submit();
-                answerField.ActivateInputField();
+                if (answerField.text.Trim().Length == 0)
+                {
+                    answerField.ActivateInputField();
+                    warningLabel.SetActive(true);
+                }
+                else
+                {
+                    Submit();
+                    answerField.text = "";
+                    answerField.ActivateInputField();
+                    warningLabel.SetActive(false);
+                }
             }
         }
         else
@@ -101,11 +89,15 @@ public class QuizManager : MonoBehaviour
             if (isPostTest)
             {
                 //do something
+                panelForQuiz.SetActive(false);
                 panelForPostGame.SetActive(true);
-                scoreText.text = "";
 
-                PostScoreToAPI(preTestScore,"Pre",studentId);
-                PostScoreToAPI(experimentScore,"Experiment",studentId);
+                preScoreText.text = preTestScore.ToString();
+                expScoreText.text = experimentScore.ToString();
+                postScoreText.text = postTestScore.ToString();
+
+                PostScoreToAPI(preTestScore,"Pre", studentId);
+                PostScoreToAPI(experimentScore,"Experiment", studentId);
                 PostScoreToAPI(postTestScore, "Post", studentId);
                 finish = true;
             }
@@ -117,7 +109,8 @@ public class QuizManager : MonoBehaviour
                 paused = true;
                 gameManager.GetComponent<GameManager>().UnPause();
                 questionLabel.text = questionList[index].Question;
-                Debug.Log("else called");
+                panelForQuiz.SetActive(false);
+
             }
         }
         else

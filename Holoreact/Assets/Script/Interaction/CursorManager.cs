@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class MouseFollow : MonoBehaviour
+public class CursorManager : MonoBehaviour
 {
     [SerializeField]
     GameManager gameManager;
@@ -34,6 +34,9 @@ public class MouseFollow : MonoBehaviour
                     else if (hitData.collider.gameObject.name == "Handbook(Clone)")
                     {
                         gameManager.ShowHandbook();
+                    }
+                    else if (hitData.collider.gameObject.name == "SubmitButton(Clone)") {
+                        gameManager.Submit();
                     }
                 }
             }
