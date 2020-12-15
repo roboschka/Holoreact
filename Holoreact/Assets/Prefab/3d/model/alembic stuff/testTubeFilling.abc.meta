@@ -3,29 +3,14 @@ guid: a88cf930a18320140bcfbf85bc52fb7b
 ScriptedImporter:
   fileIDToRecycleName:
     100000: testTubeFilling/testTubeFilling
-    100002: testTubeFilling/testTubeFilling/Cube
-    100004: testTubeFilling/testTubeFilling/Cube/Cube_002
-    100006: testTubeFilling/testTubeFilling/substance
-    100008: testTubeFilling/testTubeFilling/substance/Cube_001
-    100010: testTubeFilling/testTubeFilling/tube
-    100012: testTubeFilling/testTubeFilling/tube/Cylinder
+    100002: testTubeFilling/testTubeFilling/substance
+    100004: testTubeFilling/testTubeFilling/substance/Cube_001
     400000: testTubeFilling/testTubeFilling/Transform
-    400002: testTubeFilling/testTubeFilling/Cube/Transform
-    400004: testTubeFilling/testTubeFilling/Cube/Cube_002/Transform
-    400006: testTubeFilling/testTubeFilling/substance/Transform
-    400008: testTubeFilling/testTubeFilling/substance/Cube_001/Transform
-    400010: testTubeFilling/testTubeFilling/tube/Transform
-    400012: testTubeFilling/testTubeFilling/tube/Cylinder/Transform
-    2100000: Default Material
-    2300000: testTubeFilling/testTubeFilling/Cube/Cube_002/MeshRenderer
-    2300002: testTubeFilling/testTubeFilling/substance/Cube_001/MeshRenderer
-    2300004: testTubeFilling/testTubeFilling/tube/Cylinder/MeshRenderer
-    3300000: testTubeFilling/testTubeFilling/Cube/Cube_002/MeshFilter
-    3300002: testTubeFilling/testTubeFilling/substance/Cube_001/MeshFilter
-    3300004: testTubeFilling/testTubeFilling/tube/Cylinder/MeshFilter
+    400002: testTubeFilling/testTubeFilling/substance/Transform
+    400004: testTubeFilling/testTubeFilling/substance/Cube_001/Transform
+    2300000: testTubeFilling/testTubeFilling/substance/Cube_001/MeshRenderer
+    3300000: testTubeFilling/testTubeFilling/substance/Cube_001/MeshFilter
     4300000: /substance/Cube_001
-    4300002: /tube/Cylinder
-    4300004: /Cube/Cube_002
     7400000: Default Animation
     7400002: testTubeFilling_Frames
     11400000: testTubeFilling/testTubeFilling/MonoBehaviour-UTJ.Alembic.AlembicStreamPlayer
