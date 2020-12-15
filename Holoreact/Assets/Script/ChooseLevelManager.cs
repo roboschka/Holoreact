@@ -33,14 +33,14 @@ public class ChooseLevelManager : MonoBehaviour
         GetLevelList();
         GetStudentScore();
         
-        showLevelInfo(currentViewingLevel);
+        ShowLevelInfo(currentViewingLevel);
     }
 
     // Update is called once per frame
     void Update()
     {
 
-        navigation();
+        Navigation();
 
         if (Input.GetKeyDown(KeyCode.Escape))
         {
@@ -55,7 +55,7 @@ public class ChooseLevelManager : MonoBehaviour
         }
     }
 
-    private void navigation()
+    private void Navigation()
     {
         if (Input.GetKeyDown(KeyCode.RightArrow))
         {
@@ -67,7 +67,7 @@ public class ChooseLevelManager : MonoBehaviour
             {
                 currentViewingLevel = 0;
             }
-            showLevelInfo(currentViewingLevel);
+            ShowLevelInfo(currentViewingLevel);
         }
         else if (Input.GetKeyDown(KeyCode.LeftArrow))
         {
@@ -79,11 +79,11 @@ public class ChooseLevelManager : MonoBehaviour
             {
                 currentViewingLevel = levels.Length - 1;
             }
-            showLevelInfo(currentViewingLevel);
+            ShowLevelInfo(currentViewingLevel);
         }
     }
 
-    private void showLevelInfo(int index)
+    private void ShowLevelInfo(int index)
     {
         levelName.text = levels[index].LvlName;
         levelDescription.text = levels[index].Description;
@@ -99,11 +99,11 @@ public class ChooseLevelManager : MonoBehaviour
     {
         var data =
             from score in scoreData
-            where Int32.Parse(score.LevelID) == (currentIndex + 1)
+            where score.LevelID == (currentIndex + 1)
             select Int32.Parse(score.QuizScore);
 
         List<int> dataList = data.ToList();
-        return dataList.Take(3).Sum(); ;
+        return dataList.Take(3).Sum();
     }
 
     private void DetermineStars(int totalScore)

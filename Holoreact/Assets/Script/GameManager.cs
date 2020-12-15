@@ -22,7 +22,7 @@ public class GameManager : MonoBehaviour
     private bool paused, selectedItem;
 
     // Start is called before the first frame update
-    void Awake()
+    private void Awake()
     {
         currentIndex = 1;
         itemList = new List<GameObject>();
@@ -50,10 +50,10 @@ public class GameManager : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
-    {
+    //void Update()
+    //{
         
-    }
+    //}
 
     private void OnCollisionEnter(Collision collision)
     {
