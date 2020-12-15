@@ -1,0 +1,47 @@
+fileFormatVersion: 2
+guid: a88cf930a18320140bcfbf85bc52fb7b
+ScriptedImporter:
+  fileIDToRecycleName:
+    100000: testTubeFilling/testTubeFilling
+    100002: testTubeFilling/testTubeFilling/substance
+    100004: testTubeFilling/testTubeFilling/substance/Cube_001
+    400000: testTubeFilling/testTubeFilling/Transform
+    400002: testTubeFilling/testTubeFilling/substance/Transform
+    400004: testTubeFilling/testTubeFilling/substance/Cube_001/Transform
+    2300000: testTubeFilling/testTubeFilling/substance/Cube_001/MeshRenderer
+    3300000: testTubeFilling/testTubeFilling/substance/Cube_001/MeshFilter
+    4300000: /substance/Cube_001
+    7400000: Default Animation
+    7400002: testTubeFilling_Frames
+    11400000: testTubeFilling/testTubeFilling/MonoBehaviour-UTJ.Alembic.AlembicStreamPlayer
+    11400002: testTubeFilling_ABCDesc
+    100100000: testTubeFilling
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: 11500000, guid: f53f5fc499d31e44b9deee84d28a9ee8, type: 3}
+  streamSettings:
+    normals: 1
+    tangents: 1
+    cameraAspectRatio: 2
+    scaleFactor: 0.01
+    swapHandedness: 1
+    flipFaces: 0
+    turnQuadEdges: 0
+    interpolateSamples: 1
+    importPointPolygon: 1
+    importLinePolygon: 1
+    importTrianglePolygon: 1
+    importXform: 1
+    importCameras: 1
+    importMeshes: 1
+    importPoints: 1
+    importVisibility: 1
+  abcStartTime: 0.041666666666666664
+  abcEndTime: 2.4999999999999996
+  startTime: 0.041666666666666664
+  endTime: 2.4999999999999996
+  importWarning: 
+  varyingTopologyMeshNames: []
+  splittingMeshNames: []
