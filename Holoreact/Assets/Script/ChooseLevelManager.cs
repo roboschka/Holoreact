@@ -97,12 +97,13 @@ public class ChooseLevelManager : MonoBehaviour
     #region Star System
     private int CalculateTotalScore(Score[] scoreData, int currentIndex)
     {
-        var data =
-            from score in scoreData
-            where score.LevelID == (currentIndex + 1)
-            select Int32.Parse(score.QuizScore);
+        List<int> dataList =
+            (
+                from score in scoreData
+                where score.LevelID == (currentIndex + 1)
+                select score.QuizScore
+            ).ToList();
 
-        List<int> dataList = data.ToList();
         return dataList.Take(3).Sum();
     }
 

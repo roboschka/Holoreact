@@ -7,7 +7,7 @@ using UnityEngine;
 public class Score 
 {
     public int LevelID;
-    public string QuizScore;
+    public int QuizScore;
     public string QuizType;
     public string StudentID;
 }

@@ -8,4 +8,6 @@ public class Item
 {
     public int LevelID;
     public string Name;
+    public string Description;
+    public bool IsCombinationResult;
 }
