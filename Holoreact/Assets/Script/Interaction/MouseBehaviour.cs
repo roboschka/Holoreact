@@ -8,24 +8,20 @@ public class MouseBehaviour : MonoBehaviour
     public Vector3 originPosition;
     private Vector3 snapPosition;
 
-    GameObject hittedObject;
+    private GameObject hittedObject;
     public bool isWithinRange = false;
 
     private Vector3 mOffset;
     private float mZCoord;
 
-    //Samuel 4 des 2020 - For testting
-    private LayerMask experimentObjectLayer;
-
-    GameManager gameManager;
-    DescriptionManager descriptionManager;
+    private GameManager gameManager;
+    private DescriptionManager descriptionManager;
     private void Awake()
     {
         descriptionManager = FindObjectOfType<DescriptionManager>() as DescriptionManager;
         isWithinRange = false;
         originPosition = this.gameObject.transform.position;
         gameManager = FindObjectOfType<GameManager>() as GameManager;
-        experimentObjectLayer = LayerMask.GetMask("ExperimentObject");
     }
 
     private Vector3 GetMouseWorldPos()
@@ -37,7 +33,6 @@ public class MouseBehaviour : MonoBehaviour
 
     private void OnMouseOver()
     {
-        Debug.Log(descriptionManager);
         descriptionManager.ShowDescription(gameObject);
     }
 
@@ -52,10 +47,8 @@ public class MouseBehaviour : MonoBehaviour
         //Vector3 worldPosition;
 
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        RaycastHit hitData;
-        
-    
-        if (Physics.Raycast(ray, out hitData))
+
+        if (Physics.Raycast(ray, out RaycastHit hitData))
         {
             //hitData layer = "ExperimentObject"
             hittedObject = hitData.collider.gameObject;
@@ -63,7 +56,7 @@ public class MouseBehaviour : MonoBehaviour
             {
                 mZCoord = Camera.main.WorldToScreenPoint(gameObject.transform.position).z;
                 mOffset = gameObject.transform.position - GetMouseWorldPos();
-               // Debug.Log("9");
+                // Debug.Log("9");
             }
             else if (hitData.transform.gameObject.layer == 10)
             {

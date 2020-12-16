@@ -6,8 +6,8 @@ using UnityEngine;
 [Serializable]
 public class Score 
 {
-    public string LevelID;
-    public string QuizScore;
+    public int LevelID;
+    public int QuizScore;
     public string QuizType;
     public string StudentID;
 }

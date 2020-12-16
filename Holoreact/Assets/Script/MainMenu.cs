@@ -25,7 +25,7 @@ public class MainMenu : MonoBehaviour
     GameObject highlightedButton;
 
     // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
         isFirstPlay = PlayerPrefs.GetInt("isFirstPlay") == 1 ? true : false;
         Debug.Log("isFirstPlay = " + isFirstPlay);
