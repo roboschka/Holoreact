@@ -12,7 +12,6 @@ public class DescriptionManager : MonoBehaviour
         if (hoveredObject.layer == 9)
         {
             descriptionPanel.SetActive(true);
-            Debug.Log(hoveredObject.name);
         }
         
     }
@@ -20,6 +19,5 @@ public class DescriptionManager : MonoBehaviour
     public void HideDescription(GameObject hoveredObject)
     {
         descriptionPanel.SetActive(false);
-        Debug.Log(hoveredObject.name);
     }
 }

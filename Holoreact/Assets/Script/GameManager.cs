@@ -340,17 +340,17 @@ public class GameManager : MonoBehaviour
     private void SetFirstItemPosition(GameObject item)
     {
         //Change to the postion of first item latter
-        item.transform.position = new Vector3(15, -2.5f, 4);
+        item.transform.position = new Vector3(20, -4f, 4);
         MouseBehaviour mouseDrag = item.GetComponent<MouseBehaviour>();
-        mouseDrag.originPosition = new Vector3(15, -2.5f, 4);
+        mouseDrag.originPosition = new Vector3(20, -4f, 4);
     }
 
     private void SetSecondItemPosition(GameObject item)
     {
         //Change to the postion of second item latter
-        item.transform.position = new Vector3(15, -2.5f, -4);
+        item.transform.position = new Vector3(20, -4f, -4);
         MouseBehaviour mouseDrag = item.GetComponent<MouseBehaviour>();
-        mouseDrag.originPosition = new Vector3(15, -2.5f, -4);
+        mouseDrag.originPosition = new Vector3(20, -4f, -4);
     }
 
     private void CheckCollidedObject()
