@@ -15,7 +15,7 @@ public class SubmitManager : MonoBehaviour
     private bool paused;
     private GameObject highlightedButton;
 
-    private void Awake()
+    private void Start()
     {
         paused = true;
     }
@@ -47,7 +47,7 @@ public class SubmitManager : MonoBehaviour
         }
     }
 
-    public void UnPause()
+    public void ShowSubmit()
     {
         Debug.Log("Show Submit notif");
         paused = false;

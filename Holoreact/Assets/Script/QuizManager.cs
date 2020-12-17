@@ -46,7 +46,6 @@ public class QuizManager : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.Return))
             {
-                answerField.Select();
                 if (answerField.text.Trim().Length == 0)
                 {
                     answerField.ActivateInputField();
@@ -65,7 +64,7 @@ public class QuizManager : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.Return))
             {
-                SceneManager.LoadScene("ChooseLevel");
+                SceneManager.LoadScene("MainMenu");
             }
         }
     }
@@ -88,7 +87,6 @@ public class QuizManager : MonoBehaviour
         {
             if (isPostTest)
             {
-                //do something
                 panelForQuiz.SetActive(false);
                 panelForPostGame.SetActive(true);
 
@@ -106,11 +104,11 @@ public class QuizManager : MonoBehaviour
                 preTestScore = (correctAnswer / questionList.Length) * 100;
                 index = 0;
                 cameraForQuiz.SetActive(false);
+                panelForQuiz.SetActive(false);
                 paused = true;
                 gameManager.GetComponent<GameManager>().UnPause();
                 questionLabel.text = questionList[index].Question;
-                panelForQuiz.SetActive(false);
-
+                
             }
         }
         else

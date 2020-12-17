@@ -14,7 +14,7 @@ public class GameManager : MonoBehaviour
     private Collider[] collidedColliders;
     
     [SerializeField]
-    private GameObject cameraForGameplay, handBookManager, submitManager, quizManager, panelConfirmation;
+    private GameObject cameraForGameplay, handBookManager, submitManager, pauseManager, quizManager, panelConfirmation;
     
     
     //private int selectedIndex;
@@ -397,12 +397,6 @@ public class GameManager : MonoBehaviour
         paused = false;
         cameraForGameplay.SetActive(true);
         itemList[currentIndex].SetActive(true);
-
-        //if (selectedIndex != -1)
-        //{
-        //    itemList[selectedIndex].SetActive(true);
-        //}
-
     }
 
     private void Combine()
@@ -521,7 +515,14 @@ public class GameManager : MonoBehaviour
         cameraForGameplay.SetActive(false);
         panelConfirmation.SetActive(true);
         paused = true;
-        submitManager.GetComponent<SubmitManager>().UnPause();
+        submitManager.GetComponent<SubmitManager>().ShowSubmit();
+    }
+
+    public void Pause()
+    {
+        cameraForGameplay.SetActive(false);
+        paused = true;
+        pauseManager.GetComponent<PauseManager>().ShowPause();
     }
 
     public void FinishExperiment()

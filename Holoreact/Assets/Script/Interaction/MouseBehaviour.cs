@@ -105,7 +105,6 @@ public class MouseBehaviour : MonoBehaviour
         } else
         {
             transform.position = originPosition;
-            Debug.Log("masuk else");
             //buat testing navigation
             if (gameObject.name != "Plane")
             {
