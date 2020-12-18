@@ -26,14 +26,14 @@ public class StudentDataManager : MonoBehaviour
     GameObject highlightedButton;
 
     // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
         studentNameField.ActivateInputField();
         studentSchoolField.gameObject.SetActive(false);
     }
 
     // Update is called once per frame
-    void Update()
+    private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Return))
         {
@@ -99,8 +99,8 @@ public class StudentDataManager : MonoBehaviour
         } 
         else
         {
-            Debug.Log("currentID=" + student.Id);
-            PlayerPrefs.SetInt("studentID", student.Id);
+            Debug.Log("currentID=" + student.ID);
+            PlayerPrefs.SetInt("studentID", student.ID);
         }
     }
     #endregion

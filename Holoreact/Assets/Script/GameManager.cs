@@ -9,6 +9,7 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     private List<GameObject> itemList, objectsOnPlane;
+    private List<Item> itemDescriptionList;
     private Combination[] combinationList;
     private Collider[] collidedColliders;
     
@@ -22,11 +23,13 @@ public class GameManager : MonoBehaviour
     private bool paused, selectedItem;
 
     // Start is called before the first frame update
-    void Awake()
+    private void Awake()
     {
         currentIndex = 1;
         itemList = new List<GameObject>();
         objectsOnPlane = new List<GameObject>();
+        itemDescriptionList = new List<Item>();
+
         selectedItem = false;
         //selectedIndex = -1;
         combinationPerformed = 0;
@@ -50,10 +53,10 @@ public class GameManager : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
-    {
+    //void Update()
+    //{
         
-    }
+    //}
 
     private void OnCollisionEnter(Collision collision)
     {
@@ -340,17 +343,17 @@ public class GameManager : MonoBehaviour
     private void SetFirstItemPosition(GameObject item)
     {
         //Change to the postion of first item latter
-        item.transform.position = new Vector3(15, -2.5f, 4);
+        item.transform.position = new Vector3(20, -4f, 4);
         MouseBehaviour mouseDrag = item.GetComponent<MouseBehaviour>();
-        mouseDrag.originPosition = new Vector3(15, -2.5f, 4);
+        mouseDrag.originPosition = new Vector3(20, -4f, 4);
     }
 
     private void SetSecondItemPosition(GameObject item)
     {
         //Change to the postion of second item latter
-        item.transform.position = new Vector3(15, -2.5f, -4);
+        item.transform.position = new Vector3(20, -4f, -4);
         MouseBehaviour mouseDrag = item.GetComponent<MouseBehaviour>();
-        mouseDrag.originPosition = new Vector3(15, -2.5f, -4);
+        mouseDrag.originPosition = new Vector3(20, -4f, -4);
     }
 
     private void CheckCollidedObject()
@@ -546,7 +549,8 @@ public class GameManager : MonoBehaviour
 
     private void GetItemList()
     {
-        HttpWebRequest request = (HttpWebRequest)WebRequest.Create(String.Format("https://api.backendless.com/09476775-387A-4C56-FFE4-B663DC24FC00/DED29ABA-8FAC-4985-86E0-FCCDA5A290B5/data/ItemList?pageSize=50&where=levelid%3D" + currentLvl));
+        //HttpWebRequest request = (HttpWebRequest)WebRequest.Create(String.Format("https://api.backendless.com/09476775-387A-4C56-FFE4-B663DC24FC00/DED29ABA-8FAC-4985-86E0-FCCDA5A290B5/data/ItemList?pageSize=50&where=levelid%3D" + currentLvl));
+        HttpWebRequest request = (HttpWebRequest)WebRequest.Create(String.Format("https://api.backendless.com/09476775-387A-4C56-FFE4-B663DC24FC00/DED29ABA-8FAC-4985-86E0-FCCDA5A290B5/data/ItemList?pageSize=50&where=LevelID%3D" + currentLvl));
         HttpWebResponse response = (HttpWebResponse)request.GetResponse();
         StreamReader reader = new StreamReader(response.GetResponseStream());
         string jsonResponse = reader.ReadToEnd();
@@ -556,6 +560,15 @@ public class GameManager : MonoBehaviour
 
         items = JsonHelper.FromJson<Item>(jsonResponse);
 
+        itemDescriptionList.AddRange(items);
+
+        items =
+            (
+                from item in items
+                where item.IsCombinationResult == false
+                select item
+            ).ToArray();
+        
         foreach (Item item in items)
         {
             GameObject instance = Instantiate(Resources.Load("Prefab/" + item.Name) as GameObject);
@@ -669,5 +682,18 @@ public class GameManager : MonoBehaviour
     public void SetPause (bool pauseValue)
     {
         paused = pauseValue;
+    }
+    
+
+    public string getItemDescription(string hoveredGameObject)
+    {
+        string itemDescription =
+            (
+                from item in itemDescriptionList
+                where item.Name == hoveredGameObject
+                select item.Description
+            ).First().ToString();
+
+        return itemDescription;
     }
 }
