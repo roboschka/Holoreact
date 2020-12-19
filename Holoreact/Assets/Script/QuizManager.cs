@@ -90,6 +90,8 @@ public class QuizManager : MonoBehaviour
                 panelForQuiz.SetActive(false);
                 panelForPostGame.SetActive(true);
 
+                postTestScore = (correctAnswer / questionList.Length) * 100;
+
                 preScoreText.text = preTestScore.ToString();
                 expScoreText.text = experimentScore.ToString();
                 postScoreText.text = postTestScore.ToString();
