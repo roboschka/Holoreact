@@ -106,9 +106,9 @@ public class QuizManager : MonoBehaviour
             else
             {
                 preTestScore = (int)((correctAnswer / questionList.Length) * 100.0f);
-                Debug.Log("questionsList.Length: " + questionList.Length);
-                Debug.Log("preTestScore: " + preTestScore);
-                Debug.Log((correctAnswer / questionList.Length) * 100);
+                //Debug.Log("questionsList.Length: " + questionList.Length);
+                //Debug.Log("preTestScore: " + preTestScore);
+                //Debug.Log((correctAnswer / questionList.Length) * 100);
                 index = 0;
                 cameraForQuiz.SetActive(false);
                 panelForQuiz.SetActive(false);
