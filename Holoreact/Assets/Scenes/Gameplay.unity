@@ -3974,7 +3974,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b2dd71c7df00ccd4ab1d6caf6a62052f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cameraForSubmitNotif: {fileID: 725627492}
+  UICamera: {fileID: 725627492}
   gameManager: {fileID: 2041835564}
   submitPanel: {fileID: 1423194657}
   yesSubmit: {fileID: 901772893}
@@ -4253,7 +4253,7 @@ MonoBehaviour:
   textToShow: {fileID: 615973754}
   panelForHandbook: {fileID: 2113833851}
   gameManager: {fileID: 2041835564}
-  cameraForHandbook: {fileID: 725627492}
+  UICamera: {fileID: 725627492}
   paused: 0
 --- !u!4 &874952573
 Transform:
@@ -7766,7 +7766,7 @@ MonoBehaviour:
   preScoreText: {fileID: 1253848036}
   expScoreText: {fileID: 1695210403}
   postScoreText: {fileID: 1946941043}
-  cameraForQuiz: {fileID: 725627492}
+  UICamera: {fileID: 725627492}
   gameManager: {fileID: 2041835564}
   panelForPostGame: {fileID: 1861275392}
   panelForQuiz: {fileID: 686115586}

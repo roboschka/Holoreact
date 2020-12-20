@@ -125,7 +125,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   originPosition: {x: 0, y: 0, z: 0}
-  isWithinRange: 0
 --- !u!65 &6344849987461225314
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -182,8 +181,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2826751489773722629}
   m_LocalRotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
-  m_LocalPosition: {x: -0, y: 0, z: 0}
-  m_LocalScale: {x: 169.08966, y: 169.08966, z: 507.26895}
+  m_LocalPosition: {x: -0, y: -0.35, z: -0.00000025284}
+  m_LocalScale: {x: 169.08966, y: 169.08966, z: 55.01332}
   m_Children: []
   m_Father: {fileID: 2826751489773617187}
   m_RootOrder: 1

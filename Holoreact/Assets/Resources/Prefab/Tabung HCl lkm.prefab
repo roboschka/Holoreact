@@ -206,7 +206,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   originPosition: {x: 0, y: 0, z: 0}
-  isWithinRange: 0
 --- !u!65 &5523264278108996176
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -515,7 +514,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &8835648801239397991
 RectTransform:
   m_ObjectHideFlags: 0
