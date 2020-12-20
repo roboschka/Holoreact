@@ -24,19 +24,17 @@ public class PauseManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        highlightedButton = EventSystem.current.currentSelectedGameObject;
-        if (paused)
+        if (!paused)
         {
-            if (Input.GetKeyDown(KeyCode.Escape))
-            {
-                gameManager.GetComponent<GameManager>().Pause();
-            }
-        }
-        else
-        {
+            highlightedButton = EventSystem.current.currentSelectedGameObject;
             //UI Navigation ketika notifPanel tidak aktif / pausePanel sedang aktif
             if (!isNotifOn)
             {
+                if (highlightedButton == null)
+                {
+                    backToMenu.Select();
+                }
+
                 if (!settingPanel.activeInHierarchy)
                 {
                     if (Input.GetKeyDown(KeyCode.Return))
@@ -54,10 +52,11 @@ public class PauseManager : MonoBehaviour
                                 break;
                         }
                     }
-                    else if (Input.GetKeyDown(KeyCode.Escape))
-                    {
-                        HidePause();
-                    }
+                    //else if (Input.GetKeyDown(KeyCode.Escape))
+                    //{
+                    //    Debug.Log("Hide pause");
+                    //    HidePause();
+                    //}
                 }
                 //UINavigation ketika settingsPanel sedang aktif
                 else
@@ -71,6 +70,10 @@ public class PauseManager : MonoBehaviour
             }
             else
             {
+                if (highlightedButton == null)
+                {
+                    yesBack.Select();
+                }
                 //UINavigation ketika notifPanel sedang aktif
                 if (Input.GetKeyDown(KeyCode.Return))
                 {
@@ -80,7 +83,6 @@ public class PauseManager : MonoBehaviour
                             SceneManager.LoadScene("ChooseLevel");
                             break;
                         case "NoBack":
-                            Debug.Log("Show Pause");
                             ToggleNotification(true, false, backToMenu);
                             break;
                     }
@@ -96,14 +98,16 @@ public class PauseManager : MonoBehaviour
         UICamera.SetActive(true);
         pausePanel.SetActive(true);
         backToMenu.Select();
+        Debug.Log("Show Pause");
     }
 
     private void HidePause()
     {
+        paused = true;
         UICamera.SetActive(false);
         pausePanel.SetActive(false);
-        paused = true;
         gameManager.GetComponent<GameManager>().UnPause();
+        Debug.Log("Hide pause: " + paused);
     }
     #endregion
 
@@ -119,7 +123,6 @@ public class PauseManager : MonoBehaviour
     public void ShowSettings()
     {
         Debug.Log("Show Settings");
-
     }
 
     private void ToggleSettings(bool isPauseMenuActive, bool isSettingActive)
@@ -136,7 +139,4 @@ public class PauseManager : MonoBehaviour
         toHighlight.Select();
         isNotifOn = isNotifActive;
     }
-
-    
-    
 }

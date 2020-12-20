@@ -19,7 +19,7 @@ public class HandBookManager : MonoBehaviour
 
     private int index, currentLvl;
 
-    private bool paused;
+    public bool paused;
 
     private void Awake()
     {
@@ -43,9 +43,7 @@ public class HandBookManager : MonoBehaviour
             }
             else if (Input.GetKey(KeyCode.Escape))
             {
-                panelForHandbook.SetActive(false);
-                cameraForHandbook.SetActive(false);
-                gameManager.GetComponent<GameManager>().UnPause();
+                Exit();
             }
         }
     }
@@ -100,7 +98,6 @@ public class HandBookManager : MonoBehaviour
 
     public void UnPause()
     {
-        Debug.Log("show handbook");
         paused = false;
         panelForHandbook.SetActive(true);
         cameraForHandbook.SetActive(true);
@@ -112,6 +109,7 @@ public class HandBookManager : MonoBehaviour
         panelForHandbook.SetActive(false);
         cameraForHandbook.SetActive(false);
         gameManager.GetComponent<GameManager>().UnPause();
+        Debug.Log("Exit handbook");
     }
 
 }

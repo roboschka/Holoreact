@@ -48,6 +48,11 @@ public class MainMenu : MonoBehaviour
     {
         highlightedButton = EventSystem.current.currentSelectedGameObject;
 
+        if (!quitNotificationCanvas.isActiveAndEnabled && highlightedButton == null)
+        {
+            playButton.Select();
+        } 
+
         if (Input.GetKeyDown(KeyCode.Return))
         {
             Debug.Log(highlightedButton.name);
@@ -70,6 +75,11 @@ public class MainMenu : MonoBehaviour
 
         if (quitNotificationCanvas.isActiveAndEnabled)
         {
+            if (highlightedButton == null)
+            {
+                yesQuitButton.Select();
+            }
+
             if (Input.GetKeyDown(KeyCode.Return))
             {
                 switch (highlightedButton.name)
