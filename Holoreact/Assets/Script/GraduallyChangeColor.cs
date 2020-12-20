@@ -35,7 +35,7 @@ public class GraduallyChangeColor : MonoBehaviour
 
     //}
 
-    public void StartChangeColor()
+    private void StartChangeColor()
     {
         StartCoroutine(ChangeColor());
     }
