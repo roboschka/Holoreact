@@ -19,9 +19,9 @@ public class QuizManager : MonoBehaviour
 
     [SerializeField]
     private GameObject cameraForQuiz, gameManager, panelForPostGame, panelForQuiz, warningLabel;
-    
-    private int currentLvl, index, correctAnswer, studentId, preTestScore, experimentScore, postTestScore;
 
+    private int currentLvl, index, preTestScore, experimentScore, postTestScore, studentId;
+    private float correctAnswer;
     private bool paused, isPostTest, finish;
 
     // Start is called before the first frame update
@@ -76,12 +76,16 @@ public class QuizManager : MonoBehaviour
     
     private void Submit()
     {
+        //Debug.Log("answer: " + questionList[index].Answer);
+        //Debug.Log("user: " + answerField.text);
         if(answerField.text.Equals(questionList[index].Answer, StringComparison.InvariantCultureIgnoreCase))
         {
-            correctAnswer += 1;
+            correctAnswer++;
+            //Debug.Log(correctAnswer);
         }
 
         index += 1;
+        
         
         if(index >= questionList.Length)
         {
@@ -103,7 +107,10 @@ public class QuizManager : MonoBehaviour
             }
             else
             {
-                preTestScore = (correctAnswer / questionList.Length) * 100;
+                preTestScore = (int)((correctAnswer / questionList.Length) * 100.0f);
+                //Debug.Log("questionsList.Length: " + questionList.Length);
+                //Debug.Log("preTestScore: " + preTestScore);
+                //Debug.Log((correctAnswer / questionList.Length) * 100);
                 index = 0;
                 cameraForQuiz.SetActive(false);
                 panelForQuiz.SetActive(false);
