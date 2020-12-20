@@ -12,7 +12,6 @@ public class GraduallyChangeColor : MonoBehaviour
 
     private Renderer _renderer;
     private float tick;
-    private bool allowChange;
 
     // Start is called before the first frame update
     private void Awake()
@@ -21,7 +20,6 @@ public class GraduallyChangeColor : MonoBehaviour
         {
             _renderer = gameObject.GetComponent<Renderer>();
             tick = 0f;
-            allowChange = true;
             StartChangeColor();
         }
         catch (System.Exception ex)
@@ -39,10 +37,7 @@ public class GraduallyChangeColor : MonoBehaviour
 
     public void StartChangeColor()
     {
-        if (allowChange)
-        {
-            StartCoroutine(ChangeColor());
-        }
+        StartCoroutine(ChangeColor());
     }
 
     private IEnumerator ChangeColor()
