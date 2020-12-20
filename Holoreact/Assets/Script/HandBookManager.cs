@@ -15,7 +15,7 @@ public class HandBookManager : MonoBehaviour
     private TextMeshProUGUI textToShow;
 
     [SerializeField]
-    private GameObject panelForHandbook, gameManager, cameraForHandbook;
+    private GameObject panelForHandbook, gameManager, UICamera;
 
     private int index, currentLvl;
 
@@ -100,14 +100,14 @@ public class HandBookManager : MonoBehaviour
     {
         paused = false;
         panelForHandbook.SetActive(true);
-        cameraForHandbook.SetActive(true);
+        UICamera.SetActive(true);
     }
 
     private void Exit()
     {
         paused = true;
         panelForHandbook.SetActive(false);
-        cameraForHandbook.SetActive(false);
+        UICamera.SetActive(false);
         gameManager.GetComponent<GameManager>().UnPause();
         Debug.Log("Exit handbook");
     }

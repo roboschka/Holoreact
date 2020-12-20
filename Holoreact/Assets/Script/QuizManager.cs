@@ -19,7 +19,7 @@ public class QuizManager : MonoBehaviour
     private TextMeshProUGUI questionLabel, preScoreText, expScoreText, postScoreText;
 
     [SerializeField]
-    private GameObject cameraForQuiz, gameManager, panelForPostGame, panelForQuiz, warningLabel;
+    private GameObject UICamera, gameManager, panelForPostGame, panelForQuiz, warningLabel;
 
     private int currentLvl, index, preTestScore, experimentScore, postTestScore, studentId;
     private float correctAnswer;
@@ -116,7 +116,7 @@ public class QuizManager : MonoBehaviour
                 preTestScore = (int) (correctAnswer / questionList.Length) * 100;
 
                 index = 0;
-                cameraForQuiz.SetActive(false);
+                UICamera.SetActive(false);
                 panelForQuiz.SetActive(false);
                 paused = true;
                 gameManager.GetComponent<GameManager>().UnPause();
@@ -139,7 +139,7 @@ public class QuizManager : MonoBehaviour
     public void PostTest()
     {
         isPostTest = true;
-        cameraForQuiz.SetActive(true);
+        UICamera.SetActive(true);
         panelForQuiz.SetActive(true);
         paused = false;
         index = 0;

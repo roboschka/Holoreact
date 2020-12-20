@@ -7,7 +7,7 @@ using UnityEngine.UI;
 public class SubmitManager : MonoBehaviour
 {
     [SerializeField]
-    private GameObject cameraForSubmitNotif, gameManager, submitPanel;
+    private GameObject UICamera, gameManager, submitPanel;
 
     [SerializeField]
     private Button yesSubmit;
@@ -43,7 +43,7 @@ public class SubmitManager : MonoBehaviour
                         break;
                     case "No":
                         paused = true;
-                        cameraForSubmitNotif.SetActive(false);
+                        UICamera.SetActive(false);
                         submitPanel.SetActive(false);
                         gameManager.GetComponent<GameManager>().UnPause();
                         break;
@@ -63,7 +63,7 @@ public class SubmitManager : MonoBehaviour
     {
         Debug.Log("Show Submit notif");
         paused = false;
-        cameraForSubmitNotif.SetActive(true);
+        UICamera.SetActive(true);
         yesSubmit.Select();
     }
     
