@@ -21,8 +21,6 @@ public class StudentDataManager : MonoBehaviour
 
     public MainMenu mainMenu;
     StudentData student;
-    
-
     GameObject highlightedButton;
 
     // Start is called before the first frame update
@@ -35,12 +33,23 @@ public class StudentDataManager : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
+        if (EventSystem.current.currentSelectedGameObject == null)
+        {
+            if (studentNameField.IsActive())
+            {
+                studentNameField.ActivateInputField();
+            }
+            else if (studentSchoolField.IsActive())
+            {
+                studentSchoolField.ActivateInputField();
+            }
+            
+        }
         if (Input.GetKeyDown(KeyCode.Return))
         {
             if (studentNameField.IsActive())
             {
                 studentName = studentNameField.text;
-                Debug.Log("studentName: " + studentName);
 
                 studentNameField.gameObject.SetActive(false);
                 studentNameField.DeactivateInputField();
@@ -50,7 +59,6 @@ public class StudentDataManager : MonoBehaviour
             else
             {
                 studentSchool = studentSchoolField.text;
-                Debug.Log("studentSchool: " + studentSchool);
                 studentSchoolField.DeactivateInputField();
 
                 PostStudentData(studentName, studentSchool);

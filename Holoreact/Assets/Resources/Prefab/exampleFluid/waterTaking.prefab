@@ -31,8 +31,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8993503320380636944}
-  - component: {fileID: 8993503320380637039}
-  - component: {fileID: 8993503320380637038}
   m_Layer: 0
   m_Name: waterTaking
   m_TagString: Untagged
@@ -56,47 +54,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!95 &8993503320380637039
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8993503320380637037}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 35d6224011150a147a69586fe796ef63, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
---- !u!320 &8993503320380637038
-PlayableDirector:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8993503320380637037}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_PlayableAsset: {fileID: 11400000, guid: 05bc493bdc7e5dd42b16f2b867ec0e4c, type: 2}
-  m_InitialState: 1
-  m_WrapMode: 2
-  m_DirectorUpdateMode: 1
-  m_InitialTime: 0
-  m_SceneBindings:
-  - key: {fileID: 114267793228876140, guid: 05bc493bdc7e5dd42b16f2b867ec0e4c, type: 2}
-    value: {fileID: 8993503320380637039}
-  - key: {fileID: 114707810540151628, guid: 05bc493bdc7e5dd42b16f2b867ec0e4c, type: 2}
-    value: {fileID: 0}
-  m_ExposedReferences:
-    m_References:
-    - 2240115844b30bc4584290ab8b12626c: {fileID: 8993503319453787764}
 --- !u!1001 &8993503319464547636
 PrefabInstance:
   m_ObjectHideFlags: 0

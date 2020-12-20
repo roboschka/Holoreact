@@ -6,6 +6,7 @@ using System.Net;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.EventSystems;
 
 public class QuizManager : MonoBehaviour
 {
@@ -18,7 +19,7 @@ public class QuizManager : MonoBehaviour
     private TextMeshProUGUI questionLabel, preScoreText, expScoreText, postScoreText;
 
     [SerializeField]
-    private GameObject cameraForQuiz, gameManager, panelForPostGame, panelForQuiz, warningLabel;
+    private GameObject UICamera, gameManager, panelForPostGame, panelForQuiz, warningLabel;
 
     private int currentLvl, index, preTestScore, experimentScore, postTestScore, studentId;
     private float correctAnswer;
@@ -41,7 +42,12 @@ public class QuizManager : MonoBehaviour
 
     // Update is called once per frame
     void Update()
-    {
+    {   
+        if (EventSystem.current.currentSelectedGameObject == null)
+        {
+            answerField.ActivateInputField();
+        }
+
         if (!finish)
         {
             if (Input.GetKeyDown(KeyCode.Return))
@@ -94,7 +100,7 @@ public class QuizManager : MonoBehaviour
                 panelForQuiz.SetActive(false);
                 panelForPostGame.SetActive(true);
 
-                postTestScore = (correctAnswer / questionList.Length) * 100;
+                postTestScore = (int) (correctAnswer / questionList.Length) * 100;
 
                 preScoreText.text = preTestScore.ToString();
                 expScoreText.text = experimentScore.ToString();
@@ -107,12 +113,10 @@ public class QuizManager : MonoBehaviour
             }
             else
             {
-                preTestScore = (int)((correctAnswer / questionList.Length) * 100.0f);
-                //Debug.Log("questionsList.Length: " + questionList.Length);
-                //Debug.Log("preTestScore: " + preTestScore);
-                //Debug.Log((correctAnswer / questionList.Length) * 100);
+                preTestScore = (int) (correctAnswer / questionList.Length) * 100;
+
                 index = 0;
-                cameraForQuiz.SetActive(false);
+                UICamera.SetActive(false);
                 panelForQuiz.SetActive(false);
                 paused = true;
                 gameManager.GetComponent<GameManager>().UnPause();
@@ -135,7 +139,7 @@ public class QuizManager : MonoBehaviour
     public void PostTest()
     {
         isPostTest = true;
-        cameraForQuiz.SetActive(true);
+        UICamera.SetActive(true);
         panelForQuiz.SetActive(true);
         paused = false;
         index = 0;

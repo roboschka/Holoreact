@@ -3976,6 +3976,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cameraForSubmitNotif: {fileID: 725627492}
   gameManager: {fileID: 2041835564}
+  submitPanel: {fileID: 1423194657}
   yesSubmit: {fileID: 901772893}
 --- !u!4 &847832774
 Transform:
@@ -4253,6 +4254,7 @@ MonoBehaviour:
   panelForHandbook: {fileID: 2113833851}
   gameManager: {fileID: 2041835564}
   cameraForHandbook: {fileID: 725627492}
+  paused: 0
 --- !u!4 &874952573
 Transform:
   m_ObjectHideFlags: 0
