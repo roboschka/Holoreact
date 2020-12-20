@@ -9,7 +9,7 @@ public class MouseBehaviour : MonoBehaviour
     private Vector3 snapPosition;
 
     private GameObject hittedObject;
-    public bool isWithinRange = false;
+    private bool isWithinRange = false;
 
     private Vector3 mOffset;
     private float mZCoord;
@@ -101,11 +101,11 @@ public class MouseBehaviour : MonoBehaviour
         {
             transform.position = snapPosition;
             Debug.Log("snapped within range " + snapPosition);
+            
 
         } else
         {
             transform.position = originPosition;
-            Debug.Log("masuk else");
             //buat testing navigation
             if (gameObject.name != "Plane")
             {
@@ -127,6 +127,9 @@ public class MouseBehaviour : MonoBehaviour
         {
             isWithinRange = true;
             snapPosition = collision.gameObject.transform.position;
+            //Debug.Log(gameObject.GetComponent<Collider>().bounds.size.y / 2);
+            //snapPosition.y += (gameObject.transform.localScale.y / 2);
+            snapPosition.y += (gameObject.GetComponent<Collider>().bounds.size.y / 2);
         }
     }
 

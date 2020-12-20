@@ -6,6 +6,7 @@ using System.Net;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.EventSystems;
 
 public class QuizManager : MonoBehaviour
 {
@@ -18,10 +19,10 @@ public class QuizManager : MonoBehaviour
     private TextMeshProUGUI questionLabel, preScoreText, expScoreText, postScoreText;
 
     [SerializeField]
-    private GameObject cameraForQuiz, gameManager, panelForPostGame, panelForQuiz, warningLabel;
-    
-    private int currentLvl, index, correctAnswer, studentId, preTestScore, experimentScore, postTestScore;
+    private GameObject UICamera, gameManager, panelForPostGame, panelForQuiz, warningLabel;
 
+    private int currentLvl, index, preTestScore, experimentScore, postTestScore, studentId;
+    private float correctAnswer;
     private bool paused, isPostTest, finish;
 
     // Start is called before the first frame update
@@ -41,12 +42,16 @@ public class QuizManager : MonoBehaviour
 
     // Update is called once per frame
     void Update()
-    {
+    {   
+        if (EventSystem.current.currentSelectedGameObject == null)
+        {
+            answerField.ActivateInputField();
+        }
+
         if (!finish)
         {
             if (Input.GetKeyDown(KeyCode.Return))
             {
-                answerField.Select();
                 if (answerField.text.Trim().Length == 0)
                 {
                     answerField.ActivateInputField();
@@ -65,7 +70,7 @@ public class QuizManager : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.Return))
             {
-                SceneManager.LoadScene("ChooseLevel");
+                SceneManager.LoadScene("MainMenu");
             }
         }
     }
@@ -77,20 +82,25 @@ public class QuizManager : MonoBehaviour
     
     private void Submit()
     {
+        //Debug.Log("answer: " + questionList[index].Answer);
+        //Debug.Log("user: " + answerField.text);
         if(answerField.text.Equals(questionList[index].Answer, StringComparison.InvariantCultureIgnoreCase))
         {
-            correctAnswer += 1;
+            correctAnswer++;
+            //Debug.Log(correctAnswer);
         }
 
         index += 1;
+        
         
         if(index >= questionList.Length)
         {
             if (isPostTest)
             {
-                //do something
                 panelForQuiz.SetActive(false);
                 panelForPostGame.SetActive(true);
+
+                postTestScore = (int) (correctAnswer / questionList.Length) * 100;
 
                 preScoreText.text = preTestScore.ToString();
                 expScoreText.text = experimentScore.ToString();
@@ -103,14 +113,15 @@ public class QuizManager : MonoBehaviour
             }
             else
             {
-                preTestScore = (correctAnswer / questionList.Length) * 100;
+                preTestScore = (int) (correctAnswer / questionList.Length) * 100;
+
                 index = 0;
-                cameraForQuiz.SetActive(false);
+                UICamera.SetActive(false);
+                panelForQuiz.SetActive(false);
                 paused = true;
                 gameManager.GetComponent<GameManager>().UnPause();
                 questionLabel.text = questionList[index].Question;
-                panelForQuiz.SetActive(false);
-
+                
             }
         }
         else
@@ -128,7 +139,7 @@ public class QuizManager : MonoBehaviour
     public void PostTest()
     {
         isPostTest = true;
-        cameraForQuiz.SetActive(true);
+        UICamera.SetActive(true);
         panelForQuiz.SetActive(true);
         paused = false;
         index = 0;
