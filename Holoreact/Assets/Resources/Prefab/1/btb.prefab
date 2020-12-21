@@ -91,6 +91,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targetColor: {r: 0, g: 0.34509805, b: 1, a: 1}
+  startColor: {r: 0, g: 0.34509805, b: 1, a: 1}
   duration: 0
 --- !u!1 &762778003385992860
 GameObject:
@@ -218,7 +219,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   originPosition: {x: 0, y: 0, z: 0}
-  isWithinRange: 0
 --- !u!65 &3245196785533579223
 BoxCollider:
   m_ObjectHideFlags: 0

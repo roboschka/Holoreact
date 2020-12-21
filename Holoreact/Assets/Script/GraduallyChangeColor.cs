@@ -5,7 +5,7 @@ using UnityEngine;
 public class GraduallyChangeColor : MonoBehaviour
 {
     [SerializeField]
-    private Color targetColor;
+    private Color targetColor, startColor;
     [SerializeField]
     private float duration;
 
@@ -37,16 +37,22 @@ public class GraduallyChangeColor : MonoBehaviour
 
     private void StartChangeColor()
     {
-        StartCoroutine(ChangeColor());
+        if (duration == 0)
+        {
+            _renderer.material.color = targetColor;
+        }
+        else
+        {
+            StartCoroutine(ChangeColor());
+        }
     }
 
     private IEnumerator ChangeColor()
     {
-        Color startColor = _renderer.material.color;
         while (startColor != targetColor)
         {
             tick += Time.deltaTime / duration;
-            _renderer.material.color = Color.Lerp(_renderer.material.color, targetColor, tick);
+            _renderer.material.color = Color.Lerp(startColor, targetColor, tick);
             yield return null;
         }
     }

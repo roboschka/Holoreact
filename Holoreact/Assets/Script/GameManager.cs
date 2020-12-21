@@ -386,7 +386,7 @@ public class GameManager : MonoBehaviour
     private int CalculateExperimentScore()
     {
         int result;
-        return result = combinationPerformed / combinationList.Count() * 100;
+        return result = (combinationPerformed * 100) / combinationList.Count();
     }
 
     public void ShowHandbook()
