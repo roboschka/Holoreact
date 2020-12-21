@@ -449,7 +449,9 @@ public class GameManager : MonoBehaviour
             }
 
             //set combination result to plane postion
-            itemList[itemList.Count - 1].transform.position = gameObject.transform.position;
+            Vector3 planePosition = gameObject.transform.position;
+            planePosition.y += (itemList[itemList.Count - 1].GetComponent<Collider>().bounds.size.y / 2);
+            itemList[itemList.Count - 1].transform.position = planePosition;
 
             if( (itemList.Count - 1) % 2 == 0)
             {
@@ -587,7 +589,7 @@ public class GameManager : MonoBehaviour
         
         foreach (Item item in items)
         {
-            GameObject instance = Instantiate(Resources.Load("Prefab/" + item.Name) as GameObject);
+            GameObject instance = Instantiate(Resources.Load("Prefab/" + currentLvl + "/" + item.Name) as GameObject);
             itemList.Add(instance);
             instance.SetActive(false);
         }
@@ -647,8 +649,11 @@ public class GameManager : MonoBehaviour
             if (!exist)
             {
                 string result = resultName.FirstOrDefault();
-                GameObject instance = Instantiate(Resources.Load("Prefab/" + result) as GameObject);
+                Debug.Log("Call: " + result);
+                Debug.Log("Prefab/" + currentLvl + "/" + result);
+                GameObject instance = Instantiate(Resources.Load("Prefab/" + currentLvl + "/" + result) as GameObject);
 
+                
                 //string animationName =
                 //    (
                 //        from anim in combinationList

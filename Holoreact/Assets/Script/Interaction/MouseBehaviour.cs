@@ -58,12 +58,12 @@ public class MouseBehaviour : MonoBehaviour
                 mOffset = gameObject.transform.position - GetMouseWorldPos();
                 // Debug.Log("9");
             }
-            else if (hitData.transform.gameObject.layer == 10)
-            {
+            //else if (hitData.transform.gameObject.layer == 10)
+            //{
                 // Debug.Log("10");
                 //string name = hitData.transform.gameObject.GetComponent<Collider>();
                 //Debug.Log(name);
-            }
+            //}
         }
     }
     
