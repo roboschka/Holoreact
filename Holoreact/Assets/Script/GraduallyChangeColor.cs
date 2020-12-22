@@ -5,14 +5,13 @@ using UnityEngine;
 public class GraduallyChangeColor : MonoBehaviour
 {
     [SerializeField]
-    private Color targetColor;
+    private Color targetColor, startColor;
     [SerializeField]
     private float duration;
 
 
     private Renderer _renderer;
     private float tick;
-    private bool allowChange;
 
     // Start is called before the first frame update
     private void Awake()
@@ -21,7 +20,6 @@ public class GraduallyChangeColor : MonoBehaviour
         {
             _renderer = gameObject.GetComponent<Renderer>();
             tick = 0f;
-            allowChange = true;
             StartChangeColor();
         }
         catch (System.Exception ex)
@@ -37,9 +35,13 @@ public class GraduallyChangeColor : MonoBehaviour
 
     //}
 
-    public void StartChangeColor()
+    private void StartChangeColor()
     {
-        if (allowChange)
+        if (duration == 0)
+        {
+            _renderer.material.color = targetColor;
+        }
+        else
         {
             StartCoroutine(ChangeColor());
         }
@@ -47,11 +49,10 @@ public class GraduallyChangeColor : MonoBehaviour
 
     private IEnumerator ChangeColor()
     {
-        Color startColor = _renderer.material.color;
         while (startColor != targetColor)
         {
             tick += Time.deltaTime / duration;
-            _renderer.material.color = Color.Lerp(_renderer.material.color, targetColor, tick);
+            _renderer.material.color = Color.Lerp(startColor, targetColor, tick);
             yield return null;
         }
     }

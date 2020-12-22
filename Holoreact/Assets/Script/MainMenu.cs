@@ -13,16 +13,19 @@ using UnityEngine.SceneManagement;
 public class MainMenu : MonoBehaviour
 {
 
+    public Button playButton;
+
     [SerializeField]
-    public Button playButton, yesQuitButton;
+    private Button yesQuitButton;
+
     [SerializeField]
-    public Canvas quitNotificationCanvas, mainMenuCanvas, studentDataCanvas;
+    private Canvas quitNotificationCanvas, mainMenuCanvas, studentDataCanvas;
 
     private int lvl;
     
     public bool isFirstPlay = true;
 
-    GameObject highlightedButton;
+    private GameObject highlightedButton;
 
     // Start is called before the first frame update
     private void Start()
@@ -48,6 +51,11 @@ public class MainMenu : MonoBehaviour
     {
         highlightedButton = EventSystem.current.currentSelectedGameObject;
 
+        if (!quitNotificationCanvas.isActiveAndEnabled && highlightedButton == null)
+        {
+            playButton.Select();
+        } 
+
         if (Input.GetKeyDown(KeyCode.Return))
         {
             Debug.Log(highlightedButton.name);
@@ -70,6 +78,11 @@ public class MainMenu : MonoBehaviour
 
         if (quitNotificationCanvas.isActiveAndEnabled)
         {
+            if (highlightedButton == null)
+            {
+                yesQuitButton.Select();
+            }
+
             if (Input.GetKeyDown(KeyCode.Return))
             {
                 switch (highlightedButton.name)

@@ -80,9 +80,6 @@ public class GameManagerAlt : MonoBehaviour
             //if place second item try to combine
             // if could combine
             //else give feedback
-
-            
-
         }
     }
 

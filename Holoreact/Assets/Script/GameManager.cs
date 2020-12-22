@@ -14,7 +14,7 @@ public class GameManager : MonoBehaviour
     private Collider[] collidedColliders;
     
     [SerializeField]
-    private GameObject cameraForGameplay, handBookManager, submitManager, quizManager, panelConfirmation;
+    private GameObject cameraForGameplay, handBookManager, submitManager, pauseManager, quizManager, panelConfirmation;
     
     
     //private int selectedIndex;
@@ -53,10 +53,16 @@ public class GameManager : MonoBehaviour
     }
 
     // Update is called once per frame
-    //void Update()
-    //{
-        
-    //}
+    void FixedUpdate()
+    {
+        if (!paused)
+        {
+            if (Input.GetKeyDown(KeyCode.Escape))
+            {
+                Pause();
+            }
+        }
+    }
 
     private void OnCollisionEnter(Collision collision)
     {
@@ -380,7 +386,7 @@ public class GameManager : MonoBehaviour
     private int CalculateExperimentScore()
     {
         int result;
-        return result = combinationPerformed / combinationList.Count() * 100;
+        return result = (combinationPerformed * 100) / combinationList.Count();
     }
 
     public void ShowHandbook()
@@ -394,15 +400,10 @@ public class GameManager : MonoBehaviour
 
     public void UnPause()
     {
-        paused = false;
         cameraForGameplay.SetActive(true);
         itemList[currentIndex].SetActive(true);
-
-        //if (selectedIndex != -1)
-        //{
-        //    itemList[selectedIndex].SetActive(true);
-        //}
-
+        paused = false;
+        Debug.Log("Unpause Game Manager");
     }
 
     private void Combine()
@@ -437,11 +438,20 @@ public class GameManager : MonoBehaviour
 
             if (!String.IsNullOrEmpty(animationName))
             {
-                itemList[(itemList.Count - 1)].GetComponent<Animator>().Play(animationName);
+                try
+                {
+                    itemList[(itemList.Count - 1)].GetComponent<Animator>().Play(animationName);
+                }
+                catch (Exception)
+                {
+                    Debug.Log("Animation in progress");
+                }
             }
 
             //set combination result to plane postion
-            itemList[itemList.Count - 1].transform.position = gameObject.transform.position;
+            Vector3 planePosition = gameObject.transform.position;
+            planePosition.y += (itemList[itemList.Count - 1].GetComponent<Collider>().bounds.size.y / 2);
+            itemList[itemList.Count - 1].transform.position = planePosition;
 
             if( (itemList.Count - 1) % 2 == 0)
             {
@@ -521,7 +531,15 @@ public class GameManager : MonoBehaviour
         cameraForGameplay.SetActive(false);
         panelConfirmation.SetActive(true);
         paused = true;
-        submitManager.GetComponent<SubmitManager>().UnPause();
+        submitManager.GetComponent<SubmitManager>().ShowSubmit();
+    }
+
+    public void Pause()
+    {
+        cameraForGameplay.SetActive(false);
+        paused = true;
+        pauseManager.GetComponent<PauseManager>().ShowPause();
+        Debug.Log("Pause Game Manager");
     }
 
     public void FinishExperiment()
@@ -571,7 +589,8 @@ public class GameManager : MonoBehaviour
         
         foreach (Item item in items)
         {
-            GameObject instance = Instantiate(Resources.Load("Prefab/" + item.Name) as GameObject);
+            Debug.Log("Prefab/" + currentLvl + "/" + item.Name);
+            GameObject instance = Instantiate(Resources.Load("Prefab/" + currentLvl + "/" + item.Name) as GameObject);
             itemList.Add(instance);
             instance.SetActive(false);
         }
@@ -631,8 +650,11 @@ public class GameManager : MonoBehaviour
             if (!exist)
             {
                 string result = resultName.FirstOrDefault();
-                GameObject instance = Instantiate(Resources.Load("Prefab/" + result) as GameObject);
+                Debug.Log("Call: " + result);
+                Debug.Log("Prefab/" + currentLvl + "/" + result);
+                GameObject instance = Instantiate(Resources.Load("Prefab/" + currentLvl + "/" + result) as GameObject);
 
+                
                 //string animationName =
                 //    (
                 //        from anim in combinationList
