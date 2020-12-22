@@ -19,7 +19,8 @@ public class StudentDataManager : MonoBehaviour
 
     private string studentName, studentSchool, studentID;
 
-    public MainMenu mainMenu;
+    [SerializeField]
+    private MainMenu mainMenu;
     StudentData student;
     GameObject highlightedButton;
 
@@ -63,8 +64,8 @@ public class StudentDataManager : MonoBehaviour
 
                 PostStudentData(studentName, studentSchool);
 
-                mainMenu.isFirstPlay = false;
-                PlayerPrefs.SetInt("isFirstPlay", mainMenu.isFirstPlay ? 1 : 0);
+                mainMenu.setFirstPlay(false);
+                PlayerPrefs.SetInt("isFirstPlay", mainMenu.getFirstPlay() ? 1 : 0);
 
                 self.gameObject.SetActive(false);
                 mainMenu.ToggleNotification(false, true, mainMenu.playButton);
