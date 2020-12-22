@@ -589,6 +589,7 @@ public class GameManager : MonoBehaviour
         
         foreach (Item item in items)
         {
+            Debug.Log("Prefab/" + currentLvl + "/" + item.Name);
             GameObject instance = Instantiate(Resources.Load("Prefab/" + currentLvl + "/" + item.Name) as GameObject);
             itemList.Add(instance);
             instance.SetActive(false);
