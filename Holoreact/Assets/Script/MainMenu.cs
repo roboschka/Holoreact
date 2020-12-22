@@ -13,16 +13,19 @@ using UnityEngine.SceneManagement;
 public class MainMenu : MonoBehaviour
 {
 
+    public Button playButton;
+
     [SerializeField]
-    public Button playButton, yesQuitButton;
+    private Button yesQuitButton;
+
     [SerializeField]
-    public Canvas quitNotificationCanvas, mainMenuCanvas, studentDataCanvas;
+    private Canvas quitNotificationCanvas, mainMenuCanvas, studentDataCanvas;
 
     private int lvl;
     
     public bool isFirstPlay = true;
 
-    GameObject highlightedButton;
+    private GameObject highlightedButton;
 
     // Start is called before the first frame update
     private void Start()
