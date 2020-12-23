@@ -17,7 +17,7 @@ public class HandBookManager : MonoBehaviour
     [SerializeField]
     private GameObject panelForHandbook, gameManager, UICamera;
 
-    private int index, currentLvl;
+    private int currentPage, currentLvl;
 
     public bool paused;
 
@@ -26,6 +26,8 @@ public class HandBookManager : MonoBehaviour
         currentLvl = PlayerPrefs.GetInt("currentLevel");
         GetHandbookData();
         paused = true;
+        currentPage = 1;
+        Debug.Log(currentLvl);
     }
 
     // Update is called once per frame
@@ -50,19 +52,19 @@ public class HandBookManager : MonoBehaviour
 
     private void Move(int move)
     {
-        if(index + move < 1)
+        if(currentPage + move < 1)
         {
-            index = handBookData.Count();
+            currentPage = handBookData.Count();
         }
-        else if(index + move > handBookData.Count() )
+        else if(currentPage + move > handBookData.Count() )
         {
-            index = 0;
+            currentPage = 1;
         }
         else
         {
-            index += move;
+            currentPage += move;
         }
-        FindHandBookContent(index);
+        FindHandBookContent(currentPage);
     }
 
     private void GetHandbookData()
@@ -101,6 +103,15 @@ public class HandBookManager : MonoBehaviour
         paused = false;
         panelForHandbook.SetActive(true);
         UICamera.SetActive(true);
+
+        if (handBookData.Count() < 1)
+        {
+            textToShow.text = "Something goes wrong please contact the developer";
+        }
+        else
+        {
+            FindHandBookContent(1);
+        }
     }
 
     private void Exit()

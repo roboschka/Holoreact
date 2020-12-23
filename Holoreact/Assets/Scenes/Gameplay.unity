@@ -1121,8 +1121,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1.195653, y: 1.6612393, z: 2.2591875}
-  m_Center: {x: -0.09782648, y: 0.3306205, z: 0.07898259}
+  m_Size: {x: 1.4553441, y: 1.6612394, z: 2.9625485}
+  m_Center: {x: -0.113681346, y: 0.33062053, z: 0.0782255}
 --- !u!1 &321092748
 GameObject:
   m_ObjectHideFlags: 0
@@ -2382,8 +2382,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Larutan dengan trayek pH > 7,6 berubah menjadi biru dan menjadi kuning bila
-    pH < 6,0 jika ditetesi indikator Bromtimol (BTB)
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 2015c3b27b6285a42ab6c1bfc0a40f25, type: 2}
   m_sharedMaterial: {fileID: 21439035660778062, guid: 2015c3b27b6285a42ab6c1bfc0a40f25,
@@ -2429,7 +2428,7 @@ MonoBehaviour:
   m_enableWordWrapping: 1
   m_wordWrappingRatios: 0.4
   m_overflowMode: 0
-  m_firstOverflowCharacterIndex: 25
+  m_firstOverflowCharacterIndex: -1
   m_linkedTextComponent: {fileID: 0}
   m_isLinkedTextComponent: 0
   m_isTextTruncated: 0
@@ -2453,14 +2452,14 @@ MonoBehaviour:
   m_margin: {x: -39.080017, y: 0, z: -59.028076, w: 0}
   m_textInfo:
     textComponent: {fileID: 615973754}
-    characterCount: 124
+    characterCount: 0
     spriteCount: 0
-    spaceCount: 20
-    wordCount: 21
+    spaceCount: 0
+    wordCount: 0
     linkCount: 0
-    lineCount: 5
-    pageCount: 1
-    materialCount: 2
+    lineCount: 0
+    pageCount: 0
+    materialCount: 1
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_spriteAnimator: {fileID: 0}
@@ -8453,8 +8452,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1.2327423, y: 1.9415814, z: 2.227351}
-  m_Center: {x: -0.116371155, y: -0.47079107, z: 0.00367331}
+  m_Size: {x: 1.6525239, y: 2.107115, z: 3.4435365}
+  m_Center: {x: -0.21290347, y: -0.3880242, z: -0.017343985}
 --- !u!1 &2113833851
 GameObject:
   m_ObjectHideFlags: 0
