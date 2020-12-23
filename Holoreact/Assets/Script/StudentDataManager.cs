@@ -21,8 +21,8 @@ public class StudentDataManager : MonoBehaviour
 
     [SerializeField]
     private MainMenu mainMenu;
-    StudentData student;
-    GameObject highlightedButton;
+    private StudentData student;
+    private GameObject highlightedButton;
 
     // Start is called before the first frame update
     private void Start()
