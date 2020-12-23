@@ -46,10 +46,12 @@ public class ChooseLevelManager : MonoBehaviour
         {
             SceneManager.LoadScene("MainMenu");
         }
+        //Debug.Log(currentViewingLevel);
+        //Debug.Log("Get level " + levels[currentViewingLevel].LevelID);
 
         if (Input.GetKeyDown(KeyCode.Return))
         {
-            Debug.Log("Get level " + levels[currentViewingLevel].LevelID);
+            
             PlayerPrefs.SetInt("currentLevel", levels[currentViewingLevel].LevelID);
             SceneManager.LoadScene("Gameplay");
         }
@@ -62,6 +64,7 @@ public class ChooseLevelManager : MonoBehaviour
             if (currentViewingLevel < levels.Length - 1)
             {
                 currentViewingLevel++;
+                //Debug.Log("++: " + currentViewingLevel);
             }
             else
             {
@@ -74,10 +77,12 @@ public class ChooseLevelManager : MonoBehaviour
             if (currentViewingLevel > 0)
             {
                 currentViewingLevel--;
+                //Debug.Log("--: " + currentViewingLevel);
             }
             else
             {
                 currentViewingLevel = levels.Length - 1;
+                //Debug.Log("length - 1: " + currentViewingLevel);
             }
             ShowLevelInfo(currentViewingLevel);
         }
