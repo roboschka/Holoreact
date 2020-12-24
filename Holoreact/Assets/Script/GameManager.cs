@@ -14,7 +14,7 @@ public class GameManager : MonoBehaviour
     private Collider[] collidedColliders;
     
     [SerializeField]
-    private GameObject cameraForGameplay, handBookManager, submitManager, pauseManager, quizManager, panelConfirmation;
+    private GameObject cameraForGameplay, handBookManager, submitManager, pauseManager, quizManager, panelConfirmation, warningPanel;
     
     
     //private int selectedIndex;
@@ -481,6 +481,7 @@ public class GameManager : MonoBehaviour
 
             //show the current object
             ShowCurrentIndexObject();
+            StartCoroutine(ShowWarning());
         }
         #region commented
         //else
@@ -493,6 +494,13 @@ public class GameManager : MonoBehaviour
         //selectedItem = false;
         //selectedIndex = selectedIndex - 1;
         #endregion
+    }
+
+    private IEnumerator ShowWarning()
+    {
+        warningPanel.SetActive(true);
+        yield return new WaitForSeconds(3.0f);
+        warningPanel.SetActive(false);
     }
 
     public void ShowCurrentIndexObject()
