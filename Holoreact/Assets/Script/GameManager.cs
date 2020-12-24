@@ -14,7 +14,7 @@ public class GameManager : MonoBehaviour
     private Collider[] collidedColliders;
     
     [SerializeField]
-    private GameObject cameraForGameplay, handBookManager, submitManager, pauseManager, quizManager, panelConfirmation;
+    private GameObject cameraForGameplay, handBookManager, submitManager, pauseManager, quizManager, panelConfirmation, warningPanel;
     
     
     //private int selectedIndex;
@@ -351,7 +351,7 @@ public class GameManager : MonoBehaviour
         //Change to the postion of first item latter
         item.transform.position = new Vector3(20, -4f, 4);
         MouseBehaviour mouseDrag = item.GetComponent<MouseBehaviour>();
-        mouseDrag.originPosition = new Vector3(20, -4f, 4);
+        mouseDrag.SetOriginPosition(new Vector3(20, -4f, 4));
     }
 
     private void SetSecondItemPosition(GameObject item)
@@ -359,7 +359,7 @@ public class GameManager : MonoBehaviour
         //Change to the postion of second item latter
         item.transform.position = new Vector3(20, -4f, -4);
         MouseBehaviour mouseDrag = item.GetComponent<MouseBehaviour>();
-        mouseDrag.originPosition = new Vector3(20, -4f, -4);
+        mouseDrag.SetOriginPosition(new Vector3(20, -4f, -4));
     }
 
     private void CheckCollidedObject()
@@ -455,11 +455,11 @@ public class GameManager : MonoBehaviour
 
             if( (itemList.Count - 1) % 2 == 0)
             {
-                itemList[itemList.Count - 1].GetComponent<MouseBehaviour>().originPosition = new Vector3(15, -2.5f, 4);
+                itemList[itemList.Count - 1].GetComponent<MouseBehaviour>().SetOriginPosition(new Vector3(15, -2.5f, 4));
             }
             else
             {
-                itemList[itemList.Count - 1].GetComponent<MouseBehaviour>().originPosition = new Vector3(15, -2.5f, -4);
+                itemList[itemList.Count - 1].GetComponent<MouseBehaviour>().SetOriginPosition(new Vector3(15, -2.5f, -4));
             }
 
             combinationPerformed += 1;
@@ -481,6 +481,7 @@ public class GameManager : MonoBehaviour
 
             //show the current object
             ShowCurrentIndexObject();
+            StartCoroutine(ShowWarning());
         }
         #region commented
         //else
@@ -493,6 +494,13 @@ public class GameManager : MonoBehaviour
         //selectedItem = false;
         //selectedIndex = selectedIndex - 1;
         #endregion
+    }
+
+    private IEnumerator ShowWarning()
+    {
+        warningPanel.SetActive(true);
+        yield return new WaitForSeconds(3.0f);
+        warningPanel.SetActive(false);
     }
 
     public void ShowCurrentIndexObject()

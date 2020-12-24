@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class MouseBehaviour : MonoBehaviour
 {
-    public Vector3 originPosition;
+    private Vector3 originPosition;
     private Vector3 snapPosition;
 
     private GameObject hittedObject;
@@ -30,7 +30,14 @@ public class MouseBehaviour : MonoBehaviour
         mousePoint.z = mZCoord;
         return Camera.main.ScreenToWorldPoint(mousePoint);
     }
+    
 
+    public void SetOriginPosition(Vector3 newPosition)
+    {
+        originPosition = newPosition;
+    }
+
+    #region MouseHover Handling
     private void OnMouseOver()
     {
         descriptionManager.ShowDescription(gameObject);
@@ -40,6 +47,7 @@ public class MouseBehaviour : MonoBehaviour
     {
         descriptionManager.HideDescription(gameObject);
     }
+    #endregion
 
     #region MouseDrag Handling
     private void OnMouseDown()
