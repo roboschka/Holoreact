@@ -67,8 +67,9 @@ public class StudentDataManager : MonoBehaviour
                 mainMenu.setFirstPlay(false);
                 PlayerPrefs.SetInt("isFirstPlay", mainMenu.getFirstPlay() ? 1 : 0);
 
-                self.gameObject.SetActive(false);
                 mainMenu.ToggleNotification(false, true, mainMenu.playButton);
+                gameObject.SetActive(false);
+               
             }
         }
     }
@@ -108,8 +109,8 @@ public class StudentDataManager : MonoBehaviour
         } 
         else
         {
-            Debug.Log("currentID=" + student.ID);
-            PlayerPrefs.SetInt("studentID", student.ID);
+            Debug.Log("currentID=" + student.Id);
+            PlayerPrefs.SetInt("studentID", student.Id);
         }
     }
     #endregion
