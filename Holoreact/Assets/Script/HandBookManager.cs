@@ -12,12 +12,12 @@ public class HandBookManager : MonoBehaviour
     private HandBook[] handBookData;
 
     [SerializeField]
-    private TextMeshProUGUI textToShow;
+    private TextMeshProUGUI textToShow, pageText;
 
     [SerializeField]
     private GameObject panelForHandbook, gameManager, UICamera;
 
-    private int index, currentLvl;
+    private int currentPage, currentLvl;
 
     public bool paused;
 
@@ -26,6 +26,9 @@ public class HandBookManager : MonoBehaviour
         currentLvl = PlayerPrefs.GetInt("currentLevel");
         GetHandbookData();
         paused = true;
+        currentPage = 1;
+        pageText.text = currentPage.ToString() + "/" + handBookData.Count().ToString();
+        Debug.Log(currentLvl);
     }
 
     // Update is called once per frame
@@ -50,24 +53,24 @@ public class HandBookManager : MonoBehaviour
 
     private void Move(int move)
     {
-        if(index + move < 1)
+        if(currentPage + move < 1)
         {
-            index = handBookData.Count();
+            currentPage = handBookData.Count();
         }
-        else if(index + move > handBookData.Count() )
+        else if(currentPage + move > handBookData.Count() )
         {
-            index = 0;
+            currentPage = 1;
         }
         else
         {
-            index += move;
+            currentPage += move;
         }
-        FindHandBookContent(index);
+        FindHandBookContent(currentPage);
     }
 
     private void GetHandbookData()
     {
-        HttpWebRequest request = (HttpWebRequest)WebRequest.Create(String.Format("https://api.backendless.com/09476775-387A-4C56-FFE4-B663DC24FC00/DED29ABA-8FAC-4985-86E0-FCCDA5A290B5/data/Handbook?where=levelid%3D"+currentLvl));
+        HttpWebRequest request = (HttpWebRequest)WebRequest.Create(String.Format("https://api.backendless.com/09476775-387A-4C56-FFE4-B663DC24FC00/DED29ABA-8FAC-4985-86E0-FCCDA5A290B5/data/Handbook?pageSize=50&where=levelID%3D" + currentLvl));
         HttpWebResponse response = (HttpWebResponse)request.GetResponse();
         StreamReader reader = new StreamReader(response.GetResponseStream());
         string jsonResponse = reader.ReadToEnd();
@@ -89,10 +92,13 @@ public class HandBookManager : MonoBehaviour
         if (String.IsNullOrEmpty(handBookContent))
         {
             textToShow.text = "something goes wrong please contact the developer";
+            pageText.text = "0";
+            Debug.Log(handBookContent);
         }
         else
         {
             textToShow.text = handBookContent;
+            pageText.text = currentPage.ToString() + "/" + handBookData.Count().ToString();
         }
     }
 
@@ -101,6 +107,15 @@ public class HandBookManager : MonoBehaviour
         paused = false;
         panelForHandbook.SetActive(true);
         UICamera.SetActive(true);
+
+        if (handBookData.Count() < 1)
+        {
+            textToShow.text = "Something goes wrong please contact the developer";
+        }
+        else
+        {
+            FindHandBookContent(1);
+        }
     }
 
     private void Exit()

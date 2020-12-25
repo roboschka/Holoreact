@@ -23,7 +23,7 @@ public class MainMenu : MonoBehaviour
 
     private int lvl;
     
-    public bool isFirstPlay = true;
+    private bool isFirstPlay = true;
 
     private GameObject highlightedButton;
 
@@ -109,5 +109,15 @@ public class MainMenu : MonoBehaviour
         quitNotificationCanvas.gameObject.SetActive(isNotifOn);
         mainMenuCanvas.gameObject.SetActive(isMainMenuOn);
         toHighlight.Select();
+    }
+
+    public bool getFirstPlay()
+    {
+        return isFirstPlay;
+    }
+
+    public void setFirstPlay(bool value)
+    {
+        isFirstPlay = value;
     }
 }
