@@ -15,7 +15,7 @@ public class DescriptionManager : MonoBehaviour
         if (hoveredObject.layer == 9)
         {
             descriptionPanel.SetActive(true);
-            descriptionPanel.GetComponentInChildren<TextMeshProUGUI>().text = gameManager.getItemDescription(hoveredObject.name.Replace("(Clone)", ""));
+            descriptionPanel.GetComponentInChildren<TextMeshProUGUI>().text = gameManager.GetItemDescription(hoveredObject.name.Replace("(Clone)", ""));
         }
 
     }

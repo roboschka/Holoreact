@@ -31,7 +31,6 @@ public class GameManager : MonoBehaviour
         itemDescriptionList = new List<Item>();
 
         selectedItem = false;
-        //selectedIndex = -1;
         combinationPerformed = 0;
 
         currentLvl = PlayerPrefs.GetInt("currentLevel");
@@ -86,31 +85,13 @@ public class GameManager : MonoBehaviour
         if (objectsOnPlane != null && objectsOnPlane.Count > 0)
         {
 
-            //supaya di list dia gak keliatan/terduplikasi
-            if (itemList.Count % 2 != 0)
+            //kalau index terakhir maka hanya munculkan 1 item
+            if (itemList.Count % 2 != 0 && currentIndex == itemList.Count)
             {
-                //kalau index terakhir maka hanya munculkan 1 item
-                if (currentIndex == itemList.Count)
+                if (itemList[currentIndex - 1] != objectsOnPlane[0])
                 {
-                    if (itemList[currentIndex - 1] != objectsOnPlane[0])
-                    {
-                        itemList[currentIndex - 1].SetActive(false);
-                    }
+                    itemList[currentIndex - 1].SetActive(false);
                 }
-                else
-                {
-                    //kalau bukan last index seperti normal
-                    if (itemList[currentIndex - 1] != objectsOnPlane[0])
-                    {
-                        itemList[currentIndex - 1].SetActive(false);
-
-                    }
-                    if (itemList[currentIndex] != objectsOnPlane[0])
-                    {
-                        itemList[currentIndex].SetActive(false);
-                    }
-                }
-
             }
             else
             {
@@ -129,39 +110,22 @@ public class GameManager : MonoBehaviour
         }
         else
         {
-            #region commented
-            //itemList[currentIndex - 1].SetActive(false);
-            //itemList[currentIndex].SetActive(false);
-            #endregion
-
-            if (itemList.Count % 2 != 0)
+            //kalau dia ganjil dan index terakhir maka hanya munculkan 1 item
+            if (itemList.Count % 2 != 0 && currentIndex == itemList.Count)
             {
-                //kalau index terakhir maka hanya munculkan 1 item
-                if (currentIndex == itemList.Count)
-                {
-                    itemList[currentIndex - 1].SetActive(false);
-                }
-                else
-                {
-                    //kalau bukan last index seperti normal
-                    itemList[currentIndex - 1].SetActive(false);
-                    itemList[currentIndex].SetActive(false);
-                }
-
+                itemList[currentIndex - 1].SetActive(false);
             }
             else
             {
-                //kalau genap seperti normal
+                //kalau bukan last index dan ganjil maka seperti normal
                 itemList[currentIndex - 1].SetActive(false);
                 itemList[currentIndex].SetActive(false);
             }
 
         }
 
-        //ambil 2 objek selanjutnya
+        //ambil objek selanjutnya
         currentIndex += direction;
-        //Debug.Log("current index :" + currentIndex);
-        //Debug.Log("itemlist count :" + itemList.Count);
 
         if (currentIndex <= 0)
         {
@@ -191,33 +155,15 @@ public class GameManager : MonoBehaviour
 
 
         //check apakah next object yang akan ditampilkan berada di plane
-        if (objectsOnPlane.Count != 0)
+        if (objectsOnPlane != null && objectsOnPlane.Count > 0)
         {
-
-
-            if (itemList.Count % 2 != 0)
+            //kalau index terakhir dan ganjil maka hanya munculkan 1 item
+            if (itemList.Count % 2 != 0 && currentIndex == itemList.Count)
             {
-                //kalau index terakhir maka hanya munculkan 1 item
-                if (currentIndex == itemList.Count)
+                if (itemList[currentIndex - 1] != objectsOnPlane[0])
                 {
-                    if (itemList[currentIndex - 1] != objectsOnPlane[0])
-                    {
-                        SetFirstItemPosition(itemList[currentIndex - 1]);
-                    }
+                    SetFirstItemPosition(itemList[currentIndex - 1]);
                 }
-                else
-                {
-                    //kalau bukan last index seperti normal
-                    if (itemList[currentIndex - 1] != objectsOnPlane[0])
-                    {
-                        SetFirstItemPosition(itemList[currentIndex - 1]);
-                    }
-                    if (itemList[currentIndex] != objectsOnPlane[0])
-                    {
-                        SetSecondItemPosition(itemList[currentIndex]);
-                    }
-                }
-
             }
             else
             {
@@ -231,30 +177,13 @@ public class GameManager : MonoBehaviour
                     SetSecondItemPosition(itemList[currentIndex]);
                 }
             }
-
         }
         else
         {
-            #region commneted
-            //SetFirstItemPosition(itemList[currentIndex - 1]);
-            //SetSecondItemPosition(itemList[currentIndex]);
-            #endregion
-
-            if (itemList.Count % 2 != 0)
+            //kalau index terakhir dan ganjil maka hanya munculkan 1 item
+            if (itemList.Count % 2 != 0 && currentIndex == itemList.Count)
             {
-
-                //kalau index terakhir maka hanya munculkan 1 item
-                if (currentIndex == itemList.Count)
-                {
-                    SetFirstItemPosition(itemList[currentIndex - 1]);
-                }
-                else
-                {
-                    //kalau bukan last index seperti normal
-                    SetFirstItemPosition(itemList[currentIndex - 1]);
-                    SetSecondItemPosition(itemList[currentIndex]);
-                }
-
+                SetFirstItemPosition(itemList[currentIndex - 1]);
             }
             else
             {
@@ -265,41 +194,21 @@ public class GameManager : MonoBehaviour
 
         }
 
-
         //aktivasikan 2 objek selanjutnya jika bukan objek di plane.
         if (objectsOnPlane != null && objectsOnPlane.Count > 0)
         {
 
-            //supaya di list dia gak keliatan/terduplikasi.
-            Debug.Log(objectsOnPlane.Count);
-
-            if (itemList.Count % 2 != 0)
+            if (itemList.Count % 2 != 0 && currentIndex == itemList.Count)
             {
-                //kalau index terakhir maka hanya munculkan 1 item
-                if (currentIndex == itemList.Count)
+                //kalau index terakhir dan ganjil maka hanya munculkan 1 item
+                if (itemList[currentIndex - 1] != objectsOnPlane[0])
                 {
-                    if (itemList[currentIndex - 1] != objectsOnPlane[0])
-                    {
-                        itemList[currentIndex - 1].SetActive(true);
-                    }
+                    itemList[currentIndex - 1].SetActive(true);
                 }
-                else
-                {
-                    //kalau bukan last index seperti normal
-                    if (itemList[currentIndex - 1] != objectsOnPlane[0])
-                    {
-                        itemList[currentIndex - 1].SetActive(true);
-                    }
-                    if (itemList[currentIndex] != objectsOnPlane[0])
-                    {
-                        itemList[currentIndex].SetActive(true);
-                    }
-                }
-
             }
             else
             {
-                //kalau genap seperti normal
+                //kalau bukan index terakhir dan gajil maka seperti normal
                 if (itemList[currentIndex - 1] != objectsOnPlane[0])
                 {
                     itemList[currentIndex - 1].SetActive(true);
@@ -314,35 +223,19 @@ public class GameManager : MonoBehaviour
         }
         else
         {
-            #region commented
-            //itemList[currentIndex - 1].SetActive(true);
-            //itemList[currentIndex].SetActive(true);
-            #endregion
-            
-            if(itemList.Count % 2 != 0)
+            //kalau index terakhir dan ganjil maka hanya munculkan 1 item
+            if (itemList.Count % 2 != 0 && currentIndex == itemList.Count)
             {
-                //kalau index terakhir maka hanya munculkan 1 item
-                if (currentIndex == itemList.Count)
-                {
-                    itemList[currentIndex - 1].SetActive(true);
-                }
-                else
-                {
-                    //kalau bukan last index seperti normal
-                    itemList[currentIndex - 1].SetActive(true);
-                    itemList[currentIndex].SetActive(true);
-                }
-
+                itemList[currentIndex - 1].SetActive(true);
             }
             else
             {
-                //kalau genap seperti normal
+                //kalau bukan index terkahir dan gajil maka seperti normal
                 itemList[currentIndex - 1].SetActive(true);
                 itemList[currentIndex].SetActive(true);
             }
 
         }
-
 
     }
 
@@ -366,7 +259,6 @@ public class GameManager : MonoBehaviour
     {
         Collider planeCollider = gameObject.GetComponent<Collider>();
         collidedColliders = Physics.OverlapBox(gameObject.transform.position, transform.localScale*10, Quaternion.identity, LayerMask.GetMask("ExperimentObject"));
-        //Collider[] collidedColliders = Physics.OverlapBox(gameObject.transform.TransformPoint(planeCollider.bounds.center), gameObject.transform.TransformVector(planeCollider.bounds.size), gameObject.transform.rotation);
         int i = 0;
         objectsOnPlane.Clear();
         while (i < collidedColliders.Length)
@@ -377,7 +269,6 @@ public class GameManager : MonoBehaviour
         }
         if (i == 2)
         {
-            //FindCombinationResult(collidedColliders[0].gameObject, collidedColliders[1].gameObject);\
             Combine();
         }
     }
@@ -391,7 +282,6 @@ public class GameManager : MonoBehaviour
 
     public void ShowHandbook()
     {
-        //Debug.Log("selectedIndex at showHandbook: " + selectedIndex);
         cameraForGameplay.SetActive(false);
         itemList[currentIndex].SetActive(false);
         paused = true;
@@ -473,12 +363,6 @@ public class GameManager : MonoBehaviour
 
             objectsOnPlane.Clear();
 
-            //itemList[currentIndex - 1].SetActive(true);
-            //itemList[currentIndex].SetActive(true);
-
-            //SetFirstItemPosition(itemList[currentIndex - 1]);
-            //SetSecondItemPosition(itemList[currentIndex]);
-
             //show the current object
             ShowCurrentIndexObject();
             StartCoroutine(ShowWarning());
@@ -555,16 +439,6 @@ public class GameManager : MonoBehaviour
         quizManager.GetComponent<QuizManager>().SetExperimentScore(CalculateExperimentScore());
         quizManager.GetComponent<QuizManager>().PostTest();
     }
-
-    //private void DeactiveAllItemAndResetPosition()
-    //{
-    //    foreach (GameObject data in itemList)
-    //    {
-    //        data.transform.position = new Vector3(0, 0, 0);
-
-    //        data.SetActive(false);
-    //    }
-    //}
 
     #region Get Data from API
     /// <summary>
@@ -715,7 +589,7 @@ public class GameManager : MonoBehaviour
     }
     
 
-    public string getItemDescription(string hoveredGameObject)
+    public string GetItemDescription(string hoveredGameObject)
     {
         string itemDescription =
             (
