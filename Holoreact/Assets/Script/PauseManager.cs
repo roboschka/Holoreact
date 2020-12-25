@@ -119,11 +119,10 @@ public class PauseManager : MonoBehaviour
     //    isNotifOn = true;
     //}
 
-    
-    public void ShowSettings()
-    {
-        Debug.Log("Show Settings");
-    }
+    //public void ShowSettings()
+    //{
+    //    Debug.Log("Show Settings");
+    //}
 
     private void ToggleSettings(bool isPauseMenuActive, bool isSettingActive)
     {
