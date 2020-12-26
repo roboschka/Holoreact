@@ -11,7 +11,9 @@ ModelImporter:
     400002: paper
     400004: substance
     400006: tube
-    2100000: No Name
+    2100000: Material.001
+    2100002: Material
+    2100004: No Name
     2300000: paper
     2300002: substance
     2300004: tube
