@@ -147,8 +147,8 @@ Camera:
   m_GameObject: {fileID: 214856502}
   m_Enabled: 1
   serializedVersion: 2
-  m_ClearFlags: 1
-  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_ClearFlags: 2
+  m_BackGroundColor: {r: 0, g: 0, b: 0, a: 0}
   m_projectionMatrixMode: 1
   m_SensorSize: {x: 36, y: 24}
   m_LensShift: {x: 0, y: 0}
@@ -187,13 +187,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 214856502}
-  m_LocalRotation: {x: -0, y: -0.99857986, z: -0, w: 0.05327504}
-  m_LocalPosition: {x: 0, y: 0, z: 4.959}
+  m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: 0, y: 4.38, z: 8.61}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: -173.89201, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
 --- !u!1 &471309573
 GameObject:
   m_ObjectHideFlags: 0
@@ -294,7 +294,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cameraForGameplay: {fileID: 0}
   handBookManager: {fileID: 0}
+  submitManager: {fileID: 0}
+  pauseManager: {fileID: 0}
   quizManager: {fileID: 0}
+  panelConfirmation: {fileID: 0}
+  warningPanel: {fileID: 0}
 --- !u!4 &2014534730
 Transform:
   m_ObjectHideFlags: 0
@@ -309,6 +313,75 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &2105319927
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 6195552109093645918, guid: 550240cb2c60cb044bbfaeab52a9f6de,
+        type: 3}
+      propertyPath: m_Name
+      value: Alu dan mortar
+      objectReference: {fileID: 0}
+    - target: {fileID: 6195552109093810814, guid: 550240cb2c60cb044bbfaeab52a9f6de,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 10.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 6195552109093810814, guid: 550240cb2c60cb044bbfaeab52a9f6de,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6195552109093810814, guid: 550240cb2c60cb044bbfaeab52a9f6de,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 5.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 6195552109093810814, guid: 550240cb2c60cb044bbfaeab52a9f6de,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6195552109093810814, guid: 550240cb2c60cb044bbfaeab52a9f6de,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 6195552109093810814, guid: 550240cb2c60cb044bbfaeab52a9f6de,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6195552109093810814, guid: 550240cb2c60cb044bbfaeab52a9f6de,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 6195552109093810814, guid: 550240cb2c60cb044bbfaeab52a9f6de,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 6195552109093810814, guid: 550240cb2c60cb044bbfaeab52a9f6de,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6195552109093810814, guid: 550240cb2c60cb044bbfaeab52a9f6de,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: -90
+      objectReference: {fileID: 0}
+    - target: {fileID: 6195552109093810814, guid: 550240cb2c60cb044bbfaeab52a9f6de,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 550240cb2c60cb044bbfaeab52a9f6de, type: 3}
 --- !u!1 &4389259004103275288
 GameObject:
   m_ObjectHideFlags: 0
@@ -509,4 +582,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targetColor: {r: 0.18431373, g: 0.25490198, b: 0.3137255, a: 1}
+  startColor: {r: 0, g: 0, b: 0, a: 0}
   duration: 0
