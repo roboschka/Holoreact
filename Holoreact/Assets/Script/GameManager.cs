@@ -52,7 +52,7 @@ public class GameManager : MonoBehaviour
     }
 
     // Update is called once per frame
-    void FixedUpdate()
+    private void FixedUpdate()
     {
         if (!paused)
         {
