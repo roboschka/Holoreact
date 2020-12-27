@@ -70,13 +70,14 @@ public class GameManager : MonoBehaviour
 
     private void OnCollisionExit(Collision collision)
     {
-        for (int i = 0; i < objectsOnPlane.Count; i++)
-        {
-            if (collision.gameObject == objectsOnPlane[i])
-            {
-                objectsOnPlane.Clear();
-            }
-        }
+        //for (int i = 0; i < objectsOnPlane.Count; i++)
+        //{
+        //    if (collision.gameObject == objectsOnPlane[i])
+        //    {
+        //        objectsOnPlane.Clear();
+        //    }
+        //}
+        objectsOnPlane.Clear();
     }
 
     public void Move(int direction)
@@ -139,11 +140,6 @@ public class GameManager : MonoBehaviour
                 currentIndex = itemList.Count;
             }
         }
-        //Check apakah jumlah item genap
-        else if (currentIndex > itemList.Count - 1 && itemList.Count % 2 == 0)
-        {
-            currentIndex = 1;
-        }
         //jika ganjil
         else
         {
@@ -204,6 +200,7 @@ public class GameManager : MonoBehaviour
                 if (itemList[currentIndex - 1] != objectsOnPlane[0])
                 {
                     itemList[currentIndex - 1].SetActive(true);
+                    Debug.Log("activate object index terakhir");
                 }
             }
             else
@@ -212,11 +209,13 @@ public class GameManager : MonoBehaviour
                 if (itemList[currentIndex - 1] != objectsOnPlane[0])
                 {
                     itemList[currentIndex - 1].SetActive(true);
-
+                    Debug.Log("activate object bukan index terakhir: " + itemList[currentIndex]);
                 }
                 if (itemList[currentIndex] != objectsOnPlane[0])
                 {
                     itemList[currentIndex].SetActive(true);
+                    Debug.Log("activate object bukan index terakhir: " + itemList[currentIndex]);
+                    Debug.Log("ObjectOnPlane[0]: " + objectsOnPlane[0]);
                 }
             }
 
@@ -227,12 +226,14 @@ public class GameManager : MonoBehaviour
             if (itemList.Count % 2 != 0 && currentIndex == itemList.Count)
             {
                 itemList[currentIndex - 1].SetActive(true);
+                Debug.Log("activate object index terakhir");
             }
             else
             {
                 //kalau bukan index terkahir dan gajil maka seperti normal
                 itemList[currentIndex - 1].SetActive(true);
                 itemList[currentIndex].SetActive(true);
+                Debug.Log("activate object bukan index terakhir");
             }
 
         }
