@@ -14,6 +14,10 @@ public class PauseManager : MonoBehaviour
     private bool paused, isNotifOn, isSettingsOn;
     [SerializeField]
     private Button backToMenu, yesBack;
+    [SerializeField]
+    private AudioSource source;
+    [SerializeField]
+    private AudioClip selectAudio, notificationAudio, pressAudio;
     // Start is called before the first frame update
     void Start()
     {
@@ -48,6 +52,7 @@ public class PauseManager : MonoBehaviour
                                 ToggleSettings(false, true);
                                 break;
                             case "Level":
+                                source.PlayOneShot(notificationAudio, 0.5f);
                                 ToggleNotification(false, true, yesBack);
                                 break;
                         }
@@ -80,7 +85,7 @@ public class PauseManager : MonoBehaviour
                     switch (highlightedButton.name)
                     {
                         case "YesBack":
-                            SceneManager.LoadScene("ChooseLevel");
+                            StartCoroutine(DelayedSceneLoad(pressAudio));
                             break;
                         case "NoBack":
                             ToggleNotification(true, false, backToMenu);
@@ -98,7 +103,6 @@ public class PauseManager : MonoBehaviour
         UICamera.SetActive(true);
         pausePanel.SetActive(true);
         backToMenu.Select();
-        Debug.Log("Show Pause");
     }
 
     private void HidePause()
@@ -107,7 +111,6 @@ public class PauseManager : MonoBehaviour
         UICamera.SetActive(false);
         pausePanel.SetActive(false);
         gameManager.GetComponent<GameManager>().UnPause();
-        Debug.Log("Hide pause: " + paused);
     }
     #endregion
 
@@ -137,5 +140,12 @@ public class PauseManager : MonoBehaviour
         notifPanel.SetActive(isNotifActive);
         toHighlight.Select();
         isNotifOn = isNotifActive;
+    }
+
+    private IEnumerator DelayedSceneLoad(AudioClip audioToBePlayed)
+    {
+        source.PlayOneShot(audioToBePlayed, 0.6f);
+        yield return new WaitForSeconds(audioToBePlayed.length);
+        SceneManager.LoadScene("ChooseLevel");
     }
 }

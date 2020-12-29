@@ -15,7 +15,12 @@ public class GameManager : MonoBehaviour
     
     [SerializeField]
     private GameObject cameraForGameplay, handBookManager, submitManager, pauseManager, quizManager, panelConfirmation, warningPanel;
-    
+
+    [SerializeField]
+    private AudioSource source;
+
+    [SerializeField]
+    private AudioClip openCanvasAudio, submitClickAudio, buttonSelectAudio, warningAudio, itemDropAudio;
     
     //private int selectedIndex;
     private int currentIndex, currentLvl, combinationPerformed;
@@ -52,7 +57,7 @@ public class GameManager : MonoBehaviour
     }
 
     // Update is called once per frame
-    void FixedUpdate()
+    private void FixedUpdate()
     {
         if (!paused)
         {
@@ -65,22 +70,25 @@ public class GameManager : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
+        source.PlayOneShot(itemDropAudio, 0.6f);
         CheckCollidedObject();
     }
 
     private void OnCollisionExit(Collision collision)
     {
-        for (int i = 0; i < objectsOnPlane.Count; i++)
-        {
-            if (collision.gameObject == objectsOnPlane[i])
-            {
-                objectsOnPlane.Clear();
-            }
-        }
+        //for (int i = 0; i < objectsOnPlane.Count; i++)
+        //{
+        //    if (collision.gameObject == objectsOnPlane[i])
+        //    {
+        //        objectsOnPlane.Clear();
+        //    }
+        //}
+        objectsOnPlane.Clear();
     }
 
     public void Move(int direction)
     {
+        source.PlayOneShot(openCanvasAudio, 0.5f);
         //2 Objek pada 2 index sebelumnya dimatikan kecuali yang ada di plane
         if (objectsOnPlane != null && objectsOnPlane.Count > 0)
         {
@@ -138,11 +146,6 @@ public class GameManager : MonoBehaviour
             {
                 currentIndex = itemList.Count;
             }
-        }
-        //Check apakah jumlah item genap
-        else if (currentIndex > itemList.Count - 1 && itemList.Count % 2 == 0)
-        {
-            currentIndex = 1;
         }
         //jika ganjil
         else
@@ -204,6 +207,7 @@ public class GameManager : MonoBehaviour
                 if (itemList[currentIndex - 1] != objectsOnPlane[0])
                 {
                     itemList[currentIndex - 1].SetActive(true);
+                    Debug.Log("activate object index terakhir");
                 }
             }
             else
@@ -212,11 +216,13 @@ public class GameManager : MonoBehaviour
                 if (itemList[currentIndex - 1] != objectsOnPlane[0])
                 {
                     itemList[currentIndex - 1].SetActive(true);
-
+                    Debug.Log("activate object bukan index terakhir: " + itemList[currentIndex]);
                 }
                 if (itemList[currentIndex] != objectsOnPlane[0])
                 {
                     itemList[currentIndex].SetActive(true);
+                    Debug.Log("activate object bukan index terakhir: " + itemList[currentIndex]);
+                    Debug.Log("ObjectOnPlane[0]: " + objectsOnPlane[0]);
                 }
             }
 
@@ -227,12 +233,14 @@ public class GameManager : MonoBehaviour
             if (itemList.Count % 2 != 0 && currentIndex == itemList.Count)
             {
                 itemList[currentIndex - 1].SetActive(true);
+                Debug.Log("activate object index terakhir");
             }
             else
             {
                 //kalau bukan index terkahir dan gajil maka seperti normal
                 itemList[currentIndex - 1].SetActive(true);
                 itemList[currentIndex].SetActive(true);
+                Debug.Log("activate object bukan index terakhir");
             }
 
         }
@@ -282,6 +290,7 @@ public class GameManager : MonoBehaviour
 
     public void ShowHandbook()
     {
+        source.PlayOneShot(openCanvasAudio, 0.5f);
         cameraForGameplay.SetActive(false);
         itemList[currentIndex].SetActive(false);
         paused = true;
@@ -290,6 +299,7 @@ public class GameManager : MonoBehaviour
 
     public void UnPause()
     {
+        source.PlayOneShot(openCanvasAudio, 0.5f);
         cameraForGameplay.SetActive(true);
         itemList[currentIndex].SetActive(true);
         paused = false;
@@ -382,6 +392,7 @@ public class GameManager : MonoBehaviour
 
     private IEnumerator ShowWarning()
     {
+        source.PlayOneShot(warningAudio, 0.5f);
         warningPanel.SetActive(true);
         yield return new WaitForSeconds(3.0f);
         warningPanel.SetActive(false);
@@ -420,6 +431,7 @@ public class GameManager : MonoBehaviour
 
     public void Submit()
     {
+        source.PlayOneShot(submitClickAudio, 0.5f);
         cameraForGameplay.SetActive(false);
         panelConfirmation.SetActive(true);
         paused = true;
@@ -436,6 +448,7 @@ public class GameManager : MonoBehaviour
 
     public void FinishExperiment()
     {
+        source.PlayOneShot(buttonSelectAudio, 0.5f);
         quizManager.GetComponent<QuizManager>().SetExperimentScore(CalculateExperimentScore());
         quizManager.GetComponent<QuizManager>().PostTest();
     }
@@ -578,6 +591,7 @@ public class GameManager : MonoBehaviour
 
     #endregion
 
+    #region Pause Setter Getter
     public bool GetPause()
     {
         return paused;
@@ -587,7 +601,7 @@ public class GameManager : MonoBehaviour
     {
         paused = pauseValue;
     }
-    
+    #endregion
 
     public string GetItemDescription(string hoveredGameObject)
     {
@@ -600,4 +614,10 @@ public class GameManager : MonoBehaviour
 
         return itemDescription;
     }
+
+    public void PlayAudioForButtonHighlight()
+    {
+        source.PlayOneShot(openCanvasAudio, 0.5f);
+    }
+
 }

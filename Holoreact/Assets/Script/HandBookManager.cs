@@ -17,6 +17,12 @@ public class HandBookManager : MonoBehaviour
     [SerializeField]
     private GameObject panelForHandbook, gameManager, UICamera;
 
+    [SerializeField]
+    private AudioSource source;
+
+    [SerializeField]
+    private AudioClip pageTurn;
+
     private int currentPage, currentLvl;
 
     public bool paused;
@@ -53,6 +59,7 @@ public class HandBookManager : MonoBehaviour
 
     private void Move(int move)
     {
+        source.PlayOneShot(pageTurn, 0.4f);
         if(currentPage + move < 1)
         {
             currentPage = handBookData.Count();

@@ -111,7 +111,8 @@ public class MouseBehaviour : MonoBehaviour
             Debug.Log("snapped within range " + snapPosition);
             
 
-        } else
+        }
+        else
         {
             transform.position = originPosition;
             //buat testing navigation
@@ -146,6 +147,7 @@ public class MouseBehaviour : MonoBehaviour
         if (collision.gameObject.name == "Plane")
         {
             isWithinRange = false;
+            Debug.Log(gameObject.name + " is out of plane");
         }
     }
     #endregion

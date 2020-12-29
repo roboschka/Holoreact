@@ -6,7 +6,7 @@ using UnityEngine;
 [Serializable]
 public class StudentData
 {
-    public int ID;
+    public int Id;
     public string Name;
     public string SchoolName;
 }

@@ -18,6 +18,10 @@ public class ChooseLevelManager : MonoBehaviour
     private SpriteRenderer[] stars;
     [SerializeField]
     private Sprite starFilled, starEmpty;
+    [SerializeField]
+    private AudioSource source;
+    [SerializeField]
+    private AudioClip navigation, back, enter;
 
     private int currentViewingLevel = 0;
     private string studentID;
@@ -42,7 +46,7 @@ public class ChooseLevelManager : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            SceneManager.LoadScene("MainMenu");
+            StartCoroutine(DelayedSceneLoad(back, "MainMenu"));
         }
         //Debug.Log(currentViewingLevel);
         //Debug.Log("Get level " + levels[currentViewingLevel].LevelID);
@@ -51,7 +55,7 @@ public class ChooseLevelManager : MonoBehaviour
         {
             
             PlayerPrefs.SetInt("currentLevel", levels[currentViewingLevel].LevelID);
-            SceneManager.LoadScene("Gameplay");
+            StartCoroutine(DelayedSceneLoad(enter, "Gameplay"));
         }
     }
 
@@ -69,6 +73,7 @@ public class ChooseLevelManager : MonoBehaviour
                 currentViewingLevel = 0;
             }
             ShowLevelInfo();
+            source.PlayOneShot(navigation, 0.6f);
         }
         else if (Input.GetKeyDown(KeyCode.LeftArrow))
         {
@@ -83,6 +88,7 @@ public class ChooseLevelManager : MonoBehaviour
                 //Debug.Log("length - 1: " + currentViewingLevel);
             }
             ShowLevelInfo();
+            source.PlayOneShot(navigation, 0.6f);
         }
     }
 
@@ -94,8 +100,7 @@ public class ChooseLevelManager : MonoBehaviour
 
         DetermineStars(CalculateTotalScore());
     }
-
-
+    
     #region Star System
     private int CalculateTotalScore()
     {
@@ -167,5 +172,14 @@ public class ChooseLevelManager : MonoBehaviour
         Debug.Log(scores);
     }
 
+    #endregion
+
+    #region SFX
+    private IEnumerator DelayedSceneLoad(AudioClip audioToBePlayed, string sceneName)
+    {
+        source.PlayOneShot(audioToBePlayed, 0.6f);
+        yield return new WaitForSeconds(audioToBePlayed.length);
+        SceneManager.LoadScene(sceneName);
+    }
     #endregion
 }
