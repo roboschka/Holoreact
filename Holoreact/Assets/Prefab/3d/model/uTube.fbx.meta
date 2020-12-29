@@ -3,12 +3,19 @@ guid: dd397e6a76d999245904b6cad4ae6243
 ModelImporter:
   serializedVersion: 23
   fileIDToRecycleName:
-    100000: //RootNode
-    400000: //RootNode
+    100000: substance
+    100002: tube
+    100004: //RootNode
+    400000: substance
+    400002: tube
+    400004: //RootNode
     2100000: No Name
-    2300000: //RootNode
-    3300000: //RootNode
-    4300000: Cylinder
+    2300000: substance
+    2300002: tube
+    3300000: substance
+    3300002: tube
+    4300000: tube
+    4300002: substance
   externalObjects: {}
   materials:
     importMaterials: 1
