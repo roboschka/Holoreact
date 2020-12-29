@@ -64,8 +64,8 @@ public class StudentDataManager : MonoBehaviour
 
                 PostStudentData(studentName, studentSchool);
 
-                mainMenu.setFirstPlay(false);
-                PlayerPrefs.SetInt("isFirstPlay", mainMenu.getFirstPlay() ? 1 : 0);
+                mainMenu.SetFirstPlay(false);
+                PlayerPrefs.SetInt("isFirstPlay", mainMenu.GetFirstPlay() ? 1 : 0);
 
                 mainMenu.ToggleNotification(false, true, mainMenu.playButton);
                 gameObject.SetActive(false);

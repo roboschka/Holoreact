@@ -158,12 +158,12 @@ public class MainMenu : MonoBehaviour
         toHighlight.Select();
     }
 
-    public bool getFirstPlay()
+    public bool GetFirstPlay()
     {
         return isFirstPlay;
     }
 
-    public void setFirstPlay(bool value)
+    public void SetFirstPlay(bool value)
     {
         isFirstPlay = value;
     }
