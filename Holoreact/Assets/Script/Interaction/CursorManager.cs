@@ -3,8 +3,14 @@
 public class CursorManager : MonoBehaviour
 {
     [SerializeField]
-    GameManager gameManager;
-    
+    private GameManager gameManager;
+
+    [SerializeField]
+    private AudioSource source;
+
+    [SerializeField]
+    private AudioClip itemClick;
+
     private void Update()
     {
         //Debug.Log(gameManager.getPause());
@@ -37,6 +43,10 @@ public class CursorManager : MonoBehaviour
                     }
                     else if (hitData.collider.gameObject.name == "SubmitButton(Clone)") {
                         gameManager.Submit();
+                    }
+                    else if (hitData.collider.gameObject.layer == 9)
+                    {
+                        source.PlayOneShot(itemClick, 0.8f);
                     }
                 }
             }

@@ -7,6 +7,13 @@ public class Setting : MonoBehaviour
     [SerializeField]
     private GameObject turnOnSFX, turnOffSFX;
     private bool toggle;
+
+    [SerializeField]
+    private AudioSource source;
+
+    [SerializeField]
+    private AudioClip toggleSFX;
+
     // Start is called before the first frame update
     //void Start()
     //{
@@ -18,6 +25,7 @@ public class Setting : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Return))
         {
+            source.PlayOneShot(toggleSFX, 0.4f);
             ToggleSound();
         }
     }

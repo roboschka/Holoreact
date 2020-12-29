@@ -111,7 +111,8 @@ public class MouseBehaviour : MonoBehaviour
             Debug.Log("snapped within range " + snapPosition);
             
 
-        } else
+        }
+        else
         {
             transform.position = originPosition;
             //buat testing navigation

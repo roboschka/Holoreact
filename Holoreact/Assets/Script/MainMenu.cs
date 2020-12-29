@@ -21,6 +21,12 @@ public class MainMenu : MonoBehaviour
     [SerializeField]
     private GameObject quitNotificationCanvas, mainMenuCanvas, studentDataCanvas, settingsCanvas, creditsCanvas;
 
+    [SerializeField]
+    private AudioSource source;
+
+    [SerializeField]
+    private AudioClip highlight, select, notification;
+
     private int lvl;
     
     private bool isFirstPlay;
@@ -33,7 +39,6 @@ public class MainMenu : MonoBehaviour
         isFirstPlay = true;
 
         isFirstPlay = PlayerPrefs.GetInt("isFirstPlay") == 1 ? true : false;
-        Debug.Log("isFirstPlay = " + isFirstPlay);
 
         if (isFirstPlay)
         {
@@ -67,18 +72,21 @@ public class MainMenu : MonoBehaviour
                 switch (highlightedButton.name)
                 {
                     case "Play":
-                        SceneManager.LoadScene("ChooseLevel");
+                        StartCoroutine(DelayedSceneLoad(select));
                         break;
                     case "Settings":
                         ToggleSettings(true, false);
+                        source.PlayOneShot(select);
                         break;
                     case "Credits":
                         ToggleCredits(true, false);
+                        source.PlayOneShot(select);
                         break;
                     case "Quit":
                         //Open Notification Canvas
                         Debug.Log("Open Quit");
                         ToggleNotification(true, false, yesQuitButton);
+                        source.PlayOneShot(notification);
                         break;
                 }
             }
@@ -97,10 +105,11 @@ public class MainMenu : MonoBehaviour
                 {
                     case "YesQuit":
                         print("Game Quits");
-                        Application.Quit();
+                        StartCoroutine(DelayedQuit());
                         break;
                     case "NoQuit":
                         ToggleNotification(false, true, playButton);
+                        source.PlayOneShot(select);
                         break;
                 }
             }
@@ -134,6 +143,7 @@ public class MainMenu : MonoBehaviour
     {
         settingsCanvas.SetActive(isSettingOn);
         mainMenuCanvas.SetActive(isMainMenuOn);
+
     }
 
     private void ToggleCredits(bool isCreditOn, bool isMainMenuOn)
@@ -157,4 +167,26 @@ public class MainMenu : MonoBehaviour
     {
         isFirstPlay = value;
     }
+
+    #region Main Menu SFX
+    public void PlayHighlight()
+    {
+        source.PlayOneShot(highlight);
+        Debug.Log("play highlight sfx");
+    }
+    
+    IEnumerator DelayedSceneLoad(AudioClip audioToBePlayed)
+    {
+        source.PlayOneShot(audioToBePlayed);
+        yield return new WaitForSeconds(audioToBePlayed.length);
+        SceneManager.LoadScene("ChooseLevel");
+    }
+
+    IEnumerator DelayedQuit()
+    {
+        source.PlayOneShot(select);
+        yield return new WaitForSeconds(select.length);
+        Application.Quit();
+    }
+    #endregion
 }
