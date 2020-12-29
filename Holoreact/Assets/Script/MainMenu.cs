@@ -175,14 +175,14 @@ public class MainMenu : MonoBehaviour
         Debug.Log("play highlight sfx");
     }
     
-    IEnumerator DelayedSceneLoad(AudioClip audioToBePlayed)
+    private IEnumerator DelayedSceneLoad(AudioClip audioToBePlayed)
     {
         source.PlayOneShot(audioToBePlayed);
         yield return new WaitForSeconds(audioToBePlayed.length);
         SceneManager.LoadScene("ChooseLevel");
     }
 
-    IEnumerator DelayedQuit()
+    private IEnumerator DelayedQuit()
     {
         source.PlayOneShot(select);
         yield return new WaitForSeconds(select.length);

@@ -142,7 +142,7 @@ public class PauseManager : MonoBehaviour
         isNotifOn = isNotifActive;
     }
 
-    IEnumerator DelayedSceneLoad(AudioClip audioToBePlayed)
+    private IEnumerator DelayedSceneLoad(AudioClip audioToBePlayed)
     {
         source.PlayOneShot(audioToBePlayed, 0.6f);
         yield return new WaitForSeconds(audioToBePlayed.length);

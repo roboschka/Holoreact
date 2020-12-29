@@ -175,7 +175,7 @@ public class ChooseLevelManager : MonoBehaviour
     #endregion
 
     #region SFX
-    IEnumerator DelayedSceneLoad(AudioClip audioToBePlayed, string sceneName)
+    private IEnumerator DelayedSceneLoad(AudioClip audioToBePlayed, string sceneName)
     {
         source.PlayOneShot(audioToBePlayed, 0.6f);
         yield return new WaitForSeconds(audioToBePlayed.length);
