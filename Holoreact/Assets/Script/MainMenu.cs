@@ -169,7 +169,7 @@ public class MainMenu : MonoBehaviour
     }
 
     #region Main Menu SFX
-    public void PlayHighlight()
+    public void PlayAudioForButtonHighlight()
     {
         source.PlayOneShot(highlight);
         Debug.Log("play highlight sfx");

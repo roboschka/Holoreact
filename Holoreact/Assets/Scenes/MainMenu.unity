@@ -597,7 +597,7 @@ MonoBehaviour:
       m_PersistentCalls:
         m_Calls:
         - m_Target: {fileID: 1963052434}
-          m_MethodName: PlayHighlight
+          m_MethodName: PlayAudioForButtonHighlight
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -2502,7 +2502,7 @@ MonoBehaviour:
       m_PersistentCalls:
         m_Calls:
         - m_Target: {fileID: 1963052434}
-          m_MethodName: PlayHighlight
+          m_MethodName: PlayAudioForButtonHighlight
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -2886,7 +2886,7 @@ MonoBehaviour:
       m_PersistentCalls:
         m_Calls:
         - m_Target: {fileID: 1963052434}
-          m_MethodName: PlayHighlight
+          m_MethodName: PlayAudioForButtonHighlight
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -3361,7 +3361,7 @@ MonoBehaviour:
       m_PersistentCalls:
         m_Calls:
         - m_Target: {fileID: 1963052434}
-          m_MethodName: PlayHighlight
+          m_MethodName: PlayAudioForButtonHighlight
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -4833,7 +4833,7 @@ MonoBehaviour:
       m_PersistentCalls:
         m_Calls:
         - m_Target: {fileID: 1963052434}
-          m_MethodName: PlayHighlight
+          m_MethodName: PlayAudioForButtonHighlight
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -5216,7 +5216,7 @@ MonoBehaviour:
       m_PersistentCalls:
         m_Calls:
         - m_Target: {fileID: 1963052434}
-          m_MethodName: PlayHighlight
+          m_MethodName: PlayAudioForButtonHighlight
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}

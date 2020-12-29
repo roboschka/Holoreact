@@ -615,7 +615,7 @@ public class GameManager : MonoBehaviour
         return itemDescription;
     }
 
-    public void PlayHighlight()
+    public void PlayAudioForButtonHighlight()
     {
         source.PlayOneShot(openCanvasAudio, 0.5f);
     }
