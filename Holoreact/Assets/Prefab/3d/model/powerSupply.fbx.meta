@@ -1,44 +1,23 @@
 fileFormatVersion: 2
-guid: b65f55b2de6bc5a45aa43f7fbc5f03ee
+guid: 80fe96db3fb432d4d94615b6470935b4
 ModelImporter:
   serializedVersion: 23
   fileIDToRecycleName:
-    100000: Base
-    100002: Clamp
-    100004: Cylinder.003
-    100006: Rod
-    100008: //RootNode
-    100010: substance
-    100012: tube
-    400000: Base
-    400002: Clamp
-    400004: Cylinder.003
-    400006: Rod
-    400008: //RootNode
-    400010: substance
-    400012: tube
-    2100000: No Name
+    100000: Cube
+    100002: Cube.002
+    100004: //RootNode
+    400000: Cube
+    400002: Cube.002
+    400004: //RootNode
+    2100000: Material
     2100002: Material.001
-    2100004: Material
-    2300000: Base
-    2300002: Clamp
-    2300004: Cylinder.003
-    2300006: Rod
-    2300008: substance
-    2300010: tube
-    3300000: Base
-    3300002: Clamp
-    3300004: Cylinder.003
-    3300006: Rod
-    3300008: substance
-    3300010: tube
-    4300000: Base
-    4300002: Rod
-    4300004: Clamp
-    4300006: Cylinder.003
-    4300008: tube
-    4300010: substance
-    7400000: Cylinder.003|Cylinder.003Action
+    2300000: Cube
+    2300002: Cube.002
+    3300000: Cube
+    3300002: Cube.002
+    4300000: Cube
+    4300002: Cube.002
+    7400000: Cube.002|Cube.002Action
     9500000: //RootNode
   externalObjects: {}
   materials:
