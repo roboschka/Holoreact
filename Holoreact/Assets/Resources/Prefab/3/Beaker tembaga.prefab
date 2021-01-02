@@ -262,7 +262,7 @@ GameObject:
   - component: {fileID: 3621648672045592427}
   - component: {fileID: 3621648672045592420}
   m_Layer: 9
-  m_Name: CuSO4
+  m_Name: Beaker tembaga
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
