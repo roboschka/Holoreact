@@ -19,7 +19,7 @@ public class MainMenu : MonoBehaviour
     private Button yesQuitButton;
 
     [SerializeField]
-    private GameObject quitNotificationCanvas, mainMenuCanvas, studentDataCanvas, settingsCanvas, creditsCanvas;
+    private GameObject quitNotificationCanvas, mainMenuCanvas, studentDataCanvas, settingsCanvas, creditsCanvas, tutorialCanvas;
 
     [SerializeField]
     private AudioSource source;
@@ -73,6 +73,10 @@ public class MainMenu : MonoBehaviour
                 {
                     case "Play":
                         StartCoroutine(DelayedSceneLoad(select));
+                        break;
+                    case "HowToPlay":
+                        ToggleTutorial(true, false);
+                        source.PlayOneShot(select);
                         break;
                     case "Settings":
                         ToggleSettings(true, false);
@@ -137,6 +141,15 @@ public class MainMenu : MonoBehaviour
                 playButton.Select();
             }
         }
+
+        if (tutorialCanvas.activeInHierarchy)
+        {
+            if (Input.GetKeyDown(KeyCode.Escape))
+            {
+                ToggleTutorial(false, true);
+                playButton.Select();
+            }
+        }
     }
 
     private void ToggleSettings(bool isSettingOn, bool isMainMenuOn)
@@ -151,6 +164,13 @@ public class MainMenu : MonoBehaviour
         creditsCanvas.SetActive(isCreditOn);
         mainMenuCanvas.SetActive(isMainMenuOn);
     }
+
+    private void ToggleTutorial(bool isTutorialOn, bool isMainMenuOn)
+    {
+        tutorialCanvas.SetActive(isTutorialOn);
+        mainMenuCanvas.SetActive(isMainMenuOn);
+    }
+
     public void ToggleNotification(bool isNotifOn, bool isMainMenuOn, Button toHighlight)
     {
         quitNotificationCanvas.SetActive(isNotifOn);
