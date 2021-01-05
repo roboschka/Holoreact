@@ -39,6 +39,7 @@ public class QuizManager : MonoBehaviour
     {
         currentLvl = PlayerPrefs.GetInt("currentLevel");
         studentId = PlayerPrefs.GetInt("studentID");
+        Debug.Log("studentId: " + studentId);
 
         index = 0;
 
@@ -236,7 +237,8 @@ public class QuizManager : MonoBehaviour
         HttpWebRequest request = (HttpWebRequest)WebRequest.Create(String.Format("https://api.backendless.com/09476775-387A-4C56-FFE4-B663DC24FC00/DED29ABA-8FAC-4985-86E0-FCCDA5A290B5/data/Score"));
         request.ContentType = "application/json";
         request.Method = "POST";
-
+        Debug.Log("studentId: " + studentId);
+        Debug.Log("studentID: " + studentID);
         using (var streamWriter = new StreamWriter(request.GetRequestStream()))
         {
             string json = "{\"LevelID\":\"" + currentLvl + "\"," +

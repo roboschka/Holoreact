@@ -33,7 +33,7 @@ public class ChooseLevelManager : MonoBehaviour
     private void Start()
     {
         studentID = PlayerPrefs.GetInt("studentID").ToString();
-
+        Debug.Log(studentID);
         GetLevelList();
         GetStudentScore();
         ShowLevelInfo();
