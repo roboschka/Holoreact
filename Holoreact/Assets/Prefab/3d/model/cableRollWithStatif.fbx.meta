@@ -17,12 +17,13 @@ ModelImporter:
     100022: Cube.036
     100024: Cube.037
     100026: Cylinder.002
-    100028: Cylinder.004
-    100030: Rod
-    100032: substance
-    100034: substance +
-    100036: substance -
-    100038: tube
+    100028: Cylinder.003
+    100030: Cylinder.004
+    100032: Rod
+    100034: substance
+    100036: substance +
+    100038: substance -
+    100040: tube
     400000: Base
     400002: BezierCurve.006
     400004: BezierCurve.007
@@ -37,12 +38,13 @@ ModelImporter:
     400022: Cube.036
     400024: Cube.037
     400026: Cylinder.002
-    400028: Cylinder.004
-    400030: Rod
-    400032: substance
-    400034: substance +
-    400036: substance -
-    400038: tube
+    400028: Cylinder.003
+    400030: Cylinder.004
+    400032: Rod
+    400034: substance
+    400036: substance +
+    400038: substance -
+    400040: tube
     2100000: No Name
     2100002: Material.017
     2100004: Material
@@ -65,12 +67,13 @@ ModelImporter:
     2300020: Cube.036
     2300022: Cube.037
     2300024: Cylinder.002
-    2300026: Cylinder.004
-    2300028: Rod
-    2300030: substance
-    2300032: substance +
-    2300034: substance -
-    2300036: tube
+    2300026: Cylinder.003
+    2300028: Cylinder.004
+    2300030: Rod
+    2300032: substance
+    2300034: substance +
+    2300036: substance -
+    2300038: tube
     3300000: Base
     3300002: BezierCurve.006
     3300004: BezierCurve.007
@@ -84,32 +87,35 @@ ModelImporter:
     3300020: Cube.036
     3300022: Cube.037
     3300024: Cylinder.002
-    3300026: Cylinder.004
-    3300028: Rod
-    3300030: substance
-    3300032: substance +
-    3300034: substance -
-    3300036: tube
+    3300026: Cylinder.003
+    3300028: Cylinder.004
+    3300030: Rod
+    3300032: substance
+    3300034: substance +
+    3300036: substance -
+    3300038: tube
     4300000: Base
     4300002: Clamp
-    4300004: Rod
-    4300006: substance
-    4300008: tube
-    4300010: BezierCurve.007
-    4300012: BezierCurve.006
-    4300014: Cube.037
-    4300016: Cube.036
-    4300018: Cube.032
-    4300020: Cube.033
-    4300022: Cube.030
-    4300024: Cylinder.002
-    4300026: Cube.027
-    4300028: Cube.029
-    4300030: Cube.026
-    4300032: Cylinder.004
-    4300034: substance -
-    4300036: substance +
-    7400000: Cube.036|Cylinder.003Action
+    4300004: Cylinder.003
+    4300006: Rod
+    4300008: substance
+    4300010: tube
+    4300012: BezierCurve.007
+    4300014: BezierCurve.006
+    4300016: Cube.037
+    4300018: Cube.036
+    4300020: Cube.032
+    4300022: Cube.033
+    4300024: Cube.030
+    4300026: Cylinder.002
+    4300028: Cube.027
+    4300030: Cube.029
+    4300032: Cube.026
+    4300034: Cylinder.004
+    4300036: substance -
+    4300038: substance +
+    7400000: Cylinder.003|Cylinder.003Action
+    7400002: Cube.036|Cylinder.003Action
     9500000: //RootNode
   externalObjects: {}
   materials:
