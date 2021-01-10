@@ -10,20 +10,22 @@ ModelImporter:
     100008: Clamp
     100010: Cube.026
     100012: Cube.027
-    100014: Cube.029
-    100016: Cube.030
-    100018: Cube.032
-    100020: Cube.033
-    100022: Cube.036
-    100024: Cube.037
-    100026: Cylinder.002
-    100028: Cylinder.003
-    100030: Cylinder.004
-    100032: Rod
-    100034: substance
-    100036: substance +
-    100038: substance -
-    100040: tube
+    100014: Cube.028
+    100016: Cube.029
+    100018: Cube.030
+    100020: Cube.031
+    100022: Cube.032
+    100024: Cube.033
+    100026: Cube.036
+    100028: Cube.037
+    100030: Cylinder.002
+    100032: Cylinder.003
+    100034: Cylinder.004
+    100036: Rod
+    100038: substance
+    100040: substance +
+    100042: substance -
+    100044: tube
     400000: Base
     400002: BezierCurve.006
     400004: BezierCurve.007
@@ -31,20 +33,22 @@ ModelImporter:
     400008: Clamp
     400010: Cube.026
     400012: Cube.027
-    400014: Cube.029
-    400016: Cube.030
-    400018: Cube.032
-    400020: Cube.033
-    400022: Cube.036
-    400024: Cube.037
-    400026: Cylinder.002
-    400028: Cylinder.003
-    400030: Cylinder.004
-    400032: Rod
-    400034: substance
-    400036: substance +
-    400038: substance -
-    400040: tube
+    400014: Cube.028
+    400016: Cube.029
+    400018: Cube.030
+    400020: Cube.031
+    400022: Cube.032
+    400024: Cube.033
+    400026: Cube.036
+    400028: Cube.037
+    400030: Cylinder.002
+    400032: Cylinder.003
+    400034: Cylinder.004
+    400036: Rod
+    400038: substance
+    400040: substance +
+    400042: substance -
+    400044: tube
     2100000: No Name
     2100002: Material.017
     2100004: Material
@@ -53,47 +57,52 @@ ModelImporter:
     2100010: Material.035
     2100012: Material.034
     2100014: Material.032
-    2100016: Material.036
+    2100016: Material.033
+    2100018: Material.036
     2300000: Base
     2300002: BezierCurve.006
     2300004: BezierCurve.007
     2300006: Clamp
     2300008: Cube.026
     2300010: Cube.027
-    2300012: Cube.029
-    2300014: Cube.030
-    2300016: Cube.032
-    2300018: Cube.033
-    2300020: Cube.036
-    2300022: Cube.037
-    2300024: Cylinder.002
-    2300026: Cylinder.003
-    2300028: Cylinder.004
-    2300030: Rod
-    2300032: substance
-    2300034: substance +
-    2300036: substance -
-    2300038: tube
+    2300012: Cube.028
+    2300014: Cube.029
+    2300016: Cube.030
+    2300018: Cube.031
+    2300020: Cube.032
+    2300022: Cube.033
+    2300024: Cube.036
+    2300026: Cube.037
+    2300028: Cylinder.002
+    2300030: Cylinder.003
+    2300032: Cylinder.004
+    2300034: Rod
+    2300036: substance
+    2300038: substance +
+    2300040: substance -
+    2300042: tube
     3300000: Base
     3300002: BezierCurve.006
     3300004: BezierCurve.007
     3300006: Clamp
     3300008: Cube.026
     3300010: Cube.027
-    3300012: Cube.029
-    3300014: Cube.030
-    3300016: Cube.032
-    3300018: Cube.033
-    3300020: Cube.036
-    3300022: Cube.037
-    3300024: Cylinder.002
-    3300026: Cylinder.003
-    3300028: Cylinder.004
-    3300030: Rod
-    3300032: substance
-    3300034: substance +
-    3300036: substance -
-    3300038: tube
+    3300012: Cube.028
+    3300014: Cube.029
+    3300016: Cube.030
+    3300018: Cube.031
+    3300020: Cube.032
+    3300022: Cube.033
+    3300024: Cube.036
+    3300026: Cube.037
+    3300028: Cylinder.002
+    3300030: Cylinder.003
+    3300032: Cylinder.004
+    3300034: Rod
+    3300036: substance
+    3300038: substance +
+    3300040: substance -
+    3300042: tube
     4300000: Base
     4300002: Clamp
     4300004: Cylinder.003
@@ -107,13 +116,15 @@ ModelImporter:
     4300020: Cube.032
     4300022: Cube.033
     4300024: Cube.030
-    4300026: Cylinder.002
-    4300028: Cube.027
-    4300030: Cube.029
-    4300032: Cube.026
-    4300034: Cylinder.004
-    4300036: substance -
-    4300038: substance +
+    4300026: Cube.031
+    4300028: Cylinder.002
+    4300030: Cube.027
+    4300032: Cube.029
+    4300034: Cube.028
+    4300036: Cube.026
+    4300038: Cylinder.004
+    4300040: substance -
+    4300042: substance +
     7400000: Cylinder.003|Cylinder.003Action
     7400002: Cube.036|Cylinder.003Action
     9500000: //RootNode
