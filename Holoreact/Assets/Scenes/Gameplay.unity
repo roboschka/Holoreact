@@ -9090,14 +9090,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 2041835564}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f3e020e11705345429dbc06619dec7e6, type: 3}
+  m_Script: {fileID: 11500000, guid: 20bd87606948fbf40ad78a5503ef65e8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemList: []
-  objectsOnPlane: []
-  itemDescriptionList: []
-  combinationList: []
-  collidedColliders: []
   cameraForGameplay: {fileID: 1390977912}
   handBookManager: {fileID: 874952571}
   submitManager: {fileID: 847832772}
@@ -9111,11 +9106,6 @@ MonoBehaviour:
   buttonSelectAudio: {fileID: 8300000, guid: 4f094895c7af6f2439790fb2a37d32ee, type: 3}
   warningAudio: {fileID: 8300000, guid: 2b07a88ceac578940ae794e5db2c8f56, type: 3}
   itemDropAudio: {fileID: 8300000, guid: 1e603fcb11dc3264a8cc9c0b82365589, type: 3}
-  currentIndex: 0
-  currentLvl: 0
-  combinationPerformed: 0
-  paused: 0
-  selectedItem: 0
 --- !u!54 &2041835567
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -9143,8 +9133,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 2.1158066, y: 5.90205, z: 0.99999994}
-  m_Center: {x: -0.06822101, y: 2.451025, z: 0}
+  m_Size: {x: 2.1158066, y: 5.345928, z: 1}
+  m_Center: {x: -0.068221, y: 2.172964, z: 0}
 --- !u!23 &2041835569
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -10156,9 +10146,9 @@ MonoBehaviour:
   panelConfirmation: {fileID: 1423194657}
   warningPanel: {fileID: 1241209}
   source: {fileID: 893487286}
-  openCanvasAudio: {fileID: 8300000, guid: de4d472b634cc1b449a5747de3634db4, type: 3}
+  openCanvasAudio: {fileID: 8300000, guid: 4f094895c7af6f2439790fb2a37d32ee, type: 3}
   submitClickAudio: {fileID: 8300000, guid: 16666d111b56ba448ad7904dbecc972c, type: 3}
-  buttonSelectAudio: {fileID: 8300000, guid: 4f094895c7af6f2439790fb2a37d32ee, type: 3}
+  buttonSelectAudio: {fileID: 8300000, guid: de4d472b634cc1b449a5747de3634db4, type: 3}
   warningAudio: {fileID: 8300000, guid: 2b07a88ceac578940ae794e5db2c8f56, type: 3}
   itemDropAudio: {fileID: 8300000, guid: 1e603fcb11dc3264a8cc9c0b82365589, type: 3}
 --- !u!65 &5436834310243511628
