@@ -85,9 +85,11 @@ public class GameManager : MonoBehaviour
         //}
         objectsOnPlane.Clear();
     }
+    
 
     public void Move(int direction)
     {
+        Debug.Log("currentObjectOnPlane: " + objectsOnPlane.Count());
         source.PlayOneShot(openCanvasAudio, 0.5f);
         //2 Objek pada 2 index sebelumnya dimatikan kecuali yang ada di plane
         if (objectsOnPlane != null && objectsOnPlane.Count > 0)
@@ -156,7 +158,6 @@ public class GameManager : MonoBehaviour
             }
         }
 
-
         //check apakah next object yang akan ditampilkan berada di plane
         if (objectsOnPlane != null && objectsOnPlane.Count > 0)
         {
@@ -207,7 +208,6 @@ public class GameManager : MonoBehaviour
                 if (itemList[currentIndex - 1] != objectsOnPlane[0])
                 {
                     itemList[currentIndex - 1].SetActive(true);
-                    Debug.Log("activate object index terakhir");
                 }
             }
             else
@@ -216,13 +216,10 @@ public class GameManager : MonoBehaviour
                 if (itemList[currentIndex - 1] != objectsOnPlane[0])
                 {
                     itemList[currentIndex - 1].SetActive(true);
-                    Debug.Log("activate object bukan index terakhir: " + itemList[currentIndex]);
                 }
                 if (itemList[currentIndex] != objectsOnPlane[0])
                 {
                     itemList[currentIndex].SetActive(true);
-                    Debug.Log("activate object bukan index terakhir: " + itemList[currentIndex]);
-                    Debug.Log("ObjectOnPlane[0]: " + objectsOnPlane[0]);
                 }
             }
 
@@ -233,14 +230,12 @@ public class GameManager : MonoBehaviour
             if (itemList.Count % 2 != 0 && currentIndex == itemList.Count)
             {
                 itemList[currentIndex - 1].SetActive(true);
-                Debug.Log("activate object index terakhir");
             }
             else
             {
                 //kalau bukan index terkahir dan gajil maka seperti normal
                 itemList[currentIndex - 1].SetActive(true);
                 itemList[currentIndex].SetActive(true);
-                Debug.Log("activate object bukan index terakhir");
             }
 
         }
@@ -329,23 +324,39 @@ public class GameManager : MonoBehaviour
             //Set combination result object to the plane
             objectsOnPlane.Add(itemList[(itemList.Count - 1)]);
 
-            string animationName =
-            (
-                from anim in combinationList
-                where anim.Result == itemList[itemList.Count - 1].name
-                select anim.AnimationName
-            ).FirstOrDefault();
+            #region commented old way
+            //string animationName =
+            //(
+            //    from anim in combinationList
+            //    where anim.Result == itemList[itemList.Count - 1].name.Replace("(Clone)", "")
+            //    select anim.AnimationName
+            //).FirstOrDefault();
 
-            if (!String.IsNullOrEmpty(animationName))
+            //Debug.Log("Call: " + animationName);
+            //if (!String.IsNullOrEmpty(animationName))
+            //{
+            //    Debug.Log("is in if");
+            //    try
+            //    {
+            //        //itemList[(itemList.Count - 1)].GetComponent<Animator>().Play(animationName);
+            //        itemList[(itemList.Count - 1)].GetComponent<Animator>().SetTrigger("animTrigger");
+            //        Debug.Log("get animator");
+            //    }
+            //    catch (Exception)
+            //    {
+            //        Debug.Log("Animation in progress");
+            //    }
+            //}
+            #endregion
+
+            try
             {
-                try
-                {
-                    itemList[(itemList.Count - 1)].GetComponent<Animator>().Play(animationName);
-                }
-                catch (Exception)
-                {
-                    Debug.Log("Animation in progress");
-                }
+                itemList[(itemList.Count - 1)].GetComponent<Animator>().SetTrigger("animTrigger");
+
+            }
+            catch (Exception ex)
+            {
+                Debug.Log(ex.Message);
             }
 
             //set combination result to plane postion

@@ -2303,7 +2303,7 @@ MonoBehaviour:
   notifPanel: {fileID: 34264082}
   settingPanel: {fileID: 834624066}
   UICamera: {fileID: 725627492}
-  gameManager: {fileID: 5436834310243511625}
+  gameManager: {fileID: 2041835564}
   backToMenu: {fileID: 2061555604}
   yesBack: {fileID: 824862934}
   source: {fileID: 893487286}
@@ -4739,7 +4739,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   UICamera: {fileID: 725627492}
-  gameManager: {fileID: 5436834310243511625}
+  gameManager: {fileID: 2041835564}
   submitPanel: {fileID: 1423194657}
   yesSubmit: {fileID: 901772893}
 --- !u!4 &847832774
@@ -5017,7 +5017,7 @@ MonoBehaviour:
   textToShow: {fileID: 615973754}
   pageText: {fileID: 701592165}
   panelForHandbook: {fileID: 2113833851}
-  gameManager: {fileID: 5436834310243511625}
+  gameManager: {fileID: 2041835564}
   UICamera: {fileID: 725627492}
   source: {fileID: 893487286}
   pageTurn: {fileID: 8300000, guid: db6dae4eed6dc3a4e9c2c8686e10117c, type: 3}
@@ -5802,7 +5802,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83aba1bac4763394bb8e59dd12f7e220, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameManager: {fileID: 5436834310243511627}
+  gameManager: {fileID: 2041835565}
   source: {fileID: 893487286}
   itemClick: {fileID: 8300000, guid: 62c2cb279a806d143bad10feb76fc033, type: 3}
 --- !u!1001 &1092782258
@@ -6965,7 +6965,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1390977913
 Transform:
   m_ObjectHideFlags: 0
@@ -8169,7 +8169,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   descriptionPanel: {fileID: 854704965}
-  gameManager: {fileID: 5436834310243511627}
+  gameManager: {fileID: 2041835565}
 --- !u!4 &1712927213
 Transform:
   m_ObjectHideFlags: 0
@@ -9080,7 +9080,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &2041835565
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9093,6 +9093,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f3e020e11705345429dbc06619dec7e6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  itemList: []
+  objectsOnPlane: []
+  itemDescriptionList: []
+  combinationList: []
+  collidedColliders: []
   cameraForGameplay: {fileID: 1390977912}
   handBookManager: {fileID: 874952571}
   submitManager: {fileID: 847832772}
@@ -9106,6 +9111,11 @@ MonoBehaviour:
   buttonSelectAudio: {fileID: 8300000, guid: 4f094895c7af6f2439790fb2a37d32ee, type: 3}
   warningAudio: {fileID: 8300000, guid: 2b07a88ceac578940ae794e5db2c8f56, type: 3}
   itemDropAudio: {fileID: 8300000, guid: 1e603fcb11dc3264a8cc9c0b82365589, type: 3}
+  currentIndex: 0
+  currentLvl: 0
+  combinationPerformed: 0
+  paused: 0
+  selectedItem: 0
 --- !u!54 &2041835567
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -9230,7 +9240,7 @@ MonoBehaviour:
   postScoreText: {fileID: 1946941043}
   currentLevelName: {fileID: 1422293054}
   UICamera: {fileID: 725627492}
-  gameManager: {fileID: 5436834310243511625}
+  gameManager: {fileID: 2041835564}
   panelForPostGame: {fileID: 1861275392}
   panelForQuiz: {fileID: 686115586}
   warningLabel: {fileID: 645790890}
@@ -10109,7 +10119,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!54 &5436834310243511626
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -10162,8 +10172,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.023244606, y: 0.044663575, z: 0.064471476}
-  m_Center: {x: 0.00014289243, y: -0.0033429104, z: -0.02223572}
+  m_Size: {x: 0.023244606, y: 0.044663575, z: 0.051628813}
+  m_Center: {x: 0.00014289243, y: -0.0033429104, z: -0.015814384}
 --- !u!4 &5436834310244004201
 Transform:
   m_ObjectHideFlags: 0
