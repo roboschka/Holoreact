@@ -190,6 +190,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targetColor: {r: 0.18431373, g: 0.25490198, b: 0.3137255, a: 1}
+  startColor: {r: 0, g: 0, b: 0, a: 0}
   duration: 0
 --- !u!1 &4014061489145471453
 GameObject:
@@ -238,8 +239,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 2.377166, y: 3.0011165, z: 2.2355497}
-  m_Center: {x: -0.13450027, y: 1.0005583, z: 0.08565354}
+  m_Size: {x: 2.3771663, y: 2.2010257, z: 2.2355497}
+  m_Center: {x: -0.13450027, y: 1.6273359, z: 0.08565354}
 --- !u!54 &3533202650973537248
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -268,8 +269,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5b3e19551d5e26e4ab6bbe12fe4a645e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  originPosition: {x: 0, y: 0, z: 0}
-  isWithinRange: 0
 --- !u!1 &4014061489145471455
 GameObject:
   m_ObjectHideFlags: 0

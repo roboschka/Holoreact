@@ -30,7 +30,6 @@ public class MouseBehaviour : MonoBehaviour
         mousePoint.z = mZCoord;
         return Camera.main.ScreenToWorldPoint(mousePoint);
     }
-    
 
     public void SetOriginPosition(Vector3 newPosition)
     {
@@ -108,9 +107,6 @@ public class MouseBehaviour : MonoBehaviour
         if (isWithinRange)
         {
             transform.position = snapPosition;
-            Debug.Log("snapped within range " + snapPosition);
-            
-
         }
         else
         {
