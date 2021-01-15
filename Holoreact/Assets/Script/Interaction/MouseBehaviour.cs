@@ -98,6 +98,9 @@ public class MouseBehaviour : MonoBehaviour
         {
             //isWithinRange = false;
             transform.position = GetMouseWorldPos() + mOffset;
+            Debug.Log("Dragging" + hittedObject.name);
+            Debug.Log(mOffset);
+            Debug.Log(transform.position);
         }
 
     }
