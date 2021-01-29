@@ -49,7 +49,7 @@ public class MainMenu : MonoBehaviour
         {
             studentDataCanvas.gameObject.SetActive(false);
             mainMenuCanvas.gameObject.SetActive(true);
-            ToggleNotification(false, true, playButton);
+            playButton.Select();
         }
     }
 
@@ -60,7 +60,6 @@ public class MainMenu : MonoBehaviour
         
         if (mainMenuCanvas.activeInHierarchy)
         {
-            Debug.Log("main menu navigation");
             if (!quitNotificationCanvas.activeInHierarchy && highlightedButton == null)
             {
                 playButton.Select();
@@ -68,27 +67,25 @@ public class MainMenu : MonoBehaviour
             
             if (Input.GetKeyDown(KeyCode.Return))
             {
-                Debug.Log(highlightedButton.name);
                 switch (highlightedButton.name)
                 {
                     case "Play":
                         StartCoroutine(DelayedSceneLoad(select));
                         break;
                     case "HowToPlay":
-                        ToggleTutorial(true, false);
+                        ToggleCanvas(tutorialCanvas, mainMenuCanvas);
                         source.PlayOneShot(select);
                         break;
                     case "Settings":
-                        ToggleSettings(true, false);
+                        ToggleCanvas(settingsCanvas, mainMenuCanvas);
                         source.PlayOneShot(select);
                         break;
                     case "Credits":
-                        ToggleCredits(true, false);
+                        ToggleCanvas(creditsCanvas, mainMenuCanvas);
                         source.PlayOneShot(select);
                         break;
                     case "Quit":
                         //Open Notification Canvas
-                        Debug.Log("Open Quit");
                         ToggleNotification(true, false, yesQuitButton);
                         source.PlayOneShot(notification);
                         break;
@@ -128,7 +125,7 @@ public class MainMenu : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.Escape))
             {
-                ToggleSettings(false, true);
+                ToggleCanvas(mainMenuCanvas, settingsCanvas);
                 playButton.Select();
             }
         }
@@ -137,7 +134,7 @@ public class MainMenu : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.Escape))
             {
-                ToggleCredits(false, true);
+                ToggleCanvas(mainMenuCanvas, creditsCanvas);
                 playButton.Select();
             }
         }
@@ -146,31 +143,18 @@ public class MainMenu : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.Escape))
             {
-                ToggleTutorial(false, true);
+                ToggleCanvas(mainMenuCanvas, tutorialCanvas);
                 playButton.Select();
             }
         }
     }
 
-    private void ToggleSettings(bool isSettingOn, bool isMainMenuOn)
+    private void ToggleCanvas (GameObject activeCanvas, GameObject inactiveCanvas)
     {
-        settingsCanvas.SetActive(isSettingOn);
-        mainMenuCanvas.SetActive(isMainMenuOn);
-
+        activeCanvas.SetActive(true);
+        inactiveCanvas.SetActive(false);
     }
-
-    private void ToggleCredits(bool isCreditOn, bool isMainMenuOn)
-    {
-        creditsCanvas.SetActive(isCreditOn);
-        mainMenuCanvas.SetActive(isMainMenuOn);
-    }
-
-    private void ToggleTutorial(bool isTutorialOn, bool isMainMenuOn)
-    {
-        tutorialCanvas.SetActive(isTutorialOn);
-        mainMenuCanvas.SetActive(isMainMenuOn);
-    }
-
+  
     public void ToggleNotification(bool isNotifOn, bool isMainMenuOn, Button toHighlight)
     {
         quitNotificationCanvas.SetActive(isNotifOn);
@@ -192,7 +176,6 @@ public class MainMenu : MonoBehaviour
     public void PlayAudioForButtonHighlight()
     {
         source.PlayOneShot(highlight);
-        Debug.Log("play highlight sfx");
     }
     
     private IEnumerator DelayedSceneLoad(AudioClip audioToBePlayed)

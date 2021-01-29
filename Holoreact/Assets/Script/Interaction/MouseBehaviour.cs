@@ -51,58 +51,28 @@ public class MouseBehaviour : MonoBehaviour
     #region MouseDrag Handling
     private void OnMouseDown()
     {
-        //Vector3 worldPosition;
-
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
         if (Physics.Raycast(ray, out RaycastHit hitData))
         {
-            //hitData layer = "ExperimentObject"
             hittedObject = hitData.collider.gameObject;
             if (hitData.transform.gameObject.layer == 9)
             {
+                //menyamakan koordinat z mouse dengan koordinat z objek
                 mZCoord = Camera.main.WorldToScreenPoint(gameObject.transform.position).z;
+                //offset antara posisi asli objek dengan posisi cursor dibuat menjadi 0
                 mOffset = gameObject.transform.position - GetMouseWorldPos();
-                // Debug.Log("9");
             }
-            //else if (hitData.transform.gameObject.layer == 10)
-            //{
-                // Debug.Log("10");
-                //string name = hitData.transform.gameObject.GetComponent<Collider>();
-                //Debug.Log(name);
-            //}
         }
     }
     
     private void OnMouseDrag()
     {
-        #region Commented
-        //Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        //RaycastHit hitData;
-
-        //if (Physics.Raycast(ray, out hitData))
-        //{
-        //if (hittedObject.layer == 9)
-        //{
-        //    isWithinRange = false;
-        //    transform.position = GetMouseWorldPos() + mOffset;
-        //}
-        //else if (hitData.transform.gameObject.layer == 10)
-        //{
-        //Debug.Log("10");
-        //}
-        //}
-        #endregion
-
         if (hittedObject.layer == 9)
         {
-            //isWithinRange = false;
+            //objek dipindahkan sesuai dengan posisi offset yang didapat
             transform.position = GetMouseWorldPos() + mOffset;
-            Debug.Log("Dragging" + hittedObject.name);
-            Debug.Log(mOffset);
-            Debug.Log(transform.position);
         }
-
     }
 
     private void OnMouseUp()
@@ -114,18 +84,15 @@ public class MouseBehaviour : MonoBehaviour
         else
         {
             transform.position = originPosition;
-            //buat testing navigation
             if (gameObject.name != "Plane")
             {
                 //disable self
                 gameObject.SetActive(false);
             }
-
             //Show current index
             gameManager.ShowCurrentIndexObject();
         }
     }
-
     #endregion
 
     #region Collision Handling

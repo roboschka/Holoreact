@@ -39,7 +39,6 @@ public class QuizManager : MonoBehaviour
     {
         currentLvl = PlayerPrefs.GetInt("currentLevel");
         studentId = PlayerPrefs.GetInt("studentID");
-        Debug.Log("studentId: " + studentId);
 
         index = 0;
 
@@ -98,12 +97,9 @@ public class QuizManager : MonoBehaviour
     
     private void Submit()
     {
-        //Debug.Log("answer: " + questionList[index].Answer);
-        //Debug.Log("user: " + answerField.text);
         if(answerField.text.Equals(questionList[index].Answer, StringComparison.InvariantCultureIgnoreCase))
         {
             correctAnswer++;
-            //Debug.Log(correctAnswer);
         }
 
         index += 1;
@@ -196,7 +192,6 @@ public class QuizManager : MonoBehaviour
     }
 
     #region Get Data From API
-
     private void GetQuestionDataFromAPI()
     {
         HttpWebRequest request = (HttpWebRequest)WebRequest.Create(String.Format("https://api.backendless.com/09476775-387A-4C56-FFE4-B663DC24FC00/DED29ABA-8FAC-4985-86E0-FCCDA5A290B5/data/Quiz?where=LevelID%3D" + currentLvl));
@@ -230,7 +225,6 @@ public class QuizManager : MonoBehaviour
     /// <param name="name"></param>
     /// <param name="schoolName"></param>
     /// <param name="TestType"></param>
-
     private void PostScoreToAPI(int score, string quizType, int studentID)
     {
         #region Create Request

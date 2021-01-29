@@ -57,11 +57,6 @@ public class PauseManager : MonoBehaviour
                                 break;
                         }
                     }
-                    //else if (Input.GetKeyDown(KeyCode.Escape))
-                    //{
-                    //    Debug.Log("Hide pause");
-                    //    HidePause();
-                    //}
                 }
                 //UINavigation ketika settingsPanel sedang aktif
                 else
@@ -113,20 +108,7 @@ public class PauseManager : MonoBehaviour
         gameManager.GetComponent<GameManager>().UnPause();
     }
     #endregion
-
-    //private void ShowNotif()
-    //{
-    //    notifPanel.SetActive(true);
-    //    pausePanel.SetActive(false);
-    //    yesBack.Select();
-    //    isNotifOn = true;
-    //}
-
-    //public void ShowSettings()
-    //{
-    //    Debug.Log("Show Settings");
-    //}
-
+    
     private void ToggleSettings(bool isPauseMenuActive, bool isSettingActive)
     {
         pausePanel.SetActive(isPauseMenuActive);
