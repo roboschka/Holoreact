@@ -34,7 +34,6 @@ public class HandBookManager : MonoBehaviour
         paused = true;
         currentPage = 1;
         pageText.text = currentPage.ToString() + "/" + handBookData.Count().ToString();
-        Debug.Log(currentLvl);
     }
 
     // Update is called once per frame
@@ -100,7 +99,6 @@ public class HandBookManager : MonoBehaviour
         {
             textToShow.text = "something goes wrong please contact the developer";
             pageText.text = "0";
-            Debug.Log(handBookContent);
         }
         else
         {
@@ -117,7 +115,7 @@ public class HandBookManager : MonoBehaviour
 
         if (handBookData.Count() < 1)
         {
-            textToShow.text = "Something goes wrong please contact the developer";
+            textToShow.text = "Terjadi kesalahan. Mohon kontak developer.";
         }
         else
         {
@@ -131,7 +129,6 @@ public class HandBookManager : MonoBehaviour
         panelForHandbook.SetActive(false);
         UICamera.SetActive(false);
         gameManager.GetComponent<GameManager>().UnPause();
-        Debug.Log("Exit handbook");
     }
 
 }

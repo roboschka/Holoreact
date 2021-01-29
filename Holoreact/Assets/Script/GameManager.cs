@@ -473,7 +473,6 @@ public class GameManager : MonoBehaviour
 
     private void GetItemList()
     {
-        //HttpWebRequest request = (HttpWebRequest)WebRequest.Create(String.Format("https://api.backendless.com/09476775-387A-4C56-FFE4-B663DC24FC00/DED29ABA-8FAC-4985-86E0-FCCDA5A290B5/data/ItemList?pageSize=50&where=levelid%3D" + currentLvl));
         HttpWebRequest request = (HttpWebRequest)WebRequest.Create(String.Format("https://api.backendless.com/09476775-387A-4C56-FFE4-B663DC24FC00/DED29ABA-8FAC-4985-86E0-FCCDA5A290B5/data/ItemList?pageSize=50&where=LevelID%3D" + currentLvl));
         HttpWebResponse response = (HttpWebResponse)request.GetResponse();
         StreamReader reader = new StreamReader(response.GetResponseStream());
@@ -495,7 +494,6 @@ public class GameManager : MonoBehaviour
         
         foreach (Item item in items)
         {
-            Debug.Log("Prefab/" + currentLvl + "/" + item.Name);
             GameObject instance = Instantiate(Resources.Load("Prefab/" + currentLvl + "/" + item.Name) as GameObject);
             itemList.Add(instance);
             instance.SetActive(false);
@@ -556,23 +554,7 @@ public class GameManager : MonoBehaviour
             if (!exist)
             {
                 string result = resultName.FirstOrDefault();
-                Debug.Log("Call: " + result);
-                Debug.Log("Prefab/" + currentLvl + "/" + result);
                 GameObject instance = Instantiate(Resources.Load("Prefab/" + currentLvl + "/" + result) as GameObject);
-
-                
-                //string animationName =
-                //    (
-                //        from anim in combinationList
-                //        where anim.Result == result
-                //        select anim.AnimationName
-                //    ).FirstOrDefault();
-
-                //if (!String.IsNullOrEmpty(animationName))
-                //{
-                //    instance.GetComponent<Animator>().Play(animationName);
-                //}
-                Debug.Log("combination sucess");
                 itemList.Add(instance);
 
                 return true;
@@ -582,26 +564,7 @@ public class GameManager : MonoBehaviour
     }
 
     #endregion
-
-    #region Check Data by Debug.log
-
-    /// <summary>
-    /// CheckCombinationData()
-    /// </summary>
-
-    private void CheckCombinationData()
-    {
-        foreach (Combination data in combinationList)
-        {
-            //Debug.Log(data.LevelID);
-            Debug.Log(data.FirstItem);
-            Debug.Log(data.SecondItem);
-            Debug.Log(data.Result);
-        }
-    }
-
-    #endregion
-
+    
     #region Pause Setter Getter
     public bool GetPause()
     {

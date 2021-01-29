@@ -13,7 +13,6 @@ public class CursorManager : MonoBehaviour
 
     private void Update()
     {
-        //Debug.Log(gameManager.getPause());
         if (!gameManager.GetPause())
         {
             Vector3 temp = Input.mousePosition;
@@ -24,8 +23,7 @@ public class CursorManager : MonoBehaviour
             {
                 Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
                 
-                //out disini digunakan untuk menandakan bahwa akan ada value yang ditaruh ke parameter
-                //The out keyword here is used to tells the compiler that the method will return a value in that parameter
+                //The out keyword here is used to tell the compiler that the method will return a value in that parameter
                 if (Physics.Raycast(ray, out RaycastHit hitData))
                 {
                     Debug.Log(hitData.collider.gameObject.name + " is clicked");
