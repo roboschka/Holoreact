@@ -91,6 +91,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targetColor: {r: 0, g: 0, b: 0, a: 0}
+  startColor: {r: 0, g: 0, b: 0, a: 0}
   duration: 0
 --- !u!1 &1212909389546859148
 GameObject:
@@ -140,7 +141,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5b3e19551d5e26e4ab6bbe12fe4a645e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  originPosition: {x: 0, y: 0, z: 0}
 --- !u!65 &8062237573297040877
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -152,8 +152,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1.9744757, y: 10.305973, z: 2.4819055}
-  m_Center: {x: -0.05459534, y: 6.122157, z: 0.028029019}
+  m_Size: {x: 1.9744757, y: 11.146925, z: 2.4819055}
+  m_Center: {x: -0.05459534, y: 4.033499, z: 0.028029019}
 --- !u!54 &1120838156587012875
 Rigidbody:
   m_ObjectHideFlags: 0
